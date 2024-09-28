@@ -5,13 +5,26 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
-    //private lateinit var btnMoveActivity: Button
+
+    private lateinit var tvResult: TextView
+    //buat launcher registerForActivityResult untuk menerima nilai return
+    private val resultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == MoveForResultActivity.RESULT_CODE && result.data != null) {
+            val selectedValue = result.data?.getIntExtra(MoveForResultActivity.EXTRA_SELECTED_VALUE, 0)
+            tvResult.text = "Hasil : $selectedValue"
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +56,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         /* Implicit Intent */
         val btnDialPhone:Button = findViewById(R.id.btn_dial_number)
         btnDialPhone.setOnClickListener(this)
+
+
+        /* Dapatkan nilai return dri intent */
+        val btnMoveForResult:Button = findViewById(R.id.btn_move_for_result)
+        btnMoveForResult.setOnClickListener(this)
+        tvResult = findViewById(R.id.tv_result)
     }
 
     override fun onClick(view: View?) {
@@ -103,6 +122,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val phoneNumber = "081257026600"
                 val dialPhoneIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber"))
                 startActivity(dialPhoneIntent)
+            }
+
+            /* mendapatkan nilai return, pindah activity dulu*/
+            R.id.btn_move_for_result -> {
+                val moveForResultIntent = Intent(this@MainActivity, MoveForResultActivity::class.java)
+                resultLauncher.launch(moveForResultIntent)
             }
         }
     }
