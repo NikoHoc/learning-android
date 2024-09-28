@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 class MoveWithDataActivity : AppCompatActivity() {
 
     //objek untuk menerima data dari activity sebelumnya
+    //object ini dipakai di activity asal yg akan mengirim data
     companion object {
         const val EXTRA_AGE = "extra_age"
         const val EXTRA_NAME = "extra_name"
