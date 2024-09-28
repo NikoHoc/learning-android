@@ -22,16 +22,36 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             insets
         }
 
+        /* Pindah activity tanpa data*/
+        //dapatkan button
         val btnMoveActivity: Button = findViewById(R.id.btn_move_activity)
+        //pasang onClickListner
         btnMoveActivity.setOnClickListener(this)
+
+        /* Pindah activity dengan data*/
+        val btnMoveWithDataActivity: Button = findViewById(R.id.btn_move_activity_data)
+        btnMoveWithDataActivity.setOnClickListener(this)
+
+
     }
 
     override fun onClick(view: View?) {
         when (view?.id) {
+            /* Pindah activity tanpa data*/
             R.id.btn_move_activity -> {
                 //intent
                 val moveIntent = Intent(this@MainActivity, MoveActivity::class.java)
+                //menjalankan activity baru tanpa bawa data
                 startActivity(moveIntent)
+            }
+
+            /* Pindah activity dengan data*/
+            R.id.btn_move_activity_data -> {
+                val moveWithDataIntent = Intent(this@MainActivity, MoveWithDataActivity::class.java)
+                //kirim data dengan key dan value dengan .putExtra()
+                moveWithDataIntent.putExtra(MoveWithDataActivity.EXTRA_NAME, "DicodingAcademy Boy")
+                moveWithDataIntent.putExtra(MoveWithDataActivity.EXTRA_AGE, 5)
+                startActivity(moveWithDataIntent)
             }
         }
     }
