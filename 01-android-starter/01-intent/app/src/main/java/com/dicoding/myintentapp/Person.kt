@@ -2,6 +2,7 @@ package com.dicoding.myintentapp
 
 import android.os.Parcel
 import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
 //data class ini kita implement : Parcelable
 //parcelable -> interface yg memungkinkan kita ngirim 1 objek sekaligus
@@ -10,6 +11,11 @@ import android.os.Parcelable
 //pada akhir data class, tambahkan
 //: Parcelable
 //jika error, ikutin error dan klik "Add Parcelable Implementation"
+
+/*
+Sebelum nambah id("kotlin-parcelize") di build.gradle.kts -> kodenya panjang
+ */
+/*
 data class Person(
     val name: String?,
     val age: Int?,
@@ -44,4 +50,16 @@ data class Person(
             return arrayOfNulls(size)
         }
     }
-}
+} */
+
+/*
+sesudah tambahkan id("kotlin-parcelize") di build.gradle.kts
+ */
+
+@Parcelize
+data class Person(
+    val name: String?,
+    val age: Int?,
+    val email: String?,
+    val city: String?
+) : Parcelable

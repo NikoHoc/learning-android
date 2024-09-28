@@ -71,6 +71,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 //EXTRA_PERSON merupakan objek yg dibuat di MoveWithObjectActivity.kt (activity tujuan)
                 moveWithObjectIntent.putExtra(MoveWithObjectActivity.EXTRA_PERSON, person)
                 startActivity(moveWithObjectIntent)
+
+
+                /*
+                misal ingin ngirim list of object:
+                var persons = ArrayList<Person>()
+                moveWithObjectIntent.putParcelableArrayListExtra(KEY,persons)
+                contoh:
+                 */
+                val persons = arrayListOf(
+                    Person("DicodingAcademy", 5, "academy@dicoding.com", "Bandung"),
+                    Person("John Doe", 30, "johndoe@example.com", "Jakarta"),
+                    Person("Jane Doe", 28, "janedoe@example.com", "Surabaya")
+                )
+
+                // Mengirim ArrayList<Person> melalui Intent
+                val moveWithListObjectIntent = Intent(this@MainActivity, MoveWithObjectActivity::class.java)
+                moveWithListObjectIntent.putParcelableArrayListExtra(MoveWithObjectActivity.EXTRA_PERSON_LIST, persons)
+                startActivity(moveWithListObjectIntent)
             }
         }
     }
