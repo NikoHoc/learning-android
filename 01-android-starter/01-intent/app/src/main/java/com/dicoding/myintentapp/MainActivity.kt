@@ -1,6 +1,7 @@
 package com.dicoding.myintentapp
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -28,15 +29,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         //pasang onClickListner
         btnMoveActivity.setOnClickListener(this)
 
+
         /* Pindah activity dengan data*/
         val btnMoveWithDataActivity: Button = findViewById(R.id.btn_move_activity_data)
         btnMoveWithDataActivity.setOnClickListener(this)
+
 
         /* Pindah activity dengan data class, implement : Parcelable */
         val btnMoveWithObject:Button = findViewById(R.id.btn_move_activity_object)
         btnMoveWithObject.setOnClickListener(this)
 
 
+        /* Implicit Intent */
+        val btnDialPhone:Button = findViewById(R.id.btn_dial_number)
+        btnDialPhone.setOnClickListener(this)
     }
 
     override fun onClick(view: View?) {
@@ -89,6 +95,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val moveWithListObjectIntent = Intent(this@MainActivity, MoveWithObjectActivity::class.java)
                 moveWithListObjectIntent.putParcelableArrayListExtra(MoveWithObjectActivity.EXTRA_PERSON_LIST, persons)
                 startActivity(moveWithListObjectIntent)
+            }
+
+
+            /* Implicit Intent */
+            R.id.btn_dial_number -> {
+                val phoneNumber = "081257026600"
+                val dialPhoneIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber"))
+                startActivity(dialPhoneIntent)
             }
         }
     }
