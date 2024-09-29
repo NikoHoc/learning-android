@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var tvResult: TextView
+
     //buat launcher registerForActivityResult untuk menerima nilai return
     private val resultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -61,6 +62,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         /* Dapatkan nilai return dri intent */
         val btnMoveForResult:Button = findViewById(R.id.btn_move_for_result)
         btnMoveForResult.setOnClickListener(this)
+
         tvResult = findViewById(R.id.tv_result)
     }
 
@@ -127,6 +129,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             /* mendapatkan nilai return, pindah activity dulu*/
             R.id.btn_move_for_result -> {
                 val moveForResultIntent = Intent(this@MainActivity, MoveForResultActivity::class.java)
+                //perhatikan bedanya jika ingin dapatkan nilai, pakai .launch()
                 resultLauncher.launch(moveForResultIntent)
             }
         }
