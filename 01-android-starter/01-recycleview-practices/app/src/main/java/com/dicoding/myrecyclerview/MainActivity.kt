@@ -1,5 +1,6 @@
 package com.dicoding.myrecyclerview
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.tv_detail)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -70,6 +71,15 @@ class MainActivity : AppCompatActivity() {
         listHeroAdapter.setOnItemClickCallback(object : ListHeroAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Hero) {
                 showSelectedHero(data)
+            }
+        })
+
+        //jika ingin mengirim pada halaman detail
+        listHeroAdapter.setOnItemClickCallback(object : ListHeroAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: Hero) {
+                val intentToDetail = Intent(this@MainActivity, DetailActivity::class.java)
+                intentToDetail.putExtra("DATA", data)
+                startActivity(intentToDetail)
             }
         })
     }

@@ -15,11 +15,13 @@ class ListHeroAdapter (private val listHero: ArrayList<Hero>) : RecyclerView.Ada
         this.onItemClickCallback = onItemClickCallback
     }
 
+    //membuat layout item dari item_row_hero, tapi blum datanya, jadi view layout saja
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_row_hero, parent, false)
         return ListViewHolder(view)
     }
 
+    //memasukan data ke view
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val (name, description, photo) = listHero[position]
         holder.imgPhoto.setImageResource(photo)
@@ -29,6 +31,7 @@ class ListHeroAdapter (private val listHero: ArrayList<Hero>) : RecyclerView.Ada
 //            Toast.makeText(holder.itemView.context, "Kamu memilih " + listHero[holder.adapterPosition].name, Toast.LENGTH_SHORT).show()
 //        }
 
+        //menambahkan data lewat fungsi interface
         holder.itemView.setOnClickListener {
             onItemClickCallback.onItemClicked(listHero[holder.adapterPosition])
         }
@@ -36,6 +39,7 @@ class ListHeroAdapter (private val listHero: ArrayList<Hero>) : RecyclerView.Ada
 
     override fun getItemCount(): Int = listHero.size
 
+    //menginisialisasi tiap komponen sesuai layout item
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imgPhoto: ImageView = itemView.findViewById(R.id.img_item_photo)
         val tvName: TextView = itemView.findViewById(R.id.tv_item_name)
@@ -45,5 +49,7 @@ class ListHeroAdapter (private val listHero: ArrayList<Hero>) : RecyclerView.Ada
     interface OnItemClickCallback {
         fun onItemClicked(data: Hero)
     }
+
+
 
 }
