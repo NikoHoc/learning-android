@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MechanicalKeyboards</string>
+    <string name="about">About</string>
+
+    <string name="my_name">Nikolas Henrik Owen Chan</string>
+    <string name="email">niko.owen88@gmail.com</string>
+
 </resources>
