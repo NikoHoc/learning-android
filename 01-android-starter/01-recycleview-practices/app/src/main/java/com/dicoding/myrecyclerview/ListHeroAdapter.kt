@@ -27,7 +27,7 @@ class ListHeroAdapter (private val listHero: ArrayList<Hero>) : RecyclerView.Ada
         val (name, description, photo) = listHero[position]
         //holder.imgPhoto.setImageResource(photo)
         Glide.with(holder.itemView.context)
-            .load(photo) // URL Gambar
+            .load(photo).circleCrop() // URL Gambar
             .into(holder.imgPhoto) // imageView mana yang akan diterapkan
         holder.tvName.text = name
         holder.tvDescription.text = description

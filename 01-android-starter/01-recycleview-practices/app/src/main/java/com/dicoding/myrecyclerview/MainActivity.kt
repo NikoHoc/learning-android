@@ -12,10 +12,14 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dicoding.myrecyclerview.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var rvHeroes: RecyclerView
     private val list = ArrayList<Hero>()
+
+    //binding view
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,11 +31,24 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+
+
         rvHeroes = findViewById(R.id.rv_heroes)
         rvHeroes.setHasFixedSize(true)
 
         list.addAll(getListHeroes())
         showRecyclerList()
+
+        /*binding view */
+//        binding = ActivityMainBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
+
+        //binding.rvHeroes.setHasFixedSize(true)
+
+        //cek path ini untuk id nya
+        //app\build\generated\data_binding_base_class_source_out\debug\out\com\dicoding\[nama_aplikasi]\databinding
+        //dgn begini tdk perlu inisialisasi objek dgn findViewById()
+        //binding.tvWelcome.text = "Hello Dicoding"
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
