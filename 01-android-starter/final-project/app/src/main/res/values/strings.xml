@@ -5,4 +5,154 @@
     <string name="my_name">Nikolas Henrik Owen Chan</string>
     <string name="email">niko.owen88@gmail.com</string>
 
+    <string name="keyboard_name">Keyboard Name</string>
+    <string name="keyboard_price">Keyboard Price</string>
+    <string name="keyboard_description">Keyboard Description</string>
+
+    <string-array name="data_name">
+        <item>Ajazz AKS068 Pro</item>
+        <item>Ajazz K685T</item>
+        <item>Press Play Apollo61 Lite</item>
+        <item>Cidoo QK61</item>
+        <item>Cooler Master SK622</item>
+        <item>Ducky One 3 Cosmic Mini</item>
+        <item>Logitech G Pro X 60</item>
+        <item>Noir Timeless HE</item>
+        <item>VortexSeries NS 75 QMK</item>
+        <item>Zuoya GMK61</item>
+    </string-array>
+
+    <integer-array name="data_photo">
+        <item>@drawable/ajazz_aks068_pro</item>
+        <item>@drawable/ajazz_k685t</item>
+        <item>@drawable/pressplay_apolo</item>
+        <item>@drawable/cidooo_qk61</item>
+        <item>@drawable/cooler_master_sk622</item>
+        <item>@drawable/ducky_one_3_cosmic_mini</item>
+        <item>@drawable/logitech_g_pro_x_60</item>
+        <item>@drawable/noir_timeless_he</item>
+        <item>@drawable/vortexseries_ns_75_qmk</item>
+        <item>@drawable/zuoya_gmk61</item>
+    </integer-array>
+
+    <integer-array name="data_price">
+        <item>799000</item>
+        <item>525000</item>
+        <item>549000</item>
+        <item>649000</item>
+        <item>550000</item>
+        <item>1595000</item>
+        <item>2999000</item>
+        <item>1500000</item>
+        <item>999000</item>
+        <item>800000</item>
+    </integer-array>
+
+    <string-array name="data_description">
+        <item>AKS-068 Alice Wireless Mechanical Gaming Keyboard</item>
+        <item>65% Mechanical Keyboard Three-Mode RGB Hotswappable</item>
+        <item>60% Wired Mechanical Keyboard by Press Play</item>
+        <item>Mechanical Keyboard 60% VIA South Face</item>
+        <item>Hybrid Wireless Mechanical Low-Profile Gaming Keyboard</item>
+        <item>60% Hotswap RGB Mechanical Gaming Keyboard</item>
+        <item>LIGHTSPEED Keyboard Wireless Tactile with Lightsync</item>
+        <item>75% Hall Effect Rapid Trigger Magnetic Keyboard </item>
+        <item>Wireless Tri Mode 75% Gasket Mount Keyboard</item>
+        <item>Tri-Mode Prebuilt Mechanical Keyboard</item>
+    </string-array>
+
+    <string-array name="data_specification">
+        <item>AKS068 Pro hadir dalam tri-mode konektivitas, yaitu kabel Type-C, wireless 2.4G, dan Bluetooth, membuatnya kompatibel dengan berbagai sistem operasi seperti Windows Vista/XP/7/8/10/11 dan MacOS. Ditambah dengan baterai berkapasitas 3000mAh untuk penggunaan yang tahan lama. Switch Sea-Salt Ajazz yang linear menawarkan operasi yang halus dengan gaya operasi 40±10gf dan perjalanan total 3.5±0.4mm, ideal untuk gaming maupun pengetikan sehari-hari. Ajazz AKS068 Pro adalah pilihan sempurna bagi mereka yang mencari kualitas, estetika, dan performa dalam satu paket keyboard mekanikal.</item>
+
+        <item>K685T menyediakan efek pencahayaan RGB dengan 16,8 juta warna. Selain itu, K685T dilengkapi dengan beberapa efek pencahayaan preset. Anda dapat beralih antara berbagai kategori efek pencahayaan dengan menggunakan tombol FN bersamaan dengan tombol tambah. Jika Anda menekan tombol FN bersamaan dengan tombol Enter, Anda juga dapat mengakses mode warna tunggal dari efek pencahayaan</item>
+
+        <item>dimensi: 30 x 12 x 3 cm
+            60%, 61-keys layout
+            koneksi kabel/wired Type C only
+            PBT Doubleshot, Cherry profile Keycaps
+            ABS Case Semi-transparent, dengan pilihan warna Smokey Black atau Clear White
+            pilihan switch: Press Play Ivory (linear switch) atau Press Play Salmon (tactile switch)
+            VIA Compatible, remap keys dan custom RGB sesuka hati (.json file download dari website kami)
+            Universal hotswappable 3/5 pin
+            south-facing RGB, tidak interference dengan keycap Cherry
+            flex-cut PCB, tebal 1.2mm
+            silicone gasket mount (16 points leaf/sock gasket system)
+            pre-installed flex cut polycarbonate plate
+            pre-installed plate mount stabilizer (prelubed)
+            pre-installed plate + case foam
+            pre-installed switch pads</item>
+
+        <item>Produk : Mechanical Keyboard
+            Brand : CIDOO
+            Model : QK61 - South Facing
+            Switch : Compatible with 3 and 5 PIN
+            Bahan : Plastic
+            Plate : PC Gasket
+            Tipe : Keyboard
+            Battery : 3000 mAH
+            Display : LED display (customizable)
+            Interface : 3 Modes : USB Type-C, Bluetooth, Wifi
+            Support : Windows + Mac + iOS + Android
+            Apps : VIA / QMK
+            Berat : 1.32 kg
+            Size : 320mm x 145mm x 35mm</item>
+
+        <item>Low Profile Mechanical Switches, Hybrid Wireless, Ergonomic Upgrades, Portable 60% Layout, Multiple OS Support, Brushed Aluminum Design, RGB Backlighting, Highly Customizable, Hybrid Key Rollover, Garansi 2 tahun, color: black and white, material: aluminium or plastic, led color: RGB, Polling Rate: Wired Mode 1000Hz, Bluetooth Mode 125Hz, Wireless Connectivity: Bluetooth 4.0, Battery: 4000mAh, OS Compatibility: Mac OS/iOS/Android/Windows 8 and above, Cable length: 1.8m, Braided and removable, Dimension: 293 x 103 x 30.28 mm</item>
+
+        <item>QUACK Mechanics, uses only the finest materials, our keycaps are made from true PBT. The seamless legends are formed through a double-shot technique where two plastics are molded together, allowing legends to never fade away even after multiple years of use.
+        Optimized Construction, The weight distribution and lowered case height improve the keyboards overall stability and poise during the most rigorous of moments. Its front-to-back weight ratio is meticulously engineered to keep the keyboard in one unwavering position, essential for advanced gaming and typing.
+        Authentic Acoustics, A multi-layered padding design is present to spotlight raw acoustics from your switches of choice and reduce unwanted noise during use.
+        Detachable USB Type-C, We use USB HID with the highest frequency of 1000Hz polling rate, meaning the keyboard is sending its input signal(s) to your PC 1000 times per second.
+        Hot-Swappable Mechanical Keyboard, All standard Ducky One 3 mechanical keyboards are hot-swappable and feature Kailhs hot-swap sockets.
+        Dual-layer PCB, Longer life expectancy and signal stability, Handle any number of simultaneous key presses with the option of N-key or 6-Key Rollover.
+        Three keyboard angles, Two-step keyboard feet allow you to set your keyboard at three different tilt angles.
+        Sleek bezel design, The keyboard features a sleek bezel design to match all varieties of keycap colorways.</item>
+
+        <item>Didesain dengan input dari ratusan atlet esports terbaik dunia, keyboard gaming wireless PRO X 60 LIGHTSPEED adalah keyboard 60% pertama dari Logitech G. Kontrol setiap tombol di G HUB dengan KEYCONTROL dan 5 lapisan yang bisa dikustomisasi untuk pusat komando terbaik. Mainkan sesuai keinginanmu dengan dual-shot PBT keycaps dan dua opsi switch GX optical: tactile atau linear Hubungkan keyboard mechanical wireless-mu dengan mulus menggunakan Bluetooth atau USB, atau lepaskan kecepatan dan keandalan dengan kinerja LIGHTSPEED wireless yang tepercaya. Menang dengan cara yang keren bersama LIGHTSYNC RGB yang bisa dikustomisasi dan 3 corak warna keyboard: Hitam, Putih, atau Merah Muda. Kontrol ringkas. Tanpa kompromi.</item>
+
+        <item>Adjustable actuation point
+            Rapid trigger function
+            Dynamic keystrokes
+            Mod-Tap
+            Toggle key
+            Deadzone setting
+            Up to 8K polling rate
+            Semi transparent ABS-PBT doubleshot keycaps
+            Semi transparent keycaps (black and blue)
+            Adjustable knob
+            Pre-lubed Plate mount stabilizers
+            Wired Type-C</item>
+
+        <item>75% Compact Layout
+            QMK/VIA Compatible for Versatile Customization
+            Innovative Gasket Mounted (Leaf / Gasket Socks) Structure for Enhanced Typing Experience
+            Advanced Multi-Layered Sound Absorption Technology
+            Dual-Tone PBT DoubleShot Keycaps for Durability and Aesthetic Appeal
+            Cherry Profile Keycaps for Comfortable Typing
+            South Facing LED per key with Adjustable RGB Backlighting for Stunning Visual Effects
+            Three-Mode Connectivity for Seamless Device Pairing ( Wired, Wireless 2.4g and Bluetooth 3 profile )
+            Hotswappable Universal 5 Pin for Effortless Key Switch Replacement
+            Expertly Tuned Stabilizers for Smooth and Consistent Keystrokes
+            High-Capacity 5000mAh Rechargeable Battery for Long-lasting Usage
+            Full Keys Anti Ghosting (NKRO)
+            Dimensions: 326 x 152 x 20 mm, perfect for portability and comfort.</item>
+
+        <item>Hot-swappable, 3-mod Bluetooth 2.4G, Wireless RGB Backlit, Gasket Structure Keyboard, RGB Backlit, ABS, Gasket Structure, Gaming
+            Hot Swap Keyboard Kit
+            for Wire Bluetooth 2.4G Wireless
+            3-Mode GMK61 Mechanical Keyboard Kit
+            Customized Hot Swap Gaming Keyboard
+            Display Screen
+            RGB Backlit
+            Gasket Structure
+            GMK61 Customized
+            3 Mode Wireless 2.4G
+            Hot Swap Gaming Mechanical Keyboard - Prebuilt
+            With Display Screen
+            RGB Backlit Gasket Structure</item>
+    </string-array>
+
+
+
+
 </resources>

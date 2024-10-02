@@ -7,6 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class Keyboard(
     val name: String,
     val description: String,
-    val photo: String,
-    val specification: String
+    val specification: String,
+    val photo: Int,
+    val price: Int
 ) : Parcelable
