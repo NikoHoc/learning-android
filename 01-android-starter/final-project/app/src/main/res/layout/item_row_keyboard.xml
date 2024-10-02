@@ -16,7 +16,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:background="@color/carolina_blue">
 
         <ImageView
             android:id="@+id/img_item_photo"
@@ -37,6 +38,7 @@
             android:layout_toEndOf="@id/img_item_photo"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textColor="@color/white"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toEndOf="@+id/img_item_photo"
             card_view:layout_constraintTop_toTopOf="@+id/img_item_photo"
@@ -50,6 +52,7 @@
             android:ellipsize="end"
             android:fontFamily="sans-serif-medium"
             android:maxLines="5"
+            android:textColor="@color/white"
             card_view:layout_constraintEnd_toEndOf="@+id/tv_item_name"
             card_view:layout_constraintStart_toStartOf="@+id/tv_item_name"
             card_view:layout_constraintTop_toBottomOf="@+id/tv_item_name"
@@ -62,6 +65,7 @@
             android:layout_marginTop="8dp"
             android:ellipsize="end"
             android:maxLines="5"
+            android:textColor="@color/white"
             card_view:layout_constraintBottom_toBottomOf="@+id/img_item_photo"
             card_view:layout_constraintEnd_toEndOf="@+id/tv_item_price"
             card_view:layout_constraintStart_toStartOf="@+id/tv_item_price"

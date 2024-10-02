@@ -2,6 +2,12 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MechanicalKeyboards" parent="Theme.Material3.DayNight">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/charcoal</item>
+    </style>
+
+    <style name="Theme.MechanicalKeyboards" parent="Base.Theme.MechanicalKeyboards" />
+
+    <style name="circular">
+        <item name="cornerSize">50%</item>
     </style>
 </resources>

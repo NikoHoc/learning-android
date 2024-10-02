@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="darker_blue">#2F0012FF</color>
+    <color name="charcoal">#2F4858</color>
+    <color name="carolina_blue">#86BBD8</color>
+    <color name="lapiz_lazuli">#336699</color>
+    <color name="light_green">#9EE493</color>
+    <color name="nyanza">#DAF7DC</color>
 </resources>
