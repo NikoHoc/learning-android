@@ -8,18 +8,19 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_marginStart="8dp"
-    android:layout_marginTop="4dp"
+    android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp"
     android:layout_marginBottom="4dp"
-    card_view:cardCornerRadius="4dp">
+    card_view:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:background="@color/carolina_blue">
+        android:background="@color/carolina_blue"
+        >
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_item_photo"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -27,7 +28,8 @@
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@tools:sample/avatars"
+            card_view:shapeAppearance="@style/circularItem"/>
 
         <TextView
             android:id="@+id/tv_item_name"

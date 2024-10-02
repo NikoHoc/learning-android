@@ -8,6 +8,7 @@
     <string name="keyboard_name">Keyboard Name</string>
     <string name="keyboard_price">Keyboard Price</string>
     <string name="keyboard_description">Keyboard Description</string>
+    <string name="keyboard_specification">Keyboard Specification</string>
 
     <string-array name="data_name">
         <item>Ajazz AKS068 Pro</item>
@@ -66,90 +67,21 @@
 
         <item>K685T menyediakan efek pencahayaan RGB dengan 16,8 juta warna. Selain itu, K685T dilengkapi dengan beberapa efek pencahayaan preset. Anda dapat beralih antara berbagai kategori efek pencahayaan dengan menggunakan tombol FN bersamaan dengan tombol tambah. Jika Anda menekan tombol FN bersamaan dengan tombol Enter, Anda juga dapat mengakses mode warna tunggal dari efek pencahayaan</item>
 
-        <item>dimensi: 30 x 12 x 3 cm
-            60%, 61-keys layout
-            koneksi kabel/wired Type C only
-            PBT Doubleshot, Cherry profile Keycaps
-            ABS Case Semi-transparent, dengan pilihan warna Smokey Black atau Clear White
-            pilihan switch: Press Play Ivory (linear switch) atau Press Play Salmon (tactile switch)
-            VIA Compatible, remap keys dan custom RGB sesuka hati (.json file download dari website kami)
-            Universal hotswappable 3/5 pin
-            south-facing RGB, tidak interference dengan keycap Cherry
-            flex-cut PCB, tebal 1.2mm
-            silicone gasket mount (16 points leaf/sock gasket system)
-            pre-installed flex cut polycarbonate plate
-            pre-installed plate mount stabilizer (prelubed)
-            pre-installed plate + case foam
-            pre-installed switch pads</item>
+        <item>Dimensi: 30 x 12 x 3 cm 60% 61-keys layout\nKoneksi kabel/wired Type C only\nPBT Doubleshot, Cherry profile Keycaps\nABS Case Semi-transparent, dengan pilihan warna Smokey Black atau Clear White\nPilihan switch: Press Play Ivory (linear switch) atau Press Play Salmon (tactile switch)\nVIA Compatible, remap keys dan custom RGB sesuka hati (.json file download dari website kami)\nUniversal hotswappable 3/5 pin\nSouth-facing RGB, tidak interference dengan keycap Cherry\nFlex-cut PCB, tebal 1.2mm\nSilicone gasket mount (16 points leaf/sock gasket system)\nPre-installed flex cut polycarbonate plate\nPre-installed plate mount stabilizer (prelubed)\nPre-installed plate + case foam\nPre-installed switch pads</item>
 
-        <item>Produk : Mechanical Keyboard
-            Brand : CIDOO
-            Model : QK61 - South Facing
-            Switch : Compatible with 3 and 5 PIN
-            Bahan : Plastic
-            Plate : PC Gasket
-            Tipe : Keyboard
-            Battery : 3000 mAH
-            Display : LED display (customizable)
-            Interface : 3 Modes : USB Type-C, Bluetooth, Wifi
-            Support : Windows + Mac + iOS + Android
-            Apps : VIA / QMK
-            Berat : 1.32 kg
-            Size : 320mm x 145mm x 35mm</item>
+        <item>Produk : Mechanical Keyboard\nBrand : CIDOO\nModel : QK61 - South Facing\nSwitch : Compatible with 3 and 5 PIN\nBahan : Plastic\nPlate : PC Gasket\nTipe : Keyboard\nBattery : 3000 mAH\nDisplay : LED display (customizable)\nInterface : 3 Modes : USB Type-C, Bluetooth, Wifi\nSupport : Windows + Mac + iOS + Android\nApps : VIA / QMK\nBerat : 1.32 kg\nSize : 320mm x 145mm x 35mm</item>
 
         <item>Low Profile Mechanical Switches, Hybrid Wireless, Ergonomic Upgrades, Portable 60% Layout, Multiple OS Support, Brushed Aluminum Design, RGB Backlighting, Highly Customizable, Hybrid Key Rollover, Garansi 2 tahun, color: black and white, material: aluminium or plastic, led color: RGB, Polling Rate: Wired Mode 1000Hz, Bluetooth Mode 125Hz, Wireless Connectivity: Bluetooth 4.0, Battery: 4000mAh, OS Compatibility: Mac OS/iOS/Android/Windows 8 and above, Cable length: 1.8m, Braided and removable, Dimension: 293 x 103 x 30.28 mm</item>
 
-        <item>QUACK Mechanics, uses only the finest materials, our keycaps are made from true PBT. The seamless legends are formed through a double-shot technique where two plastics are molded together, allowing legends to never fade away even after multiple years of use.
-        Optimized Construction, The weight distribution and lowered case height improve the keyboards overall stability and poise during the most rigorous of moments. Its front-to-back weight ratio is meticulously engineered to keep the keyboard in one unwavering position, essential for advanced gaming and typing.
-        Authentic Acoustics, A multi-layered padding design is present to spotlight raw acoustics from your switches of choice and reduce unwanted noise during use.
-        Detachable USB Type-C, We use USB HID with the highest frequency of 1000Hz polling rate, meaning the keyboard is sending its input signal(s) to your PC 1000 times per second.
-        Hot-Swappable Mechanical Keyboard, All standard Ducky One 3 mechanical keyboards are hot-swappable and feature Kailhs hot-swap sockets.
-        Dual-layer PCB, Longer life expectancy and signal stability, Handle any number of simultaneous key presses with the option of N-key or 6-Key Rollover.
-        Three keyboard angles, Two-step keyboard feet allow you to set your keyboard at three different tilt angles.
-        Sleek bezel design, The keyboard features a sleek bezel design to match all varieties of keycap colorways.</item>
+        <item>QUACK Mechanics, uses only the finest materials, our keycaps are made from true PBT. The seamless legends are formed through a double-shot technique where two plastics are molded together, allowing legends to never fade away even after multiple years of use.\n\nOptimized Construction, The weight distribution and lowered case height improve the keyboards overall stability and poise during the most rigorous of moments. Its front-to-back weight ratio is meticulously engineered to keep the keyboard in one unwavering position, essential for advanced gaming and typing.\nAuthentic Acoustics, A multi-layered padding design is present to spotlight raw acoustics from your switches of choice and reduce unwanted noise during use.\n\nDetachable USB Type-C, We use USB HID with the highest frequency of 1000Hz polling rate, meaning the keyboard is sending its input signal(s) to your PC 1000 times per second.\n\nHot-Swappable Mechanical Keyboard, All standard Ducky One 3 mechanical keyboards are hot-swappable and feature Kailhs hot-swap sockets.\n\nDual-layer PCB, Longer life expectancy and signal stability, Handle any number of simultaneous key presses with the option of N-key or 6-Key Rollover.\n\nThree keyboard angles, Two-step keyboard feet allow you to set your keyboard at three different tilt angles.\n\nSleek bezel design, The keyboard features a sleek bezel design to match all varieties of keycap colorways.</item>
 
         <item>Didesain dengan input dari ratusan atlet esports terbaik dunia, keyboard gaming wireless PRO X 60 LIGHTSPEED adalah keyboard 60% pertama dari Logitech G. Kontrol setiap tombol di G HUB dengan KEYCONTROL dan 5 lapisan yang bisa dikustomisasi untuk pusat komando terbaik. Mainkan sesuai keinginanmu dengan dual-shot PBT keycaps dan dua opsi switch GX optical: tactile atau linear Hubungkan keyboard mechanical wireless-mu dengan mulus menggunakan Bluetooth atau USB, atau lepaskan kecepatan dan keandalan dengan kinerja LIGHTSPEED wireless yang tepercaya. Menang dengan cara yang keren bersama LIGHTSYNC RGB yang bisa dikustomisasi dan 3 corak warna keyboard: Hitam, Putih, atau Merah Muda. Kontrol ringkas. Tanpa kompromi.</item>
 
-        <item>Adjustable actuation point
-            Rapid trigger function
-            Dynamic keystrokes
-            Mod-Tap
-            Toggle key
-            Deadzone setting
-            Up to 8K polling rate
-            Semi transparent ABS-PBT doubleshot keycaps
-            Semi transparent keycaps (black and blue)
-            Adjustable knob
-            Pre-lubed Plate mount stabilizers
-            Wired Type-C</item>
+        <item>Adjustable actuation point\nRapid trigger function\nDynamic keystrokes\nMod-Tap\nToggle key\nDeadzone setting\nUp to 8K polling rate\nSemi transparent ABS-PBT doubleshot keycaps\nSemi transparent keycaps (black and blue)\nAdjustable knob\nPre-lubed Plate mount stabilizers\nWired Type-C</item>
 
-        <item>75% Compact Layout
-            QMK/VIA Compatible for Versatile Customization
-            Innovative Gasket Mounted (Leaf / Gasket Socks) Structure for Enhanced Typing Experience
-            Advanced Multi-Layered Sound Absorption Technology
-            Dual-Tone PBT DoubleShot Keycaps for Durability and Aesthetic Appeal
-            Cherry Profile Keycaps for Comfortable Typing
-            South Facing LED per key with Adjustable RGB Backlighting for Stunning Visual Effects
-            Three-Mode Connectivity for Seamless Device Pairing ( Wired, Wireless 2.4g and Bluetooth 3 profile )
-            Hotswappable Universal 5 Pin for Effortless Key Switch Replacement
-            Expertly Tuned Stabilizers for Smooth and Consistent Keystrokes
-            High-Capacity 5000mAh Rechargeable Battery for Long-lasting Usage
-            Full Keys Anti Ghosting (NKRO)
-            Dimensions: 326 x 152 x 20 mm, perfect for portability and comfort.</item>
+        <item>75% Compact Layout\nQMK/VIA Compatible for Versatile Customization\nInnovative Gasket Mounted (Leaf / Gasket Socks) Structure for Enhanced Typing Experience\nAdvanced Multi-Layered Sound Absorption Technology\nDual-Tone PBT DoubleShot Keycaps for Durability and Aesthetic Appeal\nCherry Profile Keycaps for Comfortable Typing\nSouth Facing LED per key with Adjustable RGB Backlighting for Stunning Visual Effects\nThree-Mode Connectivity for Seamless Device Pairing ( Wired, Wireless 2.4g and Bluetooth 3 profile )\nHotswappable Universal 5 Pin for Effortless Key Switch Replacement\nExpertly Tuned Stabilizers for Smooth and Consistent Keystrokes\nHigh-Capacity 5000mAh Rechargeable Battery for Long-lasting Usage\nFull Keys Anti Ghosting (NKRO)\nDimensions: 326 x 152 x 20 mm, perfect for portability and comfort.</item>
 
-        <item>Hot-swappable, 3-mod Bluetooth 2.4G, Wireless RGB Backlit, Gasket Structure Keyboard, RGB Backlit, ABS, Gasket Structure, Gaming
-            Hot Swap Keyboard Kit
-            for Wire Bluetooth 2.4G Wireless
-            3-Mode GMK61 Mechanical Keyboard Kit
-            Customized Hot Swap Gaming Keyboard
-            Display Screen
-            RGB Backlit
-            Gasket Structure
-            GMK61 Customized
-            3 Mode Wireless 2.4G
-            Hot Swap Gaming Mechanical Keyboard - Prebuilt
-            With Display Screen
-            RGB Backlit Gasket Structure</item>
+        <item>Hot-swappable\n3-Mode Bluetooth 2.4G Wireless\nRGB Backlit\nGasket Structure\nABS\nGaming\nCustomized GMK61 Mechanical Keyboard Kit\nDisplay Screen\nPrebuilt</item>
     </string-array>
 
 
