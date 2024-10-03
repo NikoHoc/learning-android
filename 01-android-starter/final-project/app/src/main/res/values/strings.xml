@@ -10,6 +10,8 @@
     <string name="keyboard_description">Keyboard Description</string>
     <string name="keyboard_specification">Keyboard Specification</string>
 
+    <string name="share_button">Share</string>
+
     <string-array name="data_name">
         <item>Ajazz AKS068 Pro</item>
         <item>Ajazz K685T</item>

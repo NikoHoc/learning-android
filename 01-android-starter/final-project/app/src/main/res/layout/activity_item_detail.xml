@@ -100,5 +100,22 @@
             app:layout_constraintStart_toStartOf="@+id/tv_keyboard_spec"
             app:layout_constraintTop_toBottomOf="@+id/tv_keyboard_spec" />
 
+        <Button
+            android:id="@+id/share_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:textStyle="bold"
+            android:drawableLeft="@drawable/ic_share"
+            android:drawablePadding="4dp"
+            android:drawableTint="#FFFFFF"
+            android:text="@string/share_button"
+            android:backgroundTint="@color/charcoal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/detail_item_specification"
+            app:layout_constraintStart_toStartOf="@+id/detail_item_specification"
+            app:layout_constraintTop_toBottomOf="@+id/detail_item_specification" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

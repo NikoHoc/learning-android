@@ -10,24 +10,26 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dicoding.mechanicalkeyboards.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var rvKeyboards: RecyclerView
+    private lateinit var binding: ActivityMainBinding
+
     private val list = ArrayList<Keyboard>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main_page)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        rvKeyboards = findViewById(R.id.rv_keyboards)
-        rvKeyboards.setHasFixedSize(true)
-
+        binding.rvKeyboards.setHasFixedSize(true)
         list.addAll(getListKeyboards())
         showRecyclerList()
     }
@@ -63,12 +65,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showRecyclerList() {
-        rvKeyboards.layoutManager = LinearLayoutManager(this)
-        val listHeroAdapter = ListKeyboardAdapter(list)
-        rvKeyboards.adapter = listHeroAdapter
+        binding.rvKeyboards.layoutManager = LinearLayoutManager(this)
+        val listKeyboardAdapter = ListKeyboardAdapter(list)
+        binding.rvKeyboards.adapter = listKeyboardAdapter
 
         //jika ingin mengirim pada halaman detail
-        listHeroAdapter.setOnItemClickCallback(object : ListKeyboardAdapter.OnItemClickCallback {
+        listKeyboardAdapter.setOnItemClickCallback(object : ListKeyboardAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Keyboard) {
                 val intentToDetail = Intent(this@MainActivity, ItemDetailActivity::class.java)
                 intentToDetail.putExtra("DATA", data)
