@@ -1,21 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Base application theme with shared styles -->
     <style name="Base.Theme.MechanicalKeyboards" parent="Theme.Material3.DayNight">
         <item name="actionBarStyle">@style/MyActionBar</item>
     </style>
 
-    <style name="MyActionBarTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/white</item>
-    </style>
-
+    <!-- Action Bar Style -->
     <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="background">@color/charcoal</item>
         <item name="titleTextStyle">@style/MyActionBarTitle</item>
     </style>
+    <style name="MyActionBarTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/white</item>
+    </style>
 
-    <!-- SplashScreenTheme -->
     <style name="SplashScreenTheme" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="actionBarStyle">@style/MyActionBar</item>
     </style>
 
     <style name="Theme.MechanicalKeyboards" parent="Base.Theme.MechanicalKeyboards" />
