@@ -85,8 +85,7 @@
 
         <item>Hot-swappable\n3-Mode Bluetooth 2.4G Wireless\nRGB Backlit\nGasket Structure\nABS\nGaming\nCustomized GMK61 Mechanical Keyboard Kit\nDisplay Screen\nPrebuilt</item>
     </string-array>
-
-
+    <string name="title_activity_splash">SplashActivity</string>
 
 
 </resources>
