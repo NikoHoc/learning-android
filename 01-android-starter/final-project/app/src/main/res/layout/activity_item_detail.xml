@@ -16,71 +16,42 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/detail_image_view"
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            style="@style/ItemDetailImageStyle"
+            tools:srcCompat="@tools:sample/avatars"
             app:shapeAppearance="@style/circularItem"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            />
 
         <TextView
             android:id="@+id/detail_item_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            style="@style/ItemDetailTitleStyle.Font"
             android:text="@string/keyboard_name"
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/detail_image_view"
             app:layout_constraintStart_toStartOf="@+id/detail_image_view"
             app:layout_constraintTop_toBottomOf="@+id/detail_image_view" />
 
         <TextView
             android:id="@+id/detail_item_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
+            style="@style/ItemDetailTextStyle.Font"
             android:text="@string/keyboard_description"
-            android:textColor="@color/white"
-            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/detail_item_name"
             app:layout_constraintStart_toStartOf="@+id/detail_item_name"
             app:layout_constraintTop_toBottomOf="@+id/detail_item_name" />
 
         <TextView
             android:id="@+id/detail_item_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="20dp"
+            style="@style/ItemDetailSubTitleStyle.Font"
             android:text="@string/keyboard_price"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
+
             app:layout_constraintEnd_toEndOf="@+id/detail_item_description"
             app:layout_constraintStart_toStartOf="@+id/detail_item_description"
             app:layout_constraintTop_toBottomOf="@+id/detail_item_description" />
 
         <TextView
             android:id="@+id/tv_keyboard_spec"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
+            style="@style/ItemDetailSubTitleStyle.Font"
             android:text="@string/keyboard_specification"
             app:layout_constraintEnd_toEndOf="@+id/detail_item_price"
             app:layout_constraintStart_toStartOf="@+id/detail_item_price"
@@ -88,14 +59,8 @@
 
         <TextView
             android:id="@+id/detail_item_specification"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="20dp"
+            style="@style/ItemDetailTextStyle.Font"
             android:text="@string/keyboard_specification"
-            android:textColor="@color/white"
-            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/tv_keyboard_spec"
             app:layout_constraintStart_toStartOf="@+id/tv_keyboard_spec"
             app:layout_constraintTop_toBottomOf="@+id/tv_keyboard_spec" />
