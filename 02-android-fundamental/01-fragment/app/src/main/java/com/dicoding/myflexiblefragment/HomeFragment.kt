@@ -7,19 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment(), View.OnClickListener {
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -33,7 +21,15 @@ class HomeFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View) {
-
+        if (v?.id == R.id.btn_category) {
+            val categoryFragment = CategoryFragment()
+            val fragmentManager = parentFragmentManager
+            fragmentManager.beginTransaction().apply {
+                replace(R.id.frame_container, categoryFragment, CategoryFragment::class.java.simpleName)
+                addToBackStack(null)
+                commit()
+            }
+        }
     }
 
 }
