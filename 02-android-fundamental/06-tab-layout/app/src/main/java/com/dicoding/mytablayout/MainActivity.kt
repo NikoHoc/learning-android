@@ -16,7 +16,8 @@ class MainActivity : AppCompatActivity() {
         @StringRes
         private val TAB_TITLES = intArrayOf(
             R.string.tab_text_1,
-            R.string.tab_text_2
+            R.string.tab_text_2,
+            R.string.tab_text_3
         )
     }
 
@@ -32,6 +33,10 @@ class MainActivity : AppCompatActivity() {
 
         //panggil class section class adapter
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
+
+        //mengirim data dari activity ke fragment
+        sectionsPagerAdapter.appName = resources.getString(R.string.app_name)
+
         val viewPager: ViewPager2 = findViewById(R.id.view_pager)
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = findViewById(R.id.tabs)
