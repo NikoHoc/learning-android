@@ -1,9 +1,11 @@
     package com.dicoding.restaurantreview.ui
 
+    import android.content.Context
     import android.os.Bundle
     import android.telecom.Call
     import android.util.Log
     import android.view.View
+    import android.view.inputmethod.InputMethodManager
     import androidx.activity.enableEdgeToEdge
     import androidx.appcompat.app.AppCompatActivity
     import androidx.core.view.ViewCompat
@@ -13,6 +15,7 @@
     import com.bumptech.glide.Glide
     import com.dicoding.restaurantreview.R
     import com.dicoding.restaurantreview.data.response.CustomerReviewsItem
+    import com.dicoding.restaurantreview.data.response.PostReviewResponse
     import com.dicoding.restaurantreview.data.response.Restaurant
     import com.dicoding.restaurantreview.data.response.RestaurantResponse
     import com.dicoding.restaurantreview.data.retrofit.ApiConfig
@@ -49,6 +52,12 @@
             binding.rvReview.addItemDecoration(itemDecoration)
 
             findRestaurant()
+
+            binding.btnSend.setOnClickListener { view ->
+                postReview(binding.edReview.text.toString())
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
+            }
         }
 
         private fun findRestaurant() {
@@ -95,5 +104,28 @@
             } else {
                 binding.progressBar.visibility = View.GONE
             }
+        }
+
+        private fun postReview(review: String) {
+            showLoading(true)
+            val client = ApiConfig.getApiService().postReview(RESTAURANT_ID, "Dicoding", review)
+            client.enqueue(object : retrofit2.Callback<PostReviewResponse> {
+                override fun onResponse(
+                    call: retrofit2.Call<PostReviewResponse>,
+                    response: Response<PostReviewResponse>
+                ) {
+                    showLoading(false)
+                    val responseBody = response.body()
+                    if (response.isSuccessful && responseBody != null) {
+                        setReviewData(responseBody.customerReviews)
+                    } else {
+                        Log.e(TAG, "onFailure: ${response.message()}")
+                    }
+                }
+                override fun onFailure(call: retrofit2.Call<PostReviewResponse>, t: Throwable) {
+                    showLoading(false)
+                    Log.e(TAG, "onFailure: ${t.message}")
+                }
+            })
         }
     }
