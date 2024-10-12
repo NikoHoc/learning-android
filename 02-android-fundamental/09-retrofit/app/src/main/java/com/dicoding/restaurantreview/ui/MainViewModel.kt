@@ -1,5 +1,5 @@
 package com.dicoding.restaurantreview.ui
-
+import com.dicoding.restaurantreview.utils.Event
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -25,6 +25,13 @@ class MainViewModel : ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
+
+//    private val _snackbarText = MutableLiveData<String>()
+//    val snackbarText: LiveData<String> = _snackbarText
+
+    //menggunakan wrapper agar tampil saat post review saja
+    private val _snackbarText = MutableLiveData<Event<String>>()
+    val snackbarText: LiveData<Event<String>> = _snackbarText
 
     companion object{
         private const val TAG = "MainViewModel"
@@ -65,7 +72,14 @@ class MainViewModel : ViewModel() {
             override fun onResponse(call: Call<PostReviewResponse>, response: Response<PostReviewResponse>) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
-                    _listReview.value = response.body()?.customerReviews
+                    //_listReview.value = response.body()?.customerReviews
+                    listReview.value = response.body()?.customerReviews
+
+                    //kode pertama dibwh ini, jika aplikasi dirotate, snackbar msi muncul kembali
+                    //_snackbarText.value = response.body()?.message
+
+                    //pakai event wrapper yg sdh dibuat
+                    _snackbarText.value = Event(response.body()?.message.toString())
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }

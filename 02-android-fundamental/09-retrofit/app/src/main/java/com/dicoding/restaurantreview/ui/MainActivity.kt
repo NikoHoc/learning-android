@@ -21,6 +21,7 @@
     import com.dicoding.restaurantreview.data.response.RestaurantResponse
     import com.dicoding.restaurantreview.data.retrofit.ApiConfig
     import com.dicoding.restaurantreview.databinding.ActivityMainBinding
+    import com.google.android.material.snackbar.Snackbar
     import retrofit2.Response
     import javax.security.auth.callback.Callback
 
@@ -79,6 +80,23 @@
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(view.windowToken, 0)
             }
+
+            //single event -> menampilkan snackbar msg hasil dari aksi post review
+            // namun jika hanya begini, saat hp di rotate, snackbarnya muncul terus
+//            mainViewModel.snackbarText.observe(this) {
+//                Snackbar.make(window.decorView.rootView, it, Snackbar.LENGTH_SHORT).show()
+//            }
+
+            // cara baru snackbar dengan wrapper Event pada utils
+            mainViewModel.snackbarText.observe(this, {
+                it.getContentIfNotHandled()?.let { snackBarText ->
+                    Snackbar.make(
+                        window.decorView.rootView,
+                        snackBarText,
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            })
         }
 
         /* pindah ke view model */
