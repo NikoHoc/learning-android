@@ -1,11 +1,13 @@
 package com.dicoding.myflexiblefragment
 
 import android.os.Bundle
+import android.text.TextUtils.replace
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.commit
 
 class CategoryFragment : Fragment(), View.OnClickListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -34,11 +36,18 @@ class CategoryFragment : Fragment(), View.OnClickListener {
             detailCategoryFragment.description = description
 
             val fragmentManager = parentFragmentManager
-            fragmentManager?.beginTransaction()?.apply {
-                replace(R.id.frame_container, detailCategoryFragment, DetailCategoryFragment::class.java.simpleName)
-                addToBackStack(null)
-                commit()
+            // cara lama pakai fragment
+//            fragmentManager?.beginTransaction()?.apply {
+//                replace(R.id.frame_container, detailCategoryFragment, DetailCategoryFragment::class.java.simpleName)
+//                addToBackStack(null)
+//                commit()
+//
+//            }
 
+            // menggunakan fragment ktx
+            fragmentManager.commit {
+                addToBackStack(null)
+                replace(R.id.frame_container, detailCategoryFragment, DetailCategoryFragment::class.java.simpleName)
             }
         }
     }

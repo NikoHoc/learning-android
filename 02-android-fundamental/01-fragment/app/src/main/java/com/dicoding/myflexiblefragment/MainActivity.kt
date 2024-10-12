@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.commit
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,12 +22,22 @@ class MainActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val homeFragment = HomeFragment()
         val fragment = fragmentManager.findFragmentByTag(HomeFragment::class.java.simpleName)
+
+        // cara biasa pakai fragment
+//        if (fragment !is HomeFragment) {
+//            Log.d("MyFlexibleFragment", "Fragment Name :" + HomeFragment::class.java.simpleName)
+//            fragmentManager
+//                .beginTransaction()
+//                .add(R.id.frame_container, homeFragment, HomeFragment::class.java.simpleName)
+//                .commit()
+//        }
+
+        // menggunakan fragment ktx
         if (fragment !is HomeFragment) {
             Log.d("MyFlexibleFragment", "Fragment Name :" + HomeFragment::class.java.simpleName)
-            fragmentManager
-                .beginTransaction()
-                .add(R.id.frame_container, homeFragment, HomeFragment::class.java.simpleName)
-                .commit()
+            fragmentManager.commit {
+                add(R.id.frame_container, homeFragment, HomeFragment::class.java.simpleName)
+            }
         }
     }
 }
