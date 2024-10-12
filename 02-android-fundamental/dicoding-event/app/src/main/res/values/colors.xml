@@ -1,40 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    &lt;!&ndash; Primary Light &ndash;&gt;-->
-<!--    <color name="p_40">#29638a</color>-->
-<!--    <color name="p_90">#cbe6ff</color>-->
-<!--    <color name="p_10">#001e30</color>-->
-<!--    &lt;!&ndash; Secondary Light &ndash;&gt;-->
-<!--    <color name="s_40">#50606f</color>-->
-<!--    <color name="s_90">#d4e4f6</color>-->
-<!--    <color name="s_10">#0d1d29</color>-->
-<!--    &lt;!&ndash; Tertiary Light &ndash;&gt;-->
-<!--    <color name="t_40">#66587b</color>-->
-<!--    <color name="t_90">#ecdcff</color>-->
-<!--    <color name="t_10">#211634</color>-->
-<!--    &lt;!&ndash; Surface Light &ndash;&gt;-->
-<!--    <color name="n_87">#d7dadf</color>-->
-<!--    <color name="n_98">#f7f9ff</color>-->
-<!--    <color name="n_10">#181c20</color>-->
-
-
-<!--    &lt;!&ndash; Primary Dark &ndash;&gt;-->
-<!--    <color name="p_80">#97ccf9</color>-->
-<!--    <color name="p_20">#003450</color>-->
-<!--    <color name="p_30">#014b71</color>-->
-<!--    &lt;!&ndash; Secondary Dark &ndash;&gt;-->
-<!--    <color name="s_80">#b8c8d9</color>-->
-<!--    <color name="s_20">#22323f</color>-->
-<!--    <color name="s_30">#394856</color>-->
-<!--    &lt;!&ndash; Tertiary Dark &ndash;&gt;-->
-<!--    <color name="t_80">#d0bfe7</color>-->
-<!--    <color name="t_20">#362b4a</color>-->
-<!--    <color name="t_30">#4d4162</color>-->
-<!--    &lt;!&ndash; Surface Dark &ndash;&gt;-->
-<!--    <color name="n_6">#101417</color>-->
-<!--    <color name="n_24">#363a3e</color>-->
-<!--    <color name="n_90">#e0e3e8</color>-->
-
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 

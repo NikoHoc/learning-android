@@ -52,5 +52,19 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorOnPrimaryContainer</item>
         <!-- Customize your theme here. -->
+
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <!-- Style for Headlines, Titles, etc. -->
+    <style name="HeadlineStyle">
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <!-- Style for Body text -->
+    <style name="BodyStyle">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>
