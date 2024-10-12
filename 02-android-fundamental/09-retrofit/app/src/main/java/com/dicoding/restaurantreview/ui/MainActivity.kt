@@ -7,6 +7,7 @@
     import android.view.View
     import android.view.inputmethod.InputMethodManager
     import androidx.activity.enableEdgeToEdge
+    import androidx.activity.viewModels
     import androidx.appcompat.app.AppCompatActivity
     import androidx.core.view.ViewCompat
     import androidx.core.view.WindowInsetsCompat
@@ -28,10 +29,12 @@
     class MainActivity : AppCompatActivity() {
         private lateinit var binding: ActivityMainBinding
 
-        companion object {
-            private const val TAG = "MainActivity"
-            private const val RESTAURANT_ID = "uewq1zg2zlskfw1e867"
-        }
+        private val mainViewModel by viewModels<MainViewModel>()
+
+//        companion object {
+//            private const val TAG = "MainActivity"
+//            private const val RESTAURANT_ID = "uewq1zg2zlskfw1e867"
+//        }
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -48,11 +51,16 @@
 
             supportActionBar?.hide()
 
-            // memakai view model
-            val mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
-            mainViewModel.restaurant.observe(this) { restaurant ->
+            // memakai view model provider
+//            val mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+//            mainViewModel.restaurant.observe(this) { restaurant ->
+//                setRestaurantData(restaurant)
+//            }
+
+            // menggunakan ktx
+            mainViewModel.restaurant.observe(this, { restaurant ->
                 setRestaurantData(restaurant)
-            }
+            })
 
             val layoutManager = LinearLayoutManager(this)
             binding.rvReview.layoutManager = layoutManager
@@ -75,6 +83,9 @@
                 showLoading(it)
             }
 
+
+
+
             binding.btnSend.setOnClickListener { view ->
                 mainViewModel.postReview(binding.edReview.text.toString())
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -89,6 +100,7 @@
 
             // cara baru snackbar dengan wrapper Event pada utils
             mainViewModel.snackbarText.observe(this, {
+                // di cek dulu apakah sudah terhandle apa belum
                 it.getContentIfNotHandled()?.let { snackBarText ->
                     Snackbar.make(
                         window.decorView.rootView,
@@ -97,6 +109,8 @@
                     ).show()
                 }
             })
+
+
         }
 
         /* pindah ke view model */
