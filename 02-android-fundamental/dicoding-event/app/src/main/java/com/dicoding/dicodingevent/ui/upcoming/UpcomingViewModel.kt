@@ -1,13 +1,13 @@
-package com.dicoding.dicodingevent.ui.dashboard
+package com.dicoding.dicodingevent.ui.upcoming
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class UpcomingViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "This is Upcoming Fragment"
     }
     val text: LiveData<String> = _text
 }
