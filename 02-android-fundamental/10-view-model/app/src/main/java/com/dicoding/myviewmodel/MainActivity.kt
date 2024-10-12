@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                     activityMainBinding.edtLength.error = "Masih kosong"
                 }
                 else -> {
+                    //panggil calculate di viewmodel
                     viewModel.calculate(width, height, length)
                     displayResult()
                 }
