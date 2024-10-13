@@ -49,6 +49,7 @@ class FinishedViewModel : ViewModel() {
             }
         })
     }
+
     fun searchEvents(query: String?) {
         _isLoading.value = true
         val client = ApiConfig.getApiService().getSearchEvent(0, query) // 0 for finished events

@@ -12,17 +12,14 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.dicodingevent.R
-import com.dicoding.dicodingevent.adapter.LandscapeEventAdapter
 import com.dicoding.dicodingevent.adapter.PortraitEventAdapter
 import com.dicoding.dicodingevent.data.response.ListEventsItem
 import com.dicoding.dicodingevent.databinding.FragmentFinishedBinding
 import com.dicoding.dicodingevent.ui.DetailEventActivity
 
 class FinishedFragment : Fragment() {
-
     private var _binding: FragmentFinishedBinding? = null
     private val binding get() = _binding!!
-
     private val finishViewModel by viewModels<FinishedViewModel>()
 
     override fun onCreateView(
@@ -38,9 +35,9 @@ class FinishedFragment : Fragment() {
         binding.rvEvents.layoutManager = GridLayoutManager(context, 2)
 
         val spanCount = if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            2  // 2 columns for portrait
+            2
         } else {
-            3  // 3 columns for landscape
+            3
         }
 
         binding.rvEvents.layoutManager = GridLayoutManager(context, spanCount)
@@ -91,7 +88,6 @@ class FinishedFragment : Fragment() {
         }
     }
 
-
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
             binding.progressBar.visibility = View.VISIBLE
@@ -99,7 +95,6 @@ class FinishedFragment : Fragment() {
             binding.progressBar.visibility = View.GONE
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

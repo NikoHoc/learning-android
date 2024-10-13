@@ -21,6 +21,7 @@
             android:id="@+id/ivEvent"
             android:layout_width="180dp"
             android:layout_height="180dp"
+            android:contentDescription="@string/event_image_logo"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"

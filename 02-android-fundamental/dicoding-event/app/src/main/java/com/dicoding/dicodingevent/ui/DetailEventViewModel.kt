@@ -6,8 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dicoding.dicodingevent.data.response.DetailEventResponse
 import com.dicoding.dicodingevent.data.response.Event
-import com.dicoding.dicodingevent.data.response.EventResponse
-import com.dicoding.dicodingevent.data.response.ListEventsItem
 import com.dicoding.dicodingevent.data.retrofit.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback

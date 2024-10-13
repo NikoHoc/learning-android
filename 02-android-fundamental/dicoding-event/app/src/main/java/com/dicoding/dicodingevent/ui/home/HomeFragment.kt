@@ -6,10 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.dicodingevent.adapter.LandscapeEventAdapter
@@ -47,12 +45,10 @@ class HomeFragment : Fragment() {
 
         binding.rvFinishedEvents.layoutManager = GridLayoutManager(context, spanCount)
 
-        // Observe Upcoming Events
         homeViewModel.upcomingEvents.observe(viewLifecycleOwner) { eventList ->
             setUpcomingEventData(eventList)
         }
 
-        // Observe finished events
         homeViewModel.finishedEvents.observe(viewLifecycleOwner) { eventList ->
             setFinishedEventData(eventList)
         }
@@ -66,7 +62,6 @@ class HomeFragment : Fragment() {
 
     private fun setUpcomingEventData (events: List<ListEventsItem>) {
         val upcomingAdapter = PortraitEventAdapter { selectedEvent ->
-            // Handle item click - Navigate to detail activity
             val intent = Intent(requireContext(), DetailEventActivity::class.java)
             intent.putExtra("EVENT_ID", selectedEvent.id)
             startActivity(intent)
@@ -87,7 +82,6 @@ class HomeFragment : Fragment() {
 
     private fun setFinishedEventData (events: List<ListEventsItem>) {
         val finishedAdapter = LandscapeEventAdapter { selectedEvent ->
-            // Handle item click - Navigate to detail activity
             val intent = Intent(requireContext(), DetailEventActivity::class.java)
             intent.putExtra("EVENT_ID", selectedEvent.id)
             startActivity(intent)

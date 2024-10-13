@@ -11,13 +11,11 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.dicodingevent.adapter.LandscapeEventAdapter
-import com.dicoding.dicodingevent.adapter.PortraitEventAdapter
 import com.dicoding.dicodingevent.data.response.ListEventsItem
 import com.dicoding.dicodingevent.databinding.FragmentUpcomingBinding
 import com.dicoding.dicodingevent.ui.DetailEventActivity
 
 class UpcomingFragment : Fragment() {
-
     private var _binding: FragmentUpcomingBinding? = null
     private val binding get() = _binding!!
 
@@ -41,7 +39,6 @@ class UpcomingFragment : Fragment() {
         }
 
         binding.rvEvents.layoutManager = GridLayoutManager(context, spanCount)
-
 
         upcomingViewModel.events.observe(viewLifecycleOwner) { eventList ->
             setEventData(eventList)
@@ -72,7 +69,6 @@ class UpcomingFragment : Fragment() {
             binding.rvEvents.visibility = View.VISIBLE
         }
     }
-
 
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {

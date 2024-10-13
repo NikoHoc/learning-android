@@ -11,7 +11,6 @@ import retrofit2.Call
 import retrofit2.Response
 
 class HomeViewModel : ViewModel() {
-
     // LiveData untuk menyimpan upcoming event list
     private val _upcomingEvents = MutableLiveData<List<ListEventsItem>>()
     val upcomingEvents: LiveData<List<ListEventsItem>> = _upcomingEvents

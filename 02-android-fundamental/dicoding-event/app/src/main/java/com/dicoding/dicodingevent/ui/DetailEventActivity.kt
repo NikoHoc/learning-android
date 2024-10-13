@@ -12,15 +12,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.dicoding.dicodingevent.R
 import com.dicoding.dicodingevent.databinding.ActivityDetailEventBinding
-import com.dicoding.dicodingevent.databinding.ActivityMainBinding
-import com.dicoding.dicodingevent.ui.finished.FinishedViewModel
 
 class DetailEventActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityDetailEventBinding
     private val detailEventViewModel by viewModels<DetailEventViewModel>()
 
@@ -38,7 +34,6 @@ class DetailEventActivity : AppCompatActivity() {
         }
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
 
         val eventId = intent.getIntExtra("EVENT_ID", -1)
 
