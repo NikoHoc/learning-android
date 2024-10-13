@@ -1,6 +1,5 @@
 package com.dicoding.dicodingevent.adapter
 
-import android.inputmethodservice.Keyboard
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

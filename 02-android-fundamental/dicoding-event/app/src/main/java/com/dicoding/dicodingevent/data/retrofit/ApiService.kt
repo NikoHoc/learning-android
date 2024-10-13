@@ -2,7 +2,6 @@ package com.dicoding.dicodingevent.data.retrofit
 
 import com.dicoding.dicodingevent.data.response.DetailEventResponse
 import com.dicoding.dicodingevent.data.response.EventResponse
-import com.dicoding.dicodingevent.data.response.ListEventsItem
 import retrofit2.Call
 import retrofit2.http.*
 
