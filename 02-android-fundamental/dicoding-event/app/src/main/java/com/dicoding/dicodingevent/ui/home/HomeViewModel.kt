@@ -1,13 +1,67 @@
 package com.dicoding.dicodingevent.ui.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dicoding.dicodingevent.data.response.EventResponse
+import com.dicoding.dicodingevent.data.response.ListEventsItem
+import com.dicoding.dicodingevent.data.retrofit.ApiConfig
+import com.dicoding.dicodingevent.ui.finished.FinishedViewModel
+import com.dicoding.dicodingevent.ui.finished.FinishedViewModel.Companion
+import retrofit2.Call
+import retrofit2.Response
 
 class HomeViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    // LiveData untuk menyimpan upcoming event list
+    private val _upcomingEvents = MutableLiveData<List<ListEventsItem>>()
+    val upcomingEvents: LiveData<List<ListEventsItem>> = _upcomingEvents
+
+    // LiveData untuk menyimpan finished event list
+    private val _finishedEvents = MutableLiveData<List<ListEventsItem>>()
+    val finishedEvents: LiveData<List<ListEventsItem>> = _finishedEvents
+
+    // LiveData untuk menyimpan status loading
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    companion object{
+        private const val TAG = "HomeViewModel"
     }
-    val text: LiveData<String> = _text
+
+    init {
+        fetchEvents(1)
+        fetchEvents(0)
+    }
+
+    private fun fetchEvents(active: Int) {
+        _isLoading.value = true
+        val client = ApiConfig.getApiService().getListEvents(active)
+        client.enqueue(object : retrofit2.Callback<EventResponse> {
+            override fun onResponse(
+                call: Call<EventResponse>,
+                response: Response<EventResponse>
+            ) {
+                _isLoading.value = false
+                if (response.isSuccessful && response.body() != null) {
+                    val events = response.body()?.listEvents?.filterNotNull() ?: emptyList()
+                    if (active == 1) {
+                        // Set upcoming events
+                        _upcomingEvents.value = events.take(5)
+                    } else {
+                        // Set finished events
+                        _finishedEvents.value = events.take(5)
+                    }
+                } else {
+                    Log.e(TAG, "onFailure: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<EventResponse>, t: Throwable) {
+                _isLoading.value = false
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
+            }
+        })
+    }
 }

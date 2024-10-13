@@ -69,4 +69,6 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.8.0")
 
     implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    implementation("com.google.android.material:material:1.9.0")
 }

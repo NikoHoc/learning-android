@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">Dicoding Event</string>
-    <string name="title_home">Events</string>
-    <string name="title_upcoming">Upcoming Dicoding Events:</string>
+    <string name="title_home">Home</string>
+    <string name="title_upcoming">Upcoming Event</string>
     <string name="title_finished">Finished Event</string>
 
+    <string name="upcoming_page_title">Daftar Event</string>
+
+    <string name="nav_upcoming">Upcoming</string>
+    <string name="nav_finished">Finished</string>
+
     <string name="event_title">Nama Event</string>
-    <string name="searchbar_hint">Masukkan kata</string>
+    <string name="searchbar_hint">Masukkan nama event</string>
 </resources>

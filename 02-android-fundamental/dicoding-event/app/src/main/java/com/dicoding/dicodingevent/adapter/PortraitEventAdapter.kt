@@ -1,4 +1,4 @@
-package com.dicoding.dicodingevent.ui.upcoming
+package com.dicoding.dicodingevent.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,21 +7,24 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dicoding.dicodingevent.data.response.ListEventsItem
-import com.dicoding.dicodingevent.databinding.ItemRowEventBinding
+import com.dicoding.dicodingevent.databinding.ItemPortraitEventBinding
 
-class UpcomingEventAdapter : ListAdapter<ListEventsItem, UpcomingEventAdapter.MyViewHolder>(DIFF_CALLBACK) {
+
+class PortraitEventAdapter : ListAdapter<ListEventsItem, PortraitEventAdapter.MyViewHolder>(
+    DIFF_CALLBACK
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = ItemRowEventBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemPortraitEventBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val event = getItem(position)
         holder.bind(event)
     }
-    class MyViewHolder(private val binding: ItemRowEventBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MyViewHolder(private val binding: ItemPortraitEventBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(event: ListEventsItem){
             Glide.with(binding.ivEvent.context)
-                .load(event.mediaCover)
+                .load(event.imageLogo)
                 .into(binding.ivEvent)
 
             binding.eventTitle.text = event.name

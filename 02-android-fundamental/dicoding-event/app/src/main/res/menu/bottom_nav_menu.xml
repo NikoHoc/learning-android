@@ -8,10 +8,10 @@
     <item
         android:id="@+id/navigation_upcoming"
         android:icon="@drawable/baseline_event_note_24"
-        android:title="@string/title_upcoming" />
+        android:title="@string/nav_upcoming" />
 
     <item
         android:id="@+id/navigation_finished"
         android:icon="@drawable/baseline_event_available_24"
-        android:title="@string/title_finished" />
+        android:title="@string/nav_finished" />
 </menu>

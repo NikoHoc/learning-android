@@ -59,7 +59,7 @@
     <!-- Style for Headlines, Titles, etc. -->
     <style name="HeadlineStyle">
         <item name="android:fontFamily">@font/poppins_regular</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <!-- Style for Body text -->
