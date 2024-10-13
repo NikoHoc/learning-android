@@ -71,7 +71,7 @@ class FinishedFragment : Fragment() {
     }
 
     private fun setEventData(events: List<ListEventsItem>) {
-        val finishedAdapter = LandscapeEventAdapter { selectedEvent ->
+        val finishedAdapter = PortraitEventAdapter { selectedEvent ->
             val intent = Intent(requireContext(), DetailEventActivity::class.java)
             intent.putExtra("EVENT_ID", selectedEvent.id)
             startActivity(intent)
