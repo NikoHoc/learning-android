@@ -1,5 +1,6 @@
 package com.dicoding.dicodingevent.ui.upcoming
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,8 +11,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.dicodingevent.adapter.LandscapeEventAdapter
+import com.dicoding.dicodingevent.adapter.PortraitEventAdapter
 import com.dicoding.dicodingevent.data.response.ListEventsItem
 import com.dicoding.dicodingevent.databinding.FragmentUpcomingBinding
+import com.dicoding.dicodingevent.ui.DetailEventActivity
 
 class UpcomingFragment : Fragment() {
 
@@ -52,9 +55,13 @@ class UpcomingFragment : Fragment() {
     }
 
     private fun setEventData(events: List<ListEventsItem>) {
-        val adapter = LandscapeEventAdapter()
-        binding.rvEvents.adapter = adapter
-        adapter.submitList(events)
+        val upcomingAdapter = LandscapeEventAdapter { selectedEvent ->
+            val intent = Intent(requireContext(), DetailEventActivity::class.java)
+            intent.putExtra("EVENT_ID", selectedEvent.id)
+            startActivity(intent)
+        }
+        binding.rvEvents.adapter = upcomingAdapter
+        upcomingAdapter.submitList(events)
     }
 
 

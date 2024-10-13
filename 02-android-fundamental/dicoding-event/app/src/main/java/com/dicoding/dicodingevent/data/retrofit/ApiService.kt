@@ -1,6 +1,8 @@
 package com.dicoding.dicodingevent.data.retrofit
 
+import com.dicoding.dicodingevent.data.response.DetailEventResponse
 import com.dicoding.dicodingevent.data.response.EventResponse
+import com.dicoding.dicodingevent.data.response.ListEventsItem
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -16,8 +18,7 @@ interface ApiService {
     // untuk detail event
     @GET("/events/{id}")
     fun getDetailEvent(
-        @Path("id") id: String
-    ): Call<EventResponse>
-
+        @Path("id") id: Int
+    ): Call<DetailEventResponse>
 
 }

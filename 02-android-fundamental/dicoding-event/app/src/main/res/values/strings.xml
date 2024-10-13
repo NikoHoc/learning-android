@@ -10,5 +10,7 @@
     <string name="nav_finished">Finished</string>
 
     <string name="event_title">Nama Event</string>
+    <string name="event_image">Event Image</string>
+    <string name="event_summary">Event Summary</string>
     <string name="searchbar_hint">Masukkan nama event</string>
 </resources>

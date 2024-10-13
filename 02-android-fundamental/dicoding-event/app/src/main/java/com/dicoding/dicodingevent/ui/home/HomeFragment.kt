@@ -1,5 +1,6 @@
 package com.dicoding.dicodingevent.ui.home
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.dicoding.dicodingevent.adapter.LandscapeEventAdapter
 import com.dicoding.dicodingevent.adapter.PortraitEventAdapter
 import com.dicoding.dicodingevent.data.response.ListEventsItem
 import com.dicoding.dicodingevent.databinding.FragmentHomeBinding
+import com.dicoding.dicodingevent.ui.DetailEventActivity
 
 class HomeFragment : Fragment() {
 
@@ -63,15 +65,26 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUpcomingEventData (events: List<ListEventsItem>) {
-        val adapter = PortraitEventAdapter()
-        binding.rvUpcomingEvents.adapter = adapter
-        adapter.submitList(events)
+        val upcomingAdapter = PortraitEventAdapter { selectedEvent ->
+            // Handle item click - Navigate to detail activity
+            val intent = Intent(requireContext(), DetailEventActivity::class.java)
+            intent.putExtra("EVENT_ID", selectedEvent.id)
+            startActivity(intent)
+        }
+        binding.rvUpcomingEvents.adapter = upcomingAdapter
+        upcomingAdapter.submitList(events)
+
     }
 
     private fun setFinishedEventData (events: List<ListEventsItem>) {
-        val adapter = LandscapeEventAdapter()
-        binding.rvFinishedEvents.adapter = adapter
-        adapter.submitList(events)
+        val finishedAdapter = LandscapeEventAdapter { selectedEvent ->
+            // Handle item click - Navigate to detail activity
+            val intent = Intent(requireContext(), DetailEventActivity::class.java)
+            intent.putExtra("EVENT_ID", selectedEvent.id)
+            startActivity(intent)
+        }
+        binding.rvFinishedEvents.adapter = finishedAdapter
+        finishedAdapter.submitList(events)
     }
 
     private fun showLoading(isLoading: Boolean) {

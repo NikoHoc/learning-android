@@ -1,5 +1,6 @@
 package com.dicoding.dicodingevent.ui.finished
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,9 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dicoding.dicodingevent.adapter.LandscapeEventAdapter
 import com.dicoding.dicodingevent.adapter.PortraitEventAdapter
 import com.dicoding.dicodingevent.data.response.ListEventsItem
 import com.dicoding.dicodingevent.databinding.FragmentFinishedBinding
+import com.dicoding.dicodingevent.ui.DetailEventActivity
 
 class FinishedFragment : Fragment() {
 
@@ -41,8 +44,6 @@ class FinishedFragment : Fragment() {
 
         binding.rvEvents.layoutManager = GridLayoutManager(context, spanCount)
 
-
-
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
             searchView
@@ -59,19 +60,22 @@ class FinishedFragment : Fragment() {
             setEventData(eventList)
         }
 
-
         finishViewModel.isLoading.observe(viewLifecycleOwner) {
             showLoading(it)
         }
-
 
         return root
     }
 
     private fun setEventData(events: List<ListEventsItem>) {
-        val adapter = PortraitEventAdapter()
-        binding.rvEvents.adapter = adapter
-        adapter.submitList(events)
+        val finishedAdapter = LandscapeEventAdapter { selectedEvent ->
+            // Handle item click - Navigate to detail activity
+            val intent = Intent(requireContext(), DetailEventActivity::class.java)
+            intent.putExtra("EVENT_ID", selectedEvent.id)
+            startActivity(intent)
+        }
+        binding.rvEvents.adapter = finishedAdapter
+        finishedAdapter.submitList(events)
     }
 
 

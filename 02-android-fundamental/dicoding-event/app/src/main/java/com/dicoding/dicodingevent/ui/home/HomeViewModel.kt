@@ -7,8 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.dicoding.dicodingevent.data.response.EventResponse
 import com.dicoding.dicodingevent.data.response.ListEventsItem
 import com.dicoding.dicodingevent.data.retrofit.ApiConfig
-import com.dicoding.dicodingevent.ui.finished.FinishedViewModel
-import com.dicoding.dicodingevent.ui.finished.FinishedViewModel.Companion
 import retrofit2.Call
 import retrofit2.Response
 
