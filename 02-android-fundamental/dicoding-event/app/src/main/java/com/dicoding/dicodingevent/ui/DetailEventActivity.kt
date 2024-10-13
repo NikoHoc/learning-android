@@ -1,7 +1,11 @@
 package com.dicoding.dicodingevent.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -9,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.dicoding.dicodingevent.R
 import com.dicoding.dicodingevent.databinding.ActivityDetailEventBinding
 import com.dicoding.dicodingevent.databinding.ActivityMainBinding
@@ -32,6 +37,9 @@ class DetailEventActivity : AppCompatActivity() {
             insets
         }
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
         val eventId = intent.getIntExtra("EVENT_ID", -1)
 
         if (eventId != -1) {
@@ -41,13 +49,39 @@ class DetailEventActivity : AppCompatActivity() {
 
         detailEventViewModel.eventDetail.observe(this) { eventDetail ->
             if (eventDetail != null) {
-//                Log.d("DetailEventActivity", "Event Name: ${eventDetail.name}")
-//                Log.d("DetailEventActivity", "Event Category: ${eventDetail.summary}")
+                supportActionBar?.title = eventDetail.name
 
-                binding.eventName.text = eventDetail.name
-                binding.textView3.text = eventDetail.summary
+                val eventQuota: Int = if (eventDetail.registrants == null || eventDetail.registrants == 0) {
+                    eventDetail.quota ?: 0
+                } else {
+                    (eventDetail.quota ?: 0) - eventDetail.registrants
+                }
+
+                Glide.with(this@DetailEventActivity)
+                    .load(eventDetail.mediaCover)
+                    .into(binding.ivMediaCover)
+                binding.tvEventCategoryAndLocation.text = getString(R.string.event_category_location, eventDetail.category, eventDetail.cityName)
+                binding.tvEventName.text = eventDetail.name
+                binding.tvEventOwner.text = getString(R.string.event_owner, eventDetail.ownerName)
+                binding.tvSummary.text = eventDetail.summary
+                binding.tvDescription.text = Html.fromHtml(eventDetail.description, Html.FROM_HTML_MODE_LEGACY)
+                binding.tvEventQuota.text = getString(R.string.event_quota, eventQuota)
+                binding.tvEventStart.text = eventDetail.beginTime
+                binding.tvEventEnd.text = eventDetail.endTime
+
+                binding.registerButton.setOnClickListener {
+                    val url = eventDetail.link
+                    val intent = Intent(Intent.ACTION_VIEW).apply {
+                        data = Uri.parse(url)
+                    }
+                    startActivity(intent)
+                }
+
+                binding.tvEventNotFound.visibility = View.GONE
             } else {
                 Log.e("DetailEventActivity", "Event details not available")
+
+                binding.tvEventNotFound.visibility = View.VISIBLE
             }
         }
         detailEventViewModel.isLoading.observe(this) {
@@ -56,6 +90,15 @@ class DetailEventActivity : AppCompatActivity() {
 
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {

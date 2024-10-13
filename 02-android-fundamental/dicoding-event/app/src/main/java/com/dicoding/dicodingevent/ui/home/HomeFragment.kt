@@ -74,6 +74,15 @@ class HomeFragment : Fragment() {
         binding.rvUpcomingEvents.adapter = upcomingAdapter
         upcomingAdapter.submitList(events)
 
+        // Cek apakah API ada data event
+        if (events.isEmpty()) {
+            binding.tvEventNotFound.visibility = View.VISIBLE
+            binding.rvUpcomingEvents.visibility = View.GONE
+        } else {
+            binding.tvEventNotFound.visibility = View.GONE
+            binding.rvUpcomingEvents.visibility = View.VISIBLE
+        }
+
     }
 
     private fun setFinishedEventData (events: List<ListEventsItem>) {
@@ -85,6 +94,15 @@ class HomeFragment : Fragment() {
         }
         binding.rvFinishedEvents.adapter = finishedAdapter
         finishedAdapter.submitList(events)
+
+        // Cek apakah API ada data event
+        if (events.isEmpty()) {
+            binding.tvEventNotFound.visibility = View.VISIBLE
+            binding.rvFinishedEvents.visibility = View.GONE
+        } else {
+            binding.tvEventNotFound.visibility = View.GONE
+            binding.rvFinishedEvents.visibility = View.VISIBLE
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {

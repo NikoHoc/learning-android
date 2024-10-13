@@ -62,6 +62,15 @@ class UpcomingFragment : Fragment() {
         }
         binding.rvEvents.adapter = upcomingAdapter
         upcomingAdapter.submitList(events)
+
+        // Cek apakah daftar events kosong
+        if (events.isEmpty()) {
+            binding.tvEventNotFound.visibility = View.VISIBLE
+            binding.rvEvents.visibility = View.GONE
+        } else {
+            binding.tvEventNotFound.visibility = View.GONE
+            binding.rvEvents.visibility = View.VISIBLE
+        }
     }
 
 

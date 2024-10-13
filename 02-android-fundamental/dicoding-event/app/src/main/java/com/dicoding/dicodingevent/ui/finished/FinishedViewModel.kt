@@ -49,4 +49,26 @@ class FinishedViewModel : ViewModel() {
             }
         })
     }
+    fun searchEvents(query: String?) {
+        _isLoading.value = true
+        val client = ApiConfig.getApiService().getSearchEvent(0, query) // 0 for finished events
+        client.enqueue(object : retrofit2.Callback<EventResponse> {
+            override fun onResponse(
+                call: Call<EventResponse>,
+                response: Response<EventResponse>
+            ) {
+                _isLoading.value = false
+                if (response.isSuccessful && response.body() != null) {
+                    _events.value = response.body()?.listEvents?.filterNotNull() ?: emptyList()
+                } else {
+                    Log.e(TAG, "onFailure: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<EventResponse>, t: Throwable) {
+                _isLoading.value = false
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
+            }
+        })
+    }
 }

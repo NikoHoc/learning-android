@@ -9,8 +9,21 @@
     <string name="nav_upcoming">Upcoming</string>
     <string name="nav_finished">Finished</string>
 
-    <string name="event_title">Nama Event</string>
-    <string name="event_image">Event Image</string>
+    <string name="event_image_logo">Event Image Logo</string>
+    <string name="event_media_cover">Event Media Cover</string>
+    <string name="event_category_location">%1$s - %2$s</string>
     <string name="event_summary">Event Summary</string>
+    <string name="event_description">Event Description</string>
+    <string name="event_title">Nama Event</string>
+    <string name="event_owner">Diselenggarakan Oleh: %1$s</string>
+    <string name="event_quota">Sisa Quota: %1$d</string>
+    <string name="event_date">Jadwal Pelaksanaan</string>
+    <string name="event_start">Mulai</string>
+    <string name="event_end">Selesai</string>
+    <string name="event_duration">: 17 Oct 2024 16:00</string>
+    <string name="register_button">Register</string>
+
+
     <string name="searchbar_hint">Masukkan nama event</string>
+    <string name="event_not_found">Event not found!!</string>
 </resources>

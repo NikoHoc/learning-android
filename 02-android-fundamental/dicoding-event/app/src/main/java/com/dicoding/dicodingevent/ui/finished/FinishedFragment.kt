@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dicoding.dicodingevent.R
 import com.dicoding.dicodingevent.adapter.LandscapeEventAdapter
 import com.dicoding.dicodingevent.adapter.PortraitEventAdapter
 import com.dicoding.dicodingevent.data.response.ListEventsItem
@@ -46,14 +47,16 @@ class FinishedFragment : Fragment() {
 
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
-            searchView
-                .editText
-                .setOnEditorActionListener { textView, actionId, event ->
-                    searchBar.setText(searchView.text)
-                    searchView.hide()
-                    Toast.makeText(requireActivity(), searchView.text, Toast.LENGTH_SHORT).show()
-                    false
-                }
+            searchView.editText.setOnEditorActionListener { _, _, _ ->
+                val query = searchView.text.toString()  // Convert Editable to String
+                searchBar.setText(query)
+                searchView.hide()
+
+                // Call the new search method in ViewModel
+                finishViewModel.searchEvents(query)
+
+                false
+            }
         }
 
         finishViewModel.events.observe(viewLifecycleOwner) { eventList ->
@@ -69,13 +72,23 @@ class FinishedFragment : Fragment() {
 
     private fun setEventData(events: List<ListEventsItem>) {
         val finishedAdapter = LandscapeEventAdapter { selectedEvent ->
-            // Handle item click - Navigate to detail activity
             val intent = Intent(requireContext(), DetailEventActivity::class.java)
             intent.putExtra("EVENT_ID", selectedEvent.id)
             startActivity(intent)
         }
         binding.rvEvents.adapter = finishedAdapter
         finishedAdapter.submitList(events)
+
+        // Cek apakah daftar events kosong
+        if (events.isEmpty()) {
+            binding.tvEventNotFound.visibility = View.VISIBLE
+            binding.rvEvents.visibility = View.GONE
+
+            Toast.makeText(requireActivity(), getString(R.string.event_not_found), Toast.LENGTH_SHORT).show()
+        } else {
+            binding.tvEventNotFound.visibility = View.GONE
+            binding.rvEvents.visibility = View.VISIBLE
+        }
     }
 
 
