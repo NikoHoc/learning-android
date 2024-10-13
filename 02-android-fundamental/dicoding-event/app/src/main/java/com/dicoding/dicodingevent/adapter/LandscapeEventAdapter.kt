@@ -32,6 +32,7 @@ class LandscapeEventAdapter(private val onItemClick: (ListEventsItem) -> Unit) :
                 .load(event.mediaCover)
                 .into(binding.ivEvent)
 
+
             binding.eventTitle.text = event.name
 
             binding.root.setOnClickListener {
@@ -39,7 +40,6 @@ class LandscapeEventAdapter(private val onItemClick: (ListEventsItem) -> Unit) :
             }
         }
     }
-
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ListEventsItem>() {
             override fun areItemsTheSame(oldItem: ListEventsItem, newItem: ListEventsItem): Boolean {

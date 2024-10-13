@@ -12,11 +12,11 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DetailEventViewModel : ViewModel() {
-    // LiveData untuk menyimpan detail event
+    // LiveData detail event
     private val _eventDetail = MutableLiveData<Event?>()
     val eventDetail: MutableLiveData<Event?> = _eventDetail
 
-    // LiveData untuk menyimpan status loading
+    // LiveData status loading
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
