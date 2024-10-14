@@ -7,6 +7,7 @@ import android.text.Html
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -52,37 +53,72 @@ class DetailEventActivity : AppCompatActivity() {
                     (eventDetail.quota ?: 0) - eventDetail.registrants
                 }
 
-                Glide.with(this@DetailEventActivity)
-                    .load(eventDetail.mediaCover)
-                    .into(binding.ivMediaCover)
-                binding.tvEventCategoryAndLocation.text = getString(R.string.event_category_location, eventDetail.category, eventDetail.cityName)
-                binding.tvEventName.text = eventDetail.name
-                binding.tvEventOwner.text = getString(R.string.event_owner, eventDetail.ownerName)
-                binding.tvSummary.text = eventDetail.summary
-                binding.tvDescription.text = Html.fromHtml(eventDetail.description, Html.FROM_HTML_MODE_LEGACY)
-                binding.tvEventQuota.text = getString(R.string.event_quota, eventQuota)
-                binding.tvEventStart.text = eventDetail.beginTime
-                binding.tvEventEnd.text = eventDetail.endTime
+                /* sebelumnya binding satu-satu */
+//                Glide.with(this@DetailEventActivity)
+//                    .load(eventDetail.mediaCover)
+//                    .into(binding.ivMediaCover)
+//                binding.tvEventCategoryAndLocation.text = getString(R.string.event_category_location, eventDetail.category, eventDetail.cityName)
+//                binding.tvEventName.text = eventDetail.name
+//                binding.tvEventOwner.text = getString(R.string.event_owner, eventDetail.ownerName)
+//                binding.tvSummary.text = eventDetail.summary
+//                binding.tvDescription.text = Html.fromHtml(eventDetail.description, Html.FROM_HTML_MODE_LEGACY)
+//                binding.tvEventQuota.text = getString(R.string.event_quota, eventQuota)
+//                binding.tvEventStart.text = eventDetail.beginTime
+//                binding.tvEventEnd.text = eventDetail.endTime
+//
+//                binding.registerButton.setOnClickListener {
+//                    val url = eventDetail.link
+//                    val intent = Intent(Intent.ACTION_VIEW).apply {
+//                        data = Uri.parse(url)
+//                    }
+//                    startActivity(intent)
+//                }
 
-                binding.registerButton.setOnClickListener {
-                    val url = eventDetail.link
-                    val intent = Intent(Intent.ACTION_VIEW).apply {
-                        data = Uri.parse(url)
+                /* pakai binding.apply
+                * apply menggunakan binding sebagai receiver */
+                binding.apply {
+                    Glide.with(this@DetailEventActivity)
+                        .load(eventDetail.mediaCover)
+                        .into(ivMediaCover)
+                    tvEventCategoryAndLocation.text = getString(R.string.event_category_location, eventDetail.category, eventDetail.cityName)
+                    tvEventName.text = eventDetail.name
+                    tvEventOwner.text = getString(R.string.event_owner, eventDetail.ownerName)
+                    tvSummary.text = eventDetail.summary
+                    tvDescription.text = Html.fromHtml(eventDetail.description, Html.FROM_HTML_MODE_LEGACY)
+                    tvEventQuota.text = getString(R.string.event_quota, eventQuota)
+                    tvEventStart.text = eventDetail.beginTime
+                    tvEventEnd.text = eventDetail.endTime
+
+                    registerButton.setOnClickListener {
+                        val url = eventDetail.link
+                        val intent = Intent(Intent.ACTION_VIEW).apply {
+                            data = Uri.parse(url)
+                        }
+                        startActivity(intent)
                     }
-                    startActivity(intent)
+
+                    tvEventNotFound.visibility = View.GONE
                 }
 
-                binding.tvEventNotFound.visibility = View.GONE
+                /* Atau pakai with(), -> mengoper objek binding sebagai param
+                with(binding) { }
+                 */
             } else {
                 Log.e("DetailEventActivity", "Event details not available")
 
                 binding.tvEventNotFound.visibility = View.VISIBLE
             }
         }
+
         detailEventViewModel.isLoading.observe(this) {
             showLoading(it)
         }
 
+        detailEventViewModel.toastMessage.observe(this) { message ->
+            message?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -95,11 +131,15 @@ class DetailEventActivity : AppCompatActivity() {
         }
     }
 
+//    private fun showLoading(isLoading: Boolean) {
+//        if (isLoading) {
+//            binding.progressBar.visibility = View.VISIBLE
+//        } else {
+//            binding.progressBar.visibility = View.GONE
+//        }
+//    }
+
     private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

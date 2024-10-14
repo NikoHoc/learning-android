@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -64,6 +65,12 @@ class FinishedFragment : Fragment() {
             showLoading(it)
         }
 
+        finishViewModel.toastMessage.observe(requireActivity()) { message ->
+            message?.let {
+                Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
+            }
+        }
+
         return root
     }
 
@@ -88,14 +95,20 @@ class FinishedFragment : Fragment() {
         }
     }
 
+//    private fun showLoading(isLoading: Boolean) {
+//        if (isLoading) {
+//            binding.progressBar.visibility = View.VISIBLE
+//        } else {
+//            binding.progressBar.visibility = View.GONE
+//        }
+//    }
+
+    // cara lebih simple
     private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
+    //private fun showLoading(isLoading: Boolean) = binding.progressBar.isVisible == isLoading
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -19,6 +19,10 @@ class UpcomingViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    // menyimpan live data toast
+    private val _toastMessage = MutableLiveData<String>()
+    val toastMessage: LiveData<String> = _toastMessage
+
     companion object{
         private const val TAG = "UpcomingViewModel"
     }
@@ -40,12 +44,15 @@ class UpcomingViewModel : ViewModel() {
                     _events.value = response.body()?.listEvents?.filterNotNull() ?: emptyList()
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
+                    _toastMessage.value = "Error: ${response.message()}"
                 }
             }
 
             override fun onFailure(call: Call<EventResponse>, t: Throwable) {
                 _isLoading.value = false
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
+                // menggunakan toast untuk menampilkan pesan error
+                _toastMessage.value = "Error: ${t.message.toString()}"
             }
         })
     }

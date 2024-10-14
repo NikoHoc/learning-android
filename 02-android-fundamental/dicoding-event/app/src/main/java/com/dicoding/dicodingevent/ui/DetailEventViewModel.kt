@@ -1,6 +1,7 @@
 package com.dicoding.dicodingevent.ui
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,6 +21,10 @@ class DetailEventViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    // menyimpan live data toast
+    private val _toastMessage = MutableLiveData<String>()
+    val toastMessage: LiveData<String> = _toastMessage
+
     companion object{
         private const val TAG = "DetailEventViewModel"
     }
@@ -37,11 +42,14 @@ class DetailEventViewModel : ViewModel() {
                     _eventDetail.value = response.body()?.event
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
+                    _toastMessage.value = "Error: ${response.message()}"
                 }
             }
             override fun onFailure(call: Call<DetailEventResponse>, t: Throwable) {
                 _isLoading.value = false
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
+                // menggunakan toast untuk menampilkan pesan error
+                _toastMessage.value = "Error: ${t.message.toString()}"
             }
             
         })
