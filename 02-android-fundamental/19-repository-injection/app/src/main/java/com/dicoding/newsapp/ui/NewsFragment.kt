@@ -32,6 +32,7 @@ class NewsFragment : Fragment() {
             factory
         }
 
+        // dari NewsAdapter di OnBindViewHolder
         val newsAdapter = NewsAdapter { news ->
             if (news.isBookmarked){
                 viewModel.deleteNews(news)

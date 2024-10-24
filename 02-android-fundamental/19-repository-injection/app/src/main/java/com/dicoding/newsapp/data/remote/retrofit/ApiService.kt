@@ -7,5 +7,7 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("top-headlines?country=us&category=business")
-    fun getNews(@Query("apiKey") apiKey: String): Call<NewsResponse>
+    //fun getNews(@Query("apiKey") apiKey: String): Call<NewsResponse>
+    // implement kotlin coroutines, hapus call dan beri suspend
+    suspend fun getNews(@Query("apiKey") apiKey: String): NewsResponse //hapus Call<>
 }

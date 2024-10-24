@@ -34,6 +34,7 @@ class NewsAdapter(private val onBookmarkClick: (NewsEntity) -> Unit) : ListAdapt
         } else {
             ivBookmark.setImageDrawable(ContextCompat.getDrawable(ivBookmark.context, R.drawable.ic_bookmark_white))
         }
+        // memanggil kode di NewsFragment
         ivBookmark.setOnClickListener {
             onBookmarkClick(news)
         }
