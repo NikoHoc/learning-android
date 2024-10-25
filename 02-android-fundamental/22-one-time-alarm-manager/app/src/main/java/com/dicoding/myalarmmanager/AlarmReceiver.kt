@@ -68,6 +68,7 @@ class AlarmReceiver : BroadcastReceiver() {
         calendar.set(Calendar.SECOND, 0)
 
         val pendingIntent = PendingIntent.getBroadcast(context, ID_ONETIME, intent, PendingIntent.FLAG_IMMUTABLE)
+        // pada one time alarm hanya pakai set
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
         Toast.makeText(context, "One time alarm set up", Toast.LENGTH_SHORT).show()
     }
@@ -110,6 +111,39 @@ class AlarmReceiver : BroadcastReceiver() {
 
         val notification = builder.build()
         notificationManagerCompat.notify(notifId, notification)
+    }
+
+    fun setRepeatingAlarm(context: Context, type: String, time: String, message: String) {
+        if (isDateInvalid(time, TIME_FORMAT)) return
+
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AlarmReceiver::class.java)
+        intent.putExtra(EXTRA_MESSAGE, message)
+        val putExtra = intent.putExtra(EXTRA_TYPE, type)
+
+        val timeArray = time.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]))
+        calendar.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]))
+        calendar.set(Calendar.SECOND, 0)
+
+        val pendingIntent = PendingIntent.getBroadcast(context, ID_REPEATING, intent, PendingIntent.FLAG_IMMUTABLE)
+        // saat repeating alarm, pakai setInexactRepeating
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
+        Toast.makeText(context, "Repeating alarm set up", Toast.LENGTH_SHORT).show()
+    }
+
+    fun cancelAlarm(context: Context, type: String) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AlarmReceiver::class.java)
+        val requestCode = if (type.equals(TYPE_ONE_TIME, ignoreCase = true)) ID_ONETIME else ID_REPEATING
+        val pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, PendingIntent.FLAG_IMMUTABLE)
+        if (pendingIntent != null) {
+            pendingIntent.cancel()
+            alarmManager.cancel(pendingIntent)
+            Toast.makeText(context, "Repeating alarm dibatalkan", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }
