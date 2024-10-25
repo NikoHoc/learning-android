@@ -2,7 +2,11 @@ package com.dicoding.simplenotif
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.TaskStackBuilder
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
@@ -42,6 +46,9 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        /*
+        Untuk Android 13 ke atas perlu menambahkan permission
+        */
         if (Build.VERSION.SDK_INT >= 33) {
             requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
         }
@@ -52,16 +59,81 @@ class MainActivity : AppCompatActivity() {
         binding.btnSendNotification.setOnClickListener {
             sendNotification(title, message)
         }
+
+        binding.btnOpenDetail.setOnClickListener{
+            val detailIntent = Intent(this@MainActivity, DetailActivity::class.java)
+            detailIntent.putExtra(DetailActivity.EXTRA_TITLE, title)
+            detailIntent.putExtra(DetailActivity.EXTRA_MESSAGE, message)
+            startActivity(detailIntent)
+        }
     }
 
     private fun sendNotification(title: String, message: String) {
+        /*
+        pending intent
+        membuat jika kita klik notifikasi, maka akan pergi ke website dicoding
+        */
+//        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://dicoding.com"))
+//        val pendingIntent = PendingIntent.getActivity(
+//            this,
+//            0,
+//            intent,
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0
+//        )
+        /* pending intent, dari notifikasi menuju ke url web lain */
+
+
+        /* membuat pending intent dari notifikasi menuju ke activity
+        * TaskStackBuilder */
+        val notifDetailIntent = Intent(this, DetailActivity::class.java)
+        notifDetailIntent.putExtra(DetailActivity.EXTRA_TITLE, title)
+        notifDetailIntent.putExtra(DetailActivity.EXTRA_MESSAGE, message)
+
+        val pendingIntent = TaskStackBuilder.create(this).run {
+            addNextIntentWithParentStack(notifDetailIntent)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                getPendingIntent(NOTIFICATION_ID, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+            } else {
+                getPendingIntent(NOTIFICATION_ID, PendingIntent.FLAG_UPDATE_CURRENT)
+            }
+        }
+        /* membuat pending intent dari notifikasi menuju ke activity */
+
+
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        /* builder untuk Notifikasi biasa */
+//        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
+//            .setContentTitle(title)
+//            .setSmallIcon(R.drawable.baseline_notifications_active_24)
+//            .setContentText(message)
+//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//            .setSubText(getString(R.string.notification_subtext))
+        /* builder untuk Notifikasi biasa */
+
+
+        /* Builder untuk pending intent notifikasi menuju web url lain */
+//        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
+//            .setContentTitle(title)
+//            .setSmallIcon(R.drawable.baseline_notifications_active_24)
+//            .setContentText(message)
+//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//            .setSubText(getString(R.string.notification_subtext))
+//            .setContentIntent(pendingIntent)
+//            .setAutoCancel(true)
+        /* Builder untuk pending intent notifikasi menuju web url lain */
+
+
+        /* Builder untuk pending intent notifikasi menuju activity di aplikasi */
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(title)
             .setSmallIcon(R.drawable.baseline_notifications_active_24)
             .setContentText(message)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setSubText(getString(R.string.notification_subtext))
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+        /* Builder untuk pending intent notifikasi menuju activity di aplikasi */
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
