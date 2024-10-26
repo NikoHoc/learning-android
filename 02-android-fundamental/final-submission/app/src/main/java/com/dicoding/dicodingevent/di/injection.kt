@@ -13,7 +13,6 @@ object Injection {
         val finishedEventDao = database.finishedEventDao()
         val favoriteEventDao = database.favoriteEventDao()
 
-
         return EventRepository.getInstance(apiService, upcomingDao, finishedEventDao, favoriteEventDao)
     }
 }

@@ -11,18 +11,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.Constraints
-import androidx.work.Data
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequest
-import androidx.work.WorkInfo
 import androidx.work.WorkManager
-import com.dicoding.dicodingevent.R
-import com.dicoding.dicodingevent.databinding.ActivityMainBinding
 import com.dicoding.dicodingevent.databinding.FragmentSettingsBinding
 import com.google.android.material.switchmaterial.SwitchMaterial
 import java.util.concurrent.TimeUnit
-import java.util.jar.Manifest
 
 class SettingFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
@@ -59,8 +54,7 @@ class SettingFragment : Fragment() {
         val switchTheme: SwitchMaterial = binding.switchTheme
 
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
-        val settingsViewModel = ViewModelProvider(this, SettingViewModelFactory(pref))
-            .get(SettingViewModel::class.java)
+        val settingsViewModel = ViewModelProvider(this, SettingViewModelFactory(pref))[SettingViewModel::class.java]
 
         settingsViewModel.getThemeSettings().observe(viewLifecycleOwner) { isDarkModeActive ->
             if (isDarkModeActive) {
@@ -99,7 +93,7 @@ class SettingFragment : Fragment() {
         workManager.enqueueUniquePeriodicWork(
             "upcomingEventNotif",
             ExistingPeriodicWorkPolicy.KEEP,
-            periodicWorkRequest!!
+            periodicWorkRequest
         )
     }
 

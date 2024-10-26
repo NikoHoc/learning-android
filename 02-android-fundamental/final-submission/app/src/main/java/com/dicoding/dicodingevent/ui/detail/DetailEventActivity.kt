@@ -24,8 +24,8 @@ class DetailEventActivity : AppCompatActivity() {
     private var _activityDetailEventBinding: ActivityDetailEventBinding? = null
     private val binding get() = _activityDetailEventBinding
 
-    val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
-    val viewModel: DetailEventViewModel by viewModels {
+    private val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
+    private val viewModel: DetailEventViewModel by viewModels {
         factory
     }
 

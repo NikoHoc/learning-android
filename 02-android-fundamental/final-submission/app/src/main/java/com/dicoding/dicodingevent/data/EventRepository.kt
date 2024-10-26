@@ -2,7 +2,6 @@ package com.dicoding.dicodingevent.data
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
 import com.dicoding.dicodingevent.data.local.entity.FavoriteEventEntity

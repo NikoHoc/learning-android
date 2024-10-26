@@ -7,8 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
-import android.os.Looper
-import android.provider.UserDictionary.Words.APP_ID
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.work.Worker
@@ -16,9 +14,6 @@ import androidx.work.WorkerParameters
 import com.dicoding.dicodingevent.R
 import com.dicoding.dicodingevent.data.remote.response.EventResponse
 import com.dicoding.dicodingevent.data.remote.retrofit.ApiConfig
-import com.loopj.android.http.AsyncHttpResponseHandler
-import com.loopj.android.http.SyncHttpClient
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

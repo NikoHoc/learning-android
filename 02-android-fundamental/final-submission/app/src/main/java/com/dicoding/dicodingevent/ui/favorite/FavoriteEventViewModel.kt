@@ -2,13 +2,8 @@ package com.dicoding.dicodingevent.ui.favorite
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import androidx.lifecycle.map
 import com.dicoding.dicodingevent.data.EventRepository
-import com.dicoding.dicodingevent.data.Result
 import com.dicoding.dicodingevent.data.local.entity.FavoriteEventEntity
-
-
 
 class FavoriteEventViewModel(private val eventRepository: EventRepository) : ViewModel() {
     init {
