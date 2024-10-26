@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,12 +18,16 @@ import com.dicoding.dicodingevent.data.remote.response.ListEventsItem
 import com.dicoding.dicodingevent.databinding.FragmentUpcomingBinding
 import com.dicoding.dicodingevent.ui.ViewModelFactory
 import com.dicoding.dicodingevent.ui.finished.FinishedViewModel
+import com.dicoding.dicodingevent.utils.NetworkUtils
 
 class UpcomingFragment : Fragment() {
     private var _binding: FragmentUpcomingBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        if (!NetworkUtils.isInternetAvailable(requireActivity())) {
+            showNoInternetDialog()
+        }
         _binding = FragmentUpcomingBinding.inflate(layoutInflater, container, false)
         val root: View = binding.root
         return root
@@ -65,11 +70,32 @@ class UpcomingFragment : Fragment() {
             }
         }
 
+        val spanCount = if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            1
+        } else {
+            2
+        }
+
         binding.rvEvents.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            //layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            layoutManager = GridLayoutManager(context, spanCount)
             setHasFixedSize(true)
             adapter = landscapeEventAdapter
         }
+    }
+
+    private fun showNoInternetDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("No Internet")
+            .setMessage("You are not connected to the internet. Please check your connection and try again.")
+            .setPositiveButton("Retry") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
     }
 
     override fun onResume() {

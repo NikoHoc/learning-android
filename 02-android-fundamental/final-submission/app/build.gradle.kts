@@ -79,6 +79,10 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 
+    // work manager
+    implementation(libs.androidx.work.runtime)
+    implementation(libs.android.async.http)
+
 
 
 }
