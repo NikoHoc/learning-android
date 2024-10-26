@@ -15,18 +15,23 @@ data class EventResponse(
 )
 
 data class ListEventsItem(
+	@field:SerializedName("id")
+	val id: Int? = null,
 
-	@field:SerializedName("summary")
-	val summary: String? = null,
+	@field:SerializedName("name")
+	val name: String? = null,
 
 	@field:SerializedName("mediaCover")
 	val mediaCover: String? = null,
 
-	@field:SerializedName("registrants")
-	val registrants: Int? = null,
-
 	@field:SerializedName("imageLogo")
 	val imageLogo: String? = null,
+
+	@field:SerializedName("summary")
+	val summary: String? = null,
+
+	@field:SerializedName("registrants")
+	val registrants: Int? = null,
 
 	@field:SerializedName("link")
 	val link: String? = null,
@@ -42,12 +47,6 @@ data class ListEventsItem(
 
 	@field:SerializedName("quota")
 	val quota: Int? = null,
-
-	@field:SerializedName("name")
-	val name: String? = null,
-
-	@field:SerializedName("id")
-	val id: Int? = null,
 
 	@field:SerializedName("beginTime")
 	val beginTime: String? = null,

@@ -4,14 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.dicoding.dicodingevent.data.local.entity.FinishedEventEntity
 import com.dicoding.dicodingevent.data.local.entity.UpcomingEventEntity
 
 //@Database(entities = [FavoriteEvent::class, UpcomingEvent::class, FinishedEvent::class], version = 1, exportSchema = false)
-@Database(entities = [UpcomingEventEntity::class], version = 1, exportSchema = false)
+@Database(entities = [UpcomingEventEntity::class, FinishedEventEntity::class], version = 2, exportSchema = false)
 abstract class EventDatabase : RoomDatabase() {
     //abstract fun favoriteEventDao(): FavoriteEventDao
     abstract fun upcomingEventDao(): UpcomingEventDao
-    //abstract fun finishedEventDao(): FinishedEventDao
+    abstract fun finishedEventDao(): FinishedEventDao
 
     companion object {
         @Volatile
@@ -21,7 +22,9 @@ abstract class EventDatabase : RoomDatabase() {
                 instance ?: Room.databaseBuilder(
                     context.applicationContext,
                     EventDatabase::class.java, "Events.db"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
             }
     }
 }

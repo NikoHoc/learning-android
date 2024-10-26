@@ -51,11 +51,9 @@ class HomeFragment : Fragment() {
                     }
                     is Result.Success -> {
                         binding.progressBar.visibility = View.GONE
-                        val events = arrayListOf<ListEventsItem>()
-                        result.data.map {
-                            val event = ListEventsItem(id = it.id, name = it.name, mediaCover = it.mediaCover)
-                            events.add(event)
-                        }
+                        val events = result.data
+                            .map { ListEventsItem(id = it.id, name = it.name, mediaCover = it.mediaCover, imageLogo = it.imageLogo) }
+                            .take(5)
                         portraitEventAdapter.submitList(events)
                     }
                     is Result.Error -> {
@@ -70,10 +68,8 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-
-        val layoutManagerHorizontal = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvUpcomingEvents.apply {
-            layoutManager = layoutManagerHorizontal
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = portraitEventAdapter
         }
 
@@ -86,11 +82,9 @@ class HomeFragment : Fragment() {
                     }
                     is Result.Success -> {
                         binding.progressBar.visibility = View.GONE
-                        val events = arrayListOf<ListEventsItem>()
-                        result.data.map {
-                            val event = ListEventsItem(id = it.id, name = it.name, mediaCover = it.mediaCover)
-                            events.add(event)
-                        }
+                        val events = result.data
+                            .map { ListEventsItem(id = it.id, name = it.name, mediaCover = it.mediaCover) }
+                            .take(5)
                         landscapeEventAdapter.submitList(events)
                     }
                     is Result.Error -> {
@@ -105,24 +99,19 @@ class HomeFragment : Fragment() {
             }
         }
         // mengatur jumlah card pada recycler view finished event jika layar landscape atau portrait
-        val spanCount = when (resources.configuration.orientation) {
-            Configuration.ORIENTATION_PORTRAIT -> 1
-            else -> 2
+        val spanCount = if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            1
+        } else {
+            2
         }
 
         binding.rvFinishedEvents.apply {
-            //layoutManager = LinearLayoutManager(context)
-            layoutManager = GridLayoutManager(requireContext(), spanCount)
+            //layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            layoutManager = GridLayoutManager(context, spanCount)
             setHasFixedSize(true)
             adapter = landscapeEventAdapter
         }
-
-
     }
-
-
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -16,6 +16,7 @@ import com.dicoding.dicodingevent.data.Result
 import com.dicoding.dicodingevent.data.remote.response.ListEventsItem
 import com.dicoding.dicodingevent.databinding.FragmentUpcomingBinding
 import com.dicoding.dicodingevent.ui.ViewModelFactory
+import com.dicoding.dicodingevent.ui.finished.FinishedViewModel
 
 class UpcomingFragment : Fragment() {
     private var _binding: FragmentUpcomingBinding? = null
@@ -24,9 +25,9 @@ class UpcomingFragment : Fragment() {
 //    companion object {
 //        const val UPCOMING_EVENT_TAG = "upcoming event"
 //    }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): ScrollView? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentUpcomingBinding.inflate(layoutInflater, container, false)
-        val root: ScrollView = binding.root
+        val root: View = binding.root
         return root
     }
 
@@ -49,7 +50,7 @@ class UpcomingFragment : Fragment() {
                         binding.progressBar.visibility = View.GONE
                         val events = arrayListOf<ListEventsItem>()
                         result.data.map {
-                            val event = ListEventsItem(id = it.id, name = it.name, mediaCover = it.mediaCover)
+                            val event = ListEventsItem(id = it.id, name = it.name, mediaCover = it.mediaCover,)
                             events.add(event)
                         }
                         landscapeEventAdapter.submitList(events)
@@ -67,17 +68,20 @@ class UpcomingFragment : Fragment() {
             }
         }
 
-        val spanCount = if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            1
-        } else {
-            2
-        }
-
         binding.rvEvents.apply {
-            layoutManager = GridLayoutManager(requireContext(), spanCount)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             setHasFixedSize(true)
             adapter = landscapeEventAdapter
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val factory: ViewModelFactory = ViewModelFactory.getInstance(requireActivity())
+        val viewModel: UpcomingViewModel by viewModels {
+            factory
+        }
+        viewModel.getUpcomingEvent()
     }
 
     override fun onDestroyView() {

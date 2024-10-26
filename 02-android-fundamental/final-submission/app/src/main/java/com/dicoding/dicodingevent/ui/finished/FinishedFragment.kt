@@ -44,7 +44,7 @@ class FinishedFragment : Fragment() {
         }
 
         val portraitEventAdapter = PortraitEventAdapter()
-        viewModel.getUpcomingEvent().observe(viewLifecycleOwner) { result ->
+        viewModel.getFinishedEvent().observe(viewLifecycleOwner) { result ->
             if (result != null) {
                 when (result) {
                     is Result.Loading -> {
@@ -54,7 +54,7 @@ class FinishedFragment : Fragment() {
                         binding.progressBar.visibility = View.GONE
                         val events = arrayListOf<ListEventsItem>()
                         result.data.map {
-                            val event = ListEventsItem(id = it.id, name = it.name, mediaCover = it.mediaCover)
+                            val event = ListEventsItem(id = it.id, name = it.name, mediaCover = it.mediaCover, imageLogo = it.imageLogo)
                             events.add(event)
                         }
                         portraitEventAdapter.submitList(events)
@@ -71,35 +71,64 @@ class FinishedFragment : Fragment() {
             }
         }
 
-
         val spanCount = if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
             2
         } else {
             3
         }
-
         binding.rvEvents.apply {
-            layoutManager = GridLayoutManager(requireContext(), spanCount)
+            //layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            layoutManager = GridLayoutManager(context, spanCount)
             setHasFixedSize(true)
             adapter = portraitEventAdapter
         }
 
-//        with(binding) {
-//            searchView.setupWithSearchBar(searchBar)
-//            searchView.editText.setOnEditorActionListener { _, _, _ ->
-//                val query = searchView.text.toString()  // Convert Editable to String
-//                searchBar.setText(query)
-//                searchView.hide()
-//
-//                // Call the new search method in ViewModel
-//                finishViewModel.searchEvents(query)
-//
-//                false
-//            }
-//        }
+        with(binding) {
+            searchView.setupWithSearchBar(searchBar)
+            searchView.editText.setOnEditorActionListener { _, _, _ ->
+                val query = searchView.text.toString()
+                searchBar.setText(query)
+                searchView.hide()
+                viewModel.searchFinishedEvents(query).observe(viewLifecycleOwner) { result ->
+                    if (result != null) {
+                        when (result) {
+                            is Result.Loading -> {
+                                binding.progressBar.visibility = View.VISIBLE
+                            }
+                            is Result.Success -> {
+                                binding.progressBar.visibility = View.GONE
+                                val events = arrayListOf<ListEventsItem>()
+                                result.data.map {
+                                    val event = ListEventsItem(id = it.id, name = it.name, mediaCover = it.mediaCover, imageLogo = it.imageLogo)
+                                    events.add(event)
+                                }
+                                portraitEventAdapter.submitList(events)
+                            }
+                            is Result.Error -> {
+                                binding.progressBar.visibility = View.GONE
+                                Toast.makeText(
+                                    context,
+                                    "Terjadi kesalahan" + result.error,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    }
+                }
+
+                false
+            }
+        }
     }
 
-
+    override fun onResume() {
+        super.onResume()
+        val factory: ViewModelFactory = ViewModelFactory.getInstance(requireActivity())
+        val viewModel: FinishedViewModel by viewModels {
+            factory
+        }
+        viewModel.getFinishedEvent()
+    }
 
     //private fun showLoading(isLoading: Boolean) = binding.progressBar.isVisible == isLoading
     override fun onDestroyView() {

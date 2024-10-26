@@ -7,12 +7,9 @@ import com.dicoding.dicodingevent.data.Result
 import com.dicoding.dicodingevent.data.local.entity.UpcomingEventEntity
 
 class UpcomingViewModel(private val eventRepository: EventRepository) : ViewModel() {
-
     init {
         getUpcomingEvent()
     }
-
     fun getUpcomingEvent(): LiveData<Result<List<UpcomingEventEntity>>> = eventRepository.getUpcomingEvent( 1)
-
 
 }
