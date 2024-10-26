@@ -11,7 +11,9 @@ object Injection {
         val database = EventDatabase.getInstance(context)
         val upcomingDao = database.upcomingEventDao()
         val finishedEventDao = database.finishedEventDao()
+        val favoriteEventDao = database.favoriteEventDao()
 
-        return EventRepository.getInstance(apiService, upcomingDao, finishedEventDao)
+
+        return EventRepository.getInstance(apiService, upcomingDao, finishedEventDao, favoriteEventDao)
     }
 }

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Html
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -16,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.dicoding.dicodingevent.R
 import com.dicoding.dicodingevent.data.Result
+import com.dicoding.dicodingevent.data.local.entity.FavoriteEventEntity
 import com.dicoding.dicodingevent.data.remote.response.DetailEventResponse
 import com.dicoding.dicodingevent.databinding.ActivityDetailEventBinding
 import com.dicoding.dicodingevent.ui.ViewModelFactory
@@ -44,6 +44,9 @@ class DetailEventActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        var eventName: String? = null
+        var mediaCover: String? = null
+
         val eventId = intent.getIntExtra("EVENT_ID", -1)
 
         if (eventId != -1) {
@@ -56,6 +59,8 @@ class DetailEventActivity : AppCompatActivity() {
                         is Result.Success -> {
                             binding?.progressBar?.visibility = View.GONE
                             val eventData = result.data
+                            eventName = eventData.event?.name
+                            mediaCover = eventData.event?.mediaCover
                             setEventDetailsData(eventData)
                         }
                         is Result.Error -> {
@@ -69,10 +74,28 @@ class DetailEventActivity : AppCompatActivity() {
                     }
                 }
             }
+
+            viewModel.isFavorite(eventId).observe(this) { isFavorite ->
+                binding?.btnFavorite?.setImageResource(
+                    if (isFavorite) R.drawable.ic_love_filled else R.drawable.ic_love_outline
+                )
+
+                binding?.btnFavorite?.setOnClickListener {
+                    if (isFavorite) {
+                        viewModel.deleteFavoriteNews(eventId)
+                        Toast.makeText(this, "Removed from Favorites", Toast.LENGTH_SHORT).show()
+                    } else {
+                        val favoriteEvent = FavoriteEventEntity(
+                            id = eventId,
+                            name = eventName,
+                            mediaCover = mediaCover
+                        )
+                        viewModel.saveFavoriteEvent(favoriteEvent)
+                        Toast.makeText(this, "Added to Favorites", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
-
-
-
     }
 
     private fun setEventDetailsData(eventData: DetailEventResponse) {

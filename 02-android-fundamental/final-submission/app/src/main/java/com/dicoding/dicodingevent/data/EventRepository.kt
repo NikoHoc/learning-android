@@ -5,8 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
+import com.dicoding.dicodingevent.data.local.entity.FavoriteEventEntity
 import com.dicoding.dicodingevent.data.local.entity.FinishedEventEntity
 import com.dicoding.dicodingevent.data.local.entity.UpcomingEventEntity
+import com.dicoding.dicodingevent.data.local.room.FavoriteEventDao
 import com.dicoding.dicodingevent.data.local.room.FinishedEventDao
 import com.dicoding.dicodingevent.data.local.room.UpcomingEventDao
 import com.dicoding.dicodingevent.data.remote.response.DetailEventResponse
@@ -17,7 +19,8 @@ import com.dicoding.dicodingevent.data.remote.retrofit.ApiService
 class EventRepository private constructor(
     private val apiService: ApiService,
     private val upcomingEventDao: UpcomingEventDao,
-    private val finishedEventDao: FinishedEventDao
+    private val finishedEventDao: FinishedEventDao,
+    private val favoriteEventDao: FavoriteEventDao
 ) {
 
     fun getUpcomingEvent(active: Int) : LiveData<Result<List<UpcomingEventEntity>>> = liveData {
@@ -126,20 +129,39 @@ class EventRepository private constructor(
             emit(Result.Error(e.message.toString()))
         }
     }
+
+    fun getFavoriteEvents(): LiveData<List<FavoriteEventEntity>> {
+        return favoriteEventDao.getAllFavoriteEvents()
+    }
+
+    suspend fun saveFavoriteEvent(event: FavoriteEventEntity) {
+        favoriteEventDao.insertFavoriteEvent(event)
+    }
+
+    suspend fun removeFavoriteEvent(eventId: Int) {
+        favoriteEventDao.deleteFavoriteEvent(eventId)
+    }
+
+    fun isEventFavorite(eventId: Int): LiveData<Boolean> {
+        return favoriteEventDao.isFavorite(eventId).map { it != null }
+    }
+
     companion object {
         @Volatile
         private var instance: EventRepository? = null
         fun getInstance(
             apiService: ApiService,
             upcomingEventDao: UpcomingEventDao,
-            finishedEventDao: FinishedEventDao
+            finishedEventDao: FinishedEventDao,
+            favoriteEventDao: FavoriteEventDao
 
         ): EventRepository =
             instance ?: synchronized(this) {
                 instance ?: EventRepository(
                     apiService,
                     upcomingEventDao,
-                    finishedEventDao
+                    finishedEventDao,
+                    favoriteEventDao
                 )
             }.also { instance = it }
     }

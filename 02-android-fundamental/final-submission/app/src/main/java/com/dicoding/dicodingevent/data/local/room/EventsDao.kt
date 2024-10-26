@@ -5,12 +5,25 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.dicoding.dicodingevent.data.local.entity.FavoriteEventEntity
 import com.dicoding.dicodingevent.data.local.entity.FinishedEventEntity
 import com.dicoding.dicodingevent.data.local.entity.UpcomingEventEntity
 
-class EventsDao {
-}
+@Dao
+interface FavoriteEventDao {
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertFavoriteEvent(favoritEvent: FavoriteEventEntity)
 
+    @Query("SELECT * FROM favorite_events")
+    fun getAllFavoriteEvents(): LiveData<List<FavoriteEventEntity>>
+
+    @Query("SELECT * FROM favorite_events WHERE id = :id LIMIT 1")
+    fun isFavorite(id: Int): LiveData<FavoriteEventEntity?>
+
+    @Query("DELETE FROM favorite_events WHERE id = :id")
+    suspend fun deleteFavoriteEvent(id: Int)
+
+}
 @Dao
 interface UpcomingEventDao {
     // insert

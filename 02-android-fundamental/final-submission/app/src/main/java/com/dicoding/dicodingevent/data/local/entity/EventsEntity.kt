@@ -6,11 +6,15 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "favorite_events")
 class FavoriteEventEntity(
-    @field:ColumnInfo(name = "title")
-    @field:PrimaryKey
-    val title: String,
+    @field:ColumnInfo(name = "id")
+    @field:PrimaryKey(autoGenerate = false)
+    var id: Int? = null,
 
+    @field:ColumnInfo(name = "name")
+    val name: String? = null,
 
+    @field:ColumnInfo(name = "media_cover")
+    val mediaCover: String? = null,
 )
 
 @Entity(tableName = "upcoming_events")

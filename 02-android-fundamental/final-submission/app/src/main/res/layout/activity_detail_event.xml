@@ -20,16 +20,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/backgrounds/scenic" />
-        <Button
+
+        <ImageButton
             android:id="@+id/btn_favorite"
-            style="?attr/materialIconButtonFilledStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            app:icon="@drawable/ic_love_outline"
+            android:padding="8dp"
+            android:src="@drawable/ic_love_outline"
+            android:contentDescription="@string/fav_btn"
             app:layout_constraintBottom_toBottomOf="@id/ivMediaCover"
             app:layout_constraintEnd_toEndOf="@id/ivMediaCover"
-            app:layout_constraintTop_toBottomOf="@+id/ivMediaCover" />
+            app:layout_constraintTop_toBottomOf="@id/ivMediaCover"
+            app:tint="@color/md_theme_onPrimary"
+            android:background="@drawable/round_button"
+            />
         <TextView
             android:id="@+id/tvEventCategoryAndLocation"
             android:layout_width="0dp"

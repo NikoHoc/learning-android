@@ -14,6 +14,7 @@
 
     <string name="upcoming_page_title">Daftar Event</string>
 
+    <string name="fav_btn">fav btn</string>
 
     <string name="nav_upcoming">Upcoming</string>
     <string name="nav_finished">Finished</string>
