@@ -1,37 +1,71 @@
 package com.dicoding.dicodingevent.ui.upcoming
 
-import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.dicodingevent.adapter.LandscapeEventAdapter
+import com.dicoding.dicodingevent.data.Result
 import com.dicoding.dicodingevent.data.remote.response.ListEventsItem
 import com.dicoding.dicodingevent.databinding.FragmentUpcomingBinding
-import com.dicoding.dicodingevent.ui.detail.DetailEventActivity
+import com.dicoding.dicodingevent.ui.ViewModelFactory
 
 class UpcomingFragment : Fragment() {
     private var _binding: FragmentUpcomingBinding? = null
     private val binding get() = _binding!!
 
-    private val upcomingViewModel by viewModels<UpcomingViewModel>()
+//    companion object {
+//        const val UPCOMING_EVENT_TAG = "upcoming event"
+//    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): ScrollView? {
+        _binding = FragmentUpcomingBinding.inflate(layoutInflater, container, false)
+        val root: ScrollView = binding.root
+        return root
+    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentUpcomingBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val layoutManager = LinearLayoutManager(requireContext())
-        binding.rvEvents.layoutManager = layoutManager
+        val factory: ViewModelFactory = ViewModelFactory.getInstance(requireActivity())
+        val viewModel: UpcomingViewModel by viewModels {
+            factory
+        }
+
+        val landscapeEventAdapter = LandscapeEventAdapter()
+        viewModel.getUpcomingEvent().observe(viewLifecycleOwner) { result ->
+            if(result != null) {
+                when (result) {
+                    is Result.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
+                    }
+                    is Result.Success -> {
+                        binding.progressBar.visibility = View.GONE
+                        val events = arrayListOf<ListEventsItem>()
+                        result.data.map {
+                            val event = ListEventsItem(id = it.id, name = it.name, mediaCover = it.mediaCover)
+                            events.add(event)
+                        }
+                        landscapeEventAdapter.submitList(events)
+                    }
+                    is Result.Error -> {
+                        binding.progressBar.visibility = View.GONE
+                        Toast.makeText(
+                            context,
+                            "Terjadi kesalahan" + result.error,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                }
+            }
+        }
 
         val spanCount = if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
             1
@@ -39,54 +73,11 @@ class UpcomingFragment : Fragment() {
             2
         }
 
-        binding.rvEvents.layoutManager = GridLayoutManager(context, spanCount)
-
-        upcomingViewModel.events.observe(viewLifecycleOwner) { eventList ->
-            setEventData(eventList)
+        binding.rvEvents.apply {
+            layoutManager = GridLayoutManager(requireContext(), spanCount)
+            setHasFixedSize(true)
+            adapter = landscapeEventAdapter
         }
-
-        upcomingViewModel.isLoading.observe(viewLifecycleOwner) {
-            showLoading(it)
-        }
-
-        upcomingViewModel.toastMessage.observe(requireActivity()) { message ->
-            message?.let {
-                Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        return root
-    }
-
-    private fun setEventData(events: List<ListEventsItem>) {
-        val upcomingAdapter = LandscapeEventAdapter { selectedEvent ->
-            val intent = Intent(requireContext(), DetailEventActivity::class.java)
-            intent.putExtra("EVENT_ID", selectedEvent.id)
-            startActivity(intent)
-        }
-        binding.rvEvents.adapter = upcomingAdapter
-        upcomingAdapter.submitList(events)
-
-        // Cek apakah daftar events kosong
-        if (events.isEmpty()) {
-            binding.tvEventNotFound.visibility = View.VISIBLE
-            binding.rvEvents.visibility = View.GONE
-        } else {
-            binding.tvEventNotFound.visibility = View.GONE
-            binding.rvEvents.visibility = View.VISIBLE
-        }
-    }
-
-//    private fun showLoading(isLoading: Boolean) {
-//        if (isLoading) {
-//            binding.progressBar.visibility = View.VISIBLE
-//        } else {
-//            binding.progressBar.visibility = View.GONE
-//        }
-//    }
-
-    private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {

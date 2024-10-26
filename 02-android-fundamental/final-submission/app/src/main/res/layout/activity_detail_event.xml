@@ -14,13 +14,22 @@
         <ImageView
             android:id="@+id/ivMediaCover"
             android:layout_width="match_parent"
-            android:layout_height="275dp"
+            android:layout_height="wrap_content"
             android:contentDescription="@string/event_media_cover"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/backgrounds/scenic" />
-
+        <Button
+            android:id="@+id/btn_favorite"
+            style="?attr/materialIconButtonFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:icon="@drawable/ic_love_outline"
+            app:layout_constraintBottom_toBottomOf="@id/ivMediaCover"
+            app:layout_constraintEnd_toEndOf="@id/ivMediaCover"
+            app:layout_constraintTop_toBottomOf="@+id/ivMediaCover" />
         <TextView
             android:id="@+id/tvEventCategoryAndLocation"
             android:layout_width="0dp"
@@ -183,5 +192,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:visibility="gone" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

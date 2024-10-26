@@ -1,5 +1,6 @@
 package com.dicoding.dicodingevent.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,34 +9,34 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dicoding.dicodingevent.data.remote.response.ListEventsItem
 import com.dicoding.dicodingevent.databinding.ItemPortraitEventBinding
+import com.dicoding.dicodingevent.ui.detail.DetailEventActivity
 
 
-class PortraitEventAdapter(private val onItemClick: (ListEventsItem) -> Unit) : ListAdapter<ListEventsItem, PortraitEventAdapter.MyViewHolder>(
+class PortraitEventAdapter : ListAdapter<ListEventsItem, PortraitEventAdapter.MyViewHolder>(
     DIFF_CALLBACK
 ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemPortraitEventBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyViewHolder(binding, onItemClick)
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val event = getItem(position)
         holder.bind(event)
     }
-    class MyViewHolder(
-        private val binding: ItemPortraitEventBinding,
-        private val onItemClick: (ListEventsItem) -> Unit
-    ) : RecyclerView.ViewHolder(binding.root) {
+
+    class MyViewHolder(private val binding: ItemPortraitEventBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(event: ListEventsItem) {
             Glide.with(binding.ivEvent.context)
                 .load(event.imageLogo)
                 .into(binding.ivEvent)
-
             binding.eventTitle.text = event.name
 
-            // Set click listener
             binding.root.setOnClickListener {
-                onItemClick(event)
+                val context = it.context
+                val intent = Intent(context, DetailEventActivity::class.java)
+                intent.putExtra("EVENT_ID", event.id)  // Send the event id to DetailActivity
+                context.startActivity(intent)
             }
         }
     }
