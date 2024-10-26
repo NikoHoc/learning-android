@@ -22,9 +22,6 @@ class UpcomingFragment : Fragment() {
     private var _binding: FragmentUpcomingBinding? = null
     private val binding get() = _binding!!
 
-//    companion object {
-//        const val UPCOMING_EVENT_TAG = "upcoming event"
-//    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentUpcomingBinding.inflate(layoutInflater, container, false)
         val root: View = binding.root

@@ -130,9 +130,7 @@ class EventRepository private constructor(
         }
     }
 
-    fun getFavoriteEvents(): LiveData<List<FavoriteEventEntity>> {
-        return favoriteEventDao.getAllFavoriteEvents()
-    }
+    fun getFavoriteEvents(): LiveData<List<FavoriteEventEntity>> = favoriteEventDao.getAllFavoriteEvents()
 
     suspend fun saveFavoriteEvent(event: FavoriteEventEntity) {
         favoriteEventDao.insertFavoriteEvent(event)
