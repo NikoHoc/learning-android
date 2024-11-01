@@ -105,9 +105,12 @@ class ObjectDetectorHelper(
         //val results = objectDetector?.classify(tensorImage, imageProcessingOptions)
         val results = objectDetector?.detect(tensorImage)
         inferenceTime = SystemClock.uptimeMillis() - inferenceTime
+
         detectorListener?.onResults(
             results,
-            inferenceTime
+            inferenceTime,
+            tensorImage.height,
+            tensorImage.width
         )
     }
 
@@ -135,7 +138,9 @@ class ObjectDetectorHelper(
         fun onError(error: String)
         fun onResults(
             results: MutableList<Detection>?,
-            inferenceTime: Long
+            inferenceTime: Long,
+            imageHeight: Int,
+            imageWidth: Int
         )
     }
 
