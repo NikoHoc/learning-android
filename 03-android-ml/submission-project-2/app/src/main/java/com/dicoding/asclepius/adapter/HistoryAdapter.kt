@@ -1,5 +1,6 @@
 package com.dicoding.asclepius.adapter
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -48,6 +49,7 @@ class HistoryAdapter: ListAdapter<HistoryEntity, HistoryAdapter.MyViewHolder>(
             override fun areItemsTheSame(oldItem: HistoryEntity, newItem: HistoryEntity): Boolean {
                 return oldItem == newItem
             }
+            @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(oldItem: HistoryEntity, newItem: HistoryEntity): Boolean {
                 return oldItem == newItem
             }

@@ -20,11 +20,11 @@ class HistoryEntity(
     val createdAt: String? = null
 )
 
-@Entity(tableName = "articles")
-class ArticleEntity(
-    @PrimaryKey(autoGenerate = false)
+@Entity(tableName = "cancer_articles")
+class CancerArticleEntity(
     @ColumnInfo(name = "id")
-    val id: Int? = null,
+    @PrimaryKey
+    val id: String,
 
     @ColumnInfo(name = "title")
     val title: String? = null,

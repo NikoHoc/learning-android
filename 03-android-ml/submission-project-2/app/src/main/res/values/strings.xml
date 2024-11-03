@@ -4,6 +4,7 @@
     <string name="title_detector">Detector</string>
     <string name="title_history">History</string>
 
+    <string name="detector_page_title">Analyze cancer type</string>
     <string name="image_placeholder">image placeholder</string>
     <string name="gallery">Galeri</string>
     <string name="analyze">Analyze</string>
@@ -20,5 +21,8 @@
     <string name="already_saved">Already Saved</string>
     <string name="saved_at">save at:</string>
     <string name="error_image_not_found">image failed to load</string>
-
+    <string name="article_name">Article Names</string>
+    <string name="article_description">Article Description</string>
+    <string name="home_page_title">Recent cancer article</string>
+    <string name="empty_articles">There is no recent article at the moment</string>
 </resources>
