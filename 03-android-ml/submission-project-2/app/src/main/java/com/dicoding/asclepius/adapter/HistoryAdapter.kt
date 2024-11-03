@@ -29,7 +29,7 @@ class HistoryAdapter: ListAdapter<HistoryEntity, HistoryAdapter.MyViewHolder>(
             Glide.with(binding.imgResult.context)
                 .load(history.imageData)
                 .into(binding.imgResult)
-            binding.tvResultDate.text = history.created_at
+            binding.tvResultDate.text = history.createdAt
             binding.tvResult.text = history.result
 
             binding.root.setOnClickListener {
@@ -37,6 +37,7 @@ class HistoryAdapter: ListAdapter<HistoryEntity, HistoryAdapter.MyViewHolder>(
                 val intent = Intent(context, ResultActivity::class.java)
                 intent.putExtra(ResultActivity.EXTRA_IMAGE_URI, history.imageData)
                 intent.putExtra(ResultActivity.EXTRA_RESULT, history.result)
+                intent.putExtra(ResultActivity.EXTRA_CREATED_AT, history.createdAt)
                 context.startActivity(intent)
             }
         }

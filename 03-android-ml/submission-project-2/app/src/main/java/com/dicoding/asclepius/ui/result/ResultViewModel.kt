@@ -11,4 +11,11 @@ class ResultViewModel(private val dataRepository: DataRepository) : ViewModel() 
             dataRepository.insertToHistory(imageData, result)
         }
     }
+
+    fun isResultSaved(imageUri: String, callback: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            val isSaved = dataRepository.isResultSaved(imageUri)
+            callback(isSaved)
+        }
+    }
 }

@@ -10,14 +10,14 @@ class HistoryEntity(
     @field:PrimaryKey(autoGenerate = true)
     var id: Int? = null,
 
-    @field:ColumnInfo(name = "image")
+    @field:ColumnInfo(name = "image_data")
     val imageData: String? = null,
 
     @field:ColumnInfo(name = "result")
     val result: String? = null,
 
     @field:ColumnInfo(name = "created_at")
-    val created_at: String? = null
+    val createdAt: String? = null
 )
 
 @Entity(tableName = "articles")

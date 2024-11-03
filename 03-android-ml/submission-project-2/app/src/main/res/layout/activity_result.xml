@@ -11,12 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="15dp"
+        android:paddingBottom="80dp">
 
         <ImageView
             android:id="@+id/result_image"
             android:layout_width="match_parent"
             android:layout_height="400dp"
+            android:contentDescription="@string/image_placeholder"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/ic_place_holder"/>
 
@@ -33,6 +35,16 @@
             android:layout_height="match_parent"
             android:text="@string/save_result"
             android:layout_margin="16dp"
+            />
+
+        <TextView
+            android:id="@+id/tvSavedAt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/saved_at"
+            android:fontFamily="@font/montserrat_regular"
+            android:visibility="gone"
             />
     </LinearLayout>
 </ScrollView>

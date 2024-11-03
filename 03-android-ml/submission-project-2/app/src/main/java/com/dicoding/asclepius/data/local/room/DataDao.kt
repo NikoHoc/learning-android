@@ -23,5 +23,8 @@ interface HistoryDao {
     suspend fun insertIntoHistory(history: HistoryEntity)
 
     @Query("SELECT * FROM history")
-    fun getAllHistory(): LiveData<List<HistoryEntity>>
+    suspend fun getAllHistory(): List<HistoryEntity>
+
+    @Query("SELECT EXISTS(SELECT 1 FROM history WHERE image_data = :imageUri)")
+    suspend fun isResultSaved(imageUri: String): Boolean
 }

@@ -11,11 +11,16 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.asclepius.databinding.FragmentHomeBinding
 import com.dicoding.asclepius.ui.ViewModelFactory
+import com.dicoding.asclepius.ui.history.HistoryViewModel
 import com.dicoding.asclepius.ui.result.ResultViewModel
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: HomeViewModel by viewModels {
+        ViewModelFactory.getInstance(requireActivity())
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -26,11 +31,6 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val factory: ViewModelFactory = ViewModelFactory.getInstance(requireActivity())
-        val viewModel: HomeViewModel by viewModels {
-            factory
-        }
 
     }
 
