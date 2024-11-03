@@ -14,7 +14,7 @@
         android:paddingBottom="80dp">
 
         <ImageView
-            android:id="@+id/result_image"
+            android:id="@+id/resultImage"
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:contentDescription="@string/image_placeholder"
@@ -22,7 +22,7 @@
             app:srcCompat="@drawable/ic_place_holder"/>
 
         <TextView
-            android:id="@+id/result_text"
+            android:id="@+id/resultText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"

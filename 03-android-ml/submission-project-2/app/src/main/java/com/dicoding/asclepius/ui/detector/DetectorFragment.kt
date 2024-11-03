@@ -140,9 +140,9 @@ class DetectorFragment : Fragment() {
                         Toast.makeText(requireActivity(), error, Toast.LENGTH_SHORT).show()
                     }
                 }
-                override fun onResults(results: List<Classifications>?, inferenceTime: Long) {
+                override fun onResults(results: List<Classifications>?) {
                     requireActivity().runOnUiThread {
-                        results?.let { it ->
+                        results?.let {
                             if (it.isNotEmpty() && it[0].categories.isNotEmpty()) {
                                 println(it)
                                 val firstCategories = it[0].categories.firstOrNull()

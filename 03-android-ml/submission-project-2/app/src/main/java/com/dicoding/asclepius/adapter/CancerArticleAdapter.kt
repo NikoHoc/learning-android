@@ -9,12 +9,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.dicoding.asclepius.adapter.HistoryAdapter.Companion.DIFF_CALLBACK
+import com.dicoding.asclepius.R
 import com.dicoding.asclepius.data.local.entity.CancerArticleEntity
-import com.dicoding.asclepius.data.local.entity.HistoryEntity
 import com.dicoding.asclepius.databinding.ItemArticleLayoutBinding
-import com.dicoding.asclepius.databinding.ItemHistoryLayoutBinding
-import com.dicoding.asclepius.ui.result.ResultActivity
 
 class CancerArticleAdapter: ListAdapter<CancerArticleEntity, CancerArticleAdapter.MyViewHolder> (
     DIFF_CALLBACK
@@ -34,6 +31,7 @@ class CancerArticleAdapter: ListAdapter<CancerArticleEntity, CancerArticleAdapte
         fun bind(article: CancerArticleEntity) {
             Glide.with(binding.ivArticle.context)
                 .load(article.urlToImage)
+                .error(R.drawable.image_placeholder) // Replace with an actual error drawable resource
                 .into(binding.ivArticle)
             binding.tvArticleName.text = article.title
             binding.tvArticleDescription.text = article.description

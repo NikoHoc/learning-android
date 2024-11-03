@@ -15,7 +15,6 @@
     <string name="result">Hasil analisis:</string>
     <string name="save_result">Simpan Hasil</string>
     <string name="result_saved">Data berhasil di simpan</string>
-    <string name="analyze_error">No text recognized!</string>
     <string name="image_classifier_failed">Image classifier failed to initialize. See error logs for details</string>
     <string name="empty_image_warning">Silakan masukkan berkas gambar terlebih dahulu.</string>
     <string name="already_saved">Already Saved</string>
