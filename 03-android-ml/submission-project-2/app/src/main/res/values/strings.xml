@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Asclepius</string>
+    <string name="title_home">Home</string>
+    <string name="title_detector">Detector</string>
+    <string name="title_history">History</string>
+
+    <string name="image_placeholder">image placeholder</string>
+    <string name="gallery">Galeri</string>
+    <string name="analyze">Analyze</string>
+    <string name="result_title">Result</string>
+    <string name="result">Hasil analisis:</string>
+    <string name="analyze_error">No text recognized!</string>
+    <string name="image_classifier_failed">Image classifier failed to initialize. See error logs for details</string>
+    <string name="empty_image_warning">Silakan masukkan berkas gambar terlebih dahulu.</string>
+</resources>
