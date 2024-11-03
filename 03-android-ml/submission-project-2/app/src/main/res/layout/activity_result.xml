@@ -26,5 +26,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="@string/result" />
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/save_result"
+            android:layout_margin="16dp"
+            />
     </LinearLayout>
 </ScrollView>

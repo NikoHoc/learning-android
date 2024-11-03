@@ -50,17 +50,18 @@ class DetectorFragment : Fragment() {
             REQUIRED_PERMISSION
         ) == PackageManager.PERMISSION_GRANTED
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentDetectorBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         if (!allPermissionsGranted()) {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         detectorViewModel.currentImageUri.observe(viewLifecycleOwner) { uri ->
             if (uri != null) {
@@ -77,7 +78,6 @@ class DetectorFragment : Fragment() {
                 showToast(getString(R.string.empty_image_warning))
             }
         }
-        return root
     }
 
     private fun startGallery() {
@@ -95,7 +95,7 @@ class DetectorFragment : Fragment() {
     }
 
     private fun startCrop(uri: Uri) {
-        val destinationUri = Uri.fromFile(File(requireContext().cacheDir, "croppedImage.jpg"))
+        val destinationUri = Uri.fromFile(File(requireContext().cacheDir, "croppedImage_${System.currentTimeMillis()}.jpg"))
         val uCrop = UCrop.of(uri, destinationUri)
             .withAspectRatio(1f, 1f)
             .withMaxResultSize(1000, 1000)
