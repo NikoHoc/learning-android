@@ -62,9 +62,11 @@ class DetectorFragment : Fragment() {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }
 
-        detectorViewModel.currentImageUri?.let { uri ->
-            currentImageUri = uri
-            binding.previewImageView.setImageURI(uri)
+        detectorViewModel.currentImageUri.observe(viewLifecycleOwner) { uri ->
+            if (uri != null) {
+                currentImageUri = uri
+                binding.previewImageView.setImageURI(uri)
+            }
         }
 
         binding.galleryButton.setOnClickListener { startGallery() }
@@ -86,7 +88,6 @@ class DetectorFragment : Fragment() {
         ActivityResultContracts.PickVisualMedia()
     ) { uri: Uri? ->
         if (uri != null) {
-            detectorViewModel.currentImageUri = uri
             startCrop(uri)
         } else {
             Log.d("Photo Picker", "No media selected")
@@ -109,7 +110,7 @@ class DetectorFragment : Fragment() {
             val resultUri = UCrop.getOutput(result.data!!)
             if (resultUri != null) {
                 currentImageUri = resultUri
-                detectorViewModel.currentImageUri = resultUri
+                detectorViewModel.setCurrentImageUri(resultUri)
                 showImage()
             } else {
                 Log.e("uCrop", "Crop failed: resultUri is null")
@@ -125,7 +126,7 @@ class DetectorFragment : Fragment() {
             Log.d("Image URI", "showImage: $it")
             binding.previewImageView.setImageURI(null)
             binding.previewImageView.setImageURI(it)
-            detectorViewModel.currentImageUri = it
+            detectorViewModel.setCurrentImageUri(it)
         }
     }
 

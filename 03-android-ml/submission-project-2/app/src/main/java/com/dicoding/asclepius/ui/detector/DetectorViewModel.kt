@@ -6,6 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class DetectorViewModel : ViewModel() {
+    private val _currentImageUri = MutableLiveData<Uri?>()
+    val currentImageUri: LiveData<Uri?> get() = _currentImageUri
 
-    var currentImageUri: Uri? = null
+    fun setCurrentImageUri(uri: Uri?) {
+        _currentImageUri.value = uri
+    }
 }
