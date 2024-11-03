@@ -15,11 +15,10 @@ interface ApiService {
         @Query("apiKey") apiKey: String = null ?: BuildConfig.API_KEY
     ): ArticleResponse
 
+    //https://newsapi.org/v2/top-headlines?q=cancer&apiKey=efb7cb645a374923915ccb557c7cbb53
     @GET("top-headlines")
     suspend fun getCancerArticles(
         @Query("q") q: String = null ?: "cancer",
-        @Query("category") category: String = null ?: "health",
-        @Query("language") language: String = null ?: "en",
         @Query("apiKey") apiKey: String = null ?: BuildConfig.API_KEY
     ): ArticleResponse
 }

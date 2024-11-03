@@ -22,11 +22,6 @@ import java.util.Locale
 class ResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultBinding
 
-//    private val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
-//    private val viewModel: ResultViewModel by viewModels {
-//        factory
-//    }
-
     private val viewModel: ResultViewModel by viewModels {
         ViewModelFactory.getInstance(this)
     }

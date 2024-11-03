@@ -38,13 +38,14 @@ class HistoryFragment : Fragment() {
             2
         }
 
+        // Set up RecyclerView
         binding.rvHistory.apply {
             layoutManager = GridLayoutManager(context, spanCount)
             setHasFixedSize(true)
             adapter = historyAdapter
         }
 
-
+        // Observe data from ViewModel
         viewModel.getHistory().observe(viewLifecycleOwner) { result ->
             Log.d("HistoryFragment", "Data size: ${result?.size ?: 0}")
             binding.progressBar.visibility = if (result == null) View.VISIBLE else View.GONE
