@@ -5,6 +5,8 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
@@ -14,7 +16,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.widget.doOnTextChanged
 import com.dicoding.dicodingstory.R
+import com.dicoding.dicodingstory.data.Result
 import com.dicoding.dicodingstory.data.pref.UserModel
 import com.dicoding.dicodingstory.databinding.ActivityLoginBinding
 import com.dicoding.dicodingstory.view.ViewModelFactory
@@ -39,11 +43,100 @@ class LoginActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        binding.loginButton.isEnabled = false
+        binding.loginButton.backgroundTintList = getColorStateList(R.color.disabled_button)
+        binding.loginButton.text = getString(R.string.message_login_page)
 
         setupView()
         setupAction()
         playAnimation()
+
+        binding.edLoginEmail.addTextChangedListener(formTextWatcher)
+        binding.edLoginPassword.addTextChangedListener(formTextWatcher)
     }
+
+    private fun setupView() {
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+        supportActionBar?.hide()
+    }
+
+    private fun setupAction() {
+        binding.loginButton.setOnClickListener {
+            val email = binding.edLoginEmail.text.toString()
+            val password = binding.edLoginPassword.text.toString()
+            viewModel.login(email, password).observe(this) { result ->
+                if (result != null) {
+                    when (result) {
+                        is Result.Loading -> {
+                            binding.progressIndicator.visibility = View.VISIBLE
+                        }
+                        is Result.Success -> {
+                            val loginResponse = result.data
+                            val userId = loginResponse.loginResult?.userId.toString()
+                            val name = loginResponse.loginResult?.name.toString()
+                            val token = loginResponse.loginResult?.token.toString()
+
+                            viewModel.saveSession(UserModel(userId, name, email, token))
+                            AlertDialog.Builder(this).apply {
+                                setTitle(R.string.login_success_alert_title)
+                                setMessage(loginResponse.message)
+                                setPositiveButton(R.string.success_alert_reply) { _, _ ->
+                                    val intent = Intent(context, MainActivity::class.java)
+                                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                    startActivity(intent)
+                                    finish()
+                                }
+                                create()
+                                show()
+                            }
+                            binding.progressIndicator.visibility = View.GONE
+                        }
+                        is Result.Error -> {
+                            AlertDialog.Builder(this).apply {
+                                setTitle(R.string.signup_error_alert_title)
+                                setMessage(result.error)
+                                setPositiveButton(R.string.error_alert_reply) { dialog, _ ->
+                                    dialog.dismiss()
+                                }
+                                create()
+                                show()
+                            }
+                            binding.progressIndicator.visibility = View.GONE
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private val formTextWatcher = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+            val isFormFilled = !binding.edLoginEmail.text.isNullOrEmpty() &&
+                    !binding.edLoginPassword.text.isNullOrEmpty()
+
+            binding.loginButton.isEnabled = isFormFilled && binding.edLoginEmail.error == null && binding.edLoginPassword.error == null
+
+            if (binding.loginButton.isEnabled) {
+                binding.loginButton.backgroundTintList = getColorStateList(R.color.navy)
+                binding.loginButton.text = getString(R.string.login)
+            } else {
+                binding.loginButton.backgroundTintList = getColorStateList(R.color.disabled_button)
+                binding.loginButton.text = getString(R.string.message_login_page)
+            }
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+    }
+
 
     private fun playAnimation() {
         ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
@@ -77,36 +170,5 @@ class LoginActivity : AppCompatActivity() {
             )
             startDelay = 100
         }.start()
-    }
-    private fun setupView() {
-        @Suppress("DEPRECATION")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
-        }
-        supportActionBar?.hide()
-    }
-
-    private fun setupAction() {
-        binding.loginButton.setOnClickListener {
-            val email = binding.edLoginEmail.text.toString()
-            viewModel.saveSession(UserModel(email, "sample_token"))
-            AlertDialog.Builder(this).apply {
-                setTitle("Yeah!")
-                setMessage("Anda berhasil login. Sudah tidak sabar untuk belajar ya?")
-                setPositiveButton("Lanjut") { _, _ ->
-                    val intent = Intent(context, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                    finish()
-                }
-                create()
-                show()
-            }
-        }
     }
 }

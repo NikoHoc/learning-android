@@ -1,22 +1,35 @@
 <resources>
     <string name="app_name">DicodingStory</string>
 
-    <string name="signup">Daftar</string>
+    <string name="title_welcome_page">Selamat datang di Dicoding Story!</string>
+    <string name="message_welcome_page">Mau saling berbagi cerita antar sesama Dicodin? Di Dicoding Story aja!</string>
+
+    <string name="title_login_page">Sudah siap untuk berbagi cerita?</string>
     <string name="login">Masuk</string>
-    <string name="message_welcome_page">Mau belajar Android, iOS, Machine Learning, Cloud, Front-End, Back-End, dan bidang IT lainnya? Di Dicoding aja!</string>
-    <string name="title_welcome_page">Selamat datang di Dicoding!</string>
-    <string name="title_signup_page">Lengkapi data dirimu di bawah ini ya</string>
-    <string name="username_hint">Masukan username</string>
-    <string name="email_hint">Masukan email</string>
-    <string name="password_hint">Masukan password</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
     <string name="message_login_page">Masukkan dulu datamu ya</string>
-    <string name="title_login_page">Sudah siap untuk upgrade skill?</string>
+
+    <string name="title_signup_page">Lengkapi data dirimu di bawah ini ya</string>
+    <string name="signup">Daftar</string>
+    <string name="message_register_page">Isi form dulu</string>
+
     <string name="name">Nama</string>
+    <string name="username_hint">Masukan username</string>
+    <string name="email">Email</string>
+    <string name="email_hint">Masukan email</string>
+    <string name="password">Password</string>
+    <string name="password_hint">Masukan password</string>
+
+    <string name="signup_success_alert_title">Berhasil membuat akun</string>
+    <string name="signup_error_alert_title">Gagal membuat akun</string>
+    <string name="login_success_alert_title">Login berhasil</string>
+    <string name="login_error_alert_title">Login gagal</string>
+    <string name="success_alert_reply">Lanjut</string>
+    <string name="error_alert_reply">Ulangi</string>
+
     <string name="message_main_page">Selamat Belajar di Dicoding.</string>
     <string name="greeting">Halo %1$s,</string>
     <string name="logout">Keluar</string>
+
     <string name="no_story">Story tidak tersedia</string>
     <string name="add_story">Button buat story baru</string>
     <string name="image_placeholder">Gambar Story</string>

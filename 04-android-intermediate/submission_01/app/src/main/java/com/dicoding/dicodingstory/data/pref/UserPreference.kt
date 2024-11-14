@@ -15,6 +15,8 @@ class UserPreference private constructor(private val dataStore: DataStore<androi
 
     suspend fun saveSession(user: UserModel) {
         dataStore.edit { preferences ->
+            preferences[USER_ID] = user.userId
+            preferences[NAME_KEY] = user.name
             preferences[EMAIL_KEY] = user.email
             preferences[TOKEN_KEY] = user.token
             preferences[IS_LOGIN_KEY] = true
@@ -24,9 +26,11 @@ class UserPreference private constructor(private val dataStore: DataStore<androi
     fun getSession(): Flow<UserModel> {
         return dataStore.data.map { preferences ->
             UserModel(
+                preferences[USER_ID] ?: "",
+                preferences[NAME_KEY] ?: "",
                 preferences[EMAIL_KEY] ?: "",
                 preferences[TOKEN_KEY] ?: "",
-                preferences[IS_LOGIN_KEY] ?: false
+                preferences[IS_LOGIN_KEY] ?: false,
             )
         }
     }
@@ -41,9 +45,12 @@ class UserPreference private constructor(private val dataStore: DataStore<androi
         @Volatile
         private var INSTANCE: UserPreference? = null
 
+        private val USER_ID = stringPreferencesKey("userId")
+        private val NAME_KEY = stringPreferencesKey("name")
         private val EMAIL_KEY = stringPreferencesKey("email")
         private val TOKEN_KEY = stringPreferencesKey("token")
         private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")
+
 
         fun getInstance(dataStore: DataStore<androidx.datastore.preferences.core.Preferences>): UserPreference {
             return INSTANCE ?: synchronized(this) {

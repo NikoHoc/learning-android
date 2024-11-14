@@ -7,6 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".view.signup.SignUpActivity">
 
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progressIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
@@ -71,7 +81,7 @@
             android:inputType="text"
             android:hint="@string/username_hint"
             android:paddingStart="48dp"
-            tools:ignore="SpeakableTextPresentCheck"/>
+            tools:ignore="RtlSymmetry,SpeakableTextPresentCheck"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -156,6 +166,7 @@
         android:layout_marginEnd="32dp"
         android:alpha="0"
         android:backgroundTint="@color/navy"
+        android:textColor="@color/white"
         android:text="@string/signup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

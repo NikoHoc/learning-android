@@ -7,6 +7,7 @@ import com.dicoding.dicodingstory.data.UserRepository
 import com.dicoding.dicodingstory.di.Injection
 import com.dicoding.dicodingstory.view.login.LoginViewModel
 import com.dicoding.dicodingstory.view.main.MainViewModel
+import com.dicoding.dicodingstory.view.signup.SignUpViewModel
 
 
 class ViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
@@ -19,6 +20,9 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(SignUpViewModel::class.java) -> {
+                SignUpViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
