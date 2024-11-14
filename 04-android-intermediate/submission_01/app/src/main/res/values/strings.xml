@@ -12,6 +12,10 @@
     <string name="signup">Daftar</string>
     <string name="message_register_page">Isi form dulu</string>
 
+    <string name="story_owner">%1$s story</string>
+    <string name="story_date">Created at: %1$s</string>
+    <string name="story_description">Description: %1$s</string>
+
     <string name="name">Nama</string>
     <string name="username_hint">Masukan username</string>
     <string name="email">Email</string>

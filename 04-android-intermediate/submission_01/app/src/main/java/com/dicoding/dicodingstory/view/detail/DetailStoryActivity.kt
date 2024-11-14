@@ -8,9 +8,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 import com.dicoding.dicodingstory.R
+import com.dicoding.dicodingstory.data.remote.response.ListStoryItem
 import com.dicoding.dicodingstory.databinding.ActivityDetailBinding
 import com.dicoding.dicodingstory.databinding.ActivityMainBinding
+import com.dicoding.dicodingstory.utils.formatDate
 
 class DetailStoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
@@ -22,10 +25,15 @@ class DetailStoryActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.detail_activity)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        val story = intent.getParcelableExtra<ListStoryItem>(EXTRA_STORY_DATA)
+        story?.let {
+            setData(it)
         }
 
         setupView()
@@ -42,5 +50,37 @@ class DetailStoryActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
+
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+//            title = getString(R.string.result_title)
+        }
+    }
+
+    private fun setData(story: ListStoryItem) {
+        Glide.with(this)
+            .load(story.photoUrl)
+            .error(R.drawable.image_placeholder)
+            .into(binding.ivStory)
+
+
+        binding.storyOwner.text = getString(R.string.story_owner, story.name)
+        binding.storyCreatedAt.text = getString(R.string.story_date, formatDate(story.createdAt))
+        binding.storyDescription.text = getString(R.string.story_description, story.description)
+    }
+
+
+    override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    companion object {
+        const val EXTRA_STORY_DATA = "STORY_DATA"
     }
 }

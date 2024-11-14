@@ -1,9 +1,11 @@
 package com.dicoding.dicodingstory.adapter
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +14,8 @@ import com.dicoding.dicodingstory.R
 import com.dicoding.dicodingstory.data.remote.response.ListStoryItem
 import com.dicoding.dicodingstory.databinding.ItemStoryLayoutBinding
 import com.dicoding.dicodingstory.view.detail.DetailStoryActivity
+import androidx.core.util.Pair
+
 
 class StoryAdapter: ListAdapter<ListStoryItem, StoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
@@ -37,8 +41,16 @@ class StoryAdapter: ListAdapter<ListStoryItem, StoryAdapter.MyViewHolder>(DIFF_C
             binding.root.setOnClickListener {
                 val context = it.context
                 val intent = Intent(context, DetailStoryActivity::class.java)
-                intent.putExtra("STORY_ID", story.id)
-                context.startActivity(intent)
+                intent.putExtra(DetailStoryActivity.EXTRA_STORY_DATA, story)
+                //context.startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity).toBundle())
+
+                val optionsCompat: ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    context as Activity,
+                    Pair(binding.ivStory, "profile_image"),
+                    Pair(binding.storyOwner, "profile_name")
+                )
+
+                context.startActivity(intent, optionsCompat.toBundle())
             }
         }
     }
