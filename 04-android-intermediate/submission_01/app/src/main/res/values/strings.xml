@@ -27,7 +27,7 @@
     <string name="error_alert_reply">Ulangi</string>
 
     <string name="message_main_page">Selamat Belajar di Dicoding.</string>
-    <string name="greeting">Halo %1$s,</string>
+    <string name="greeting">Halo, %1$s</string>
     <string name="logout">Keluar</string>
 
     <string name="no_story">Story tidak tersedia</string>

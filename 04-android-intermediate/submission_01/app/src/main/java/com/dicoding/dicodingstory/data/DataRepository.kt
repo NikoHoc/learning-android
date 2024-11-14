@@ -4,12 +4,14 @@ import androidx.lifecycle.liveData
 import com.dicoding.dicodingstory.data.pref.UserModel
 import com.dicoding.dicodingstory.data.pref.UserPreference
 import com.dicoding.dicodingstory.data.remote.response.RegisterResponse
+import com.dicoding.dicodingstory.data.remote.response.StoryResponse
 import com.dicoding.dicodingstory.data.remote.retrofit.ApiServices
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import retrofit2.HttpException
 
-class UserRepository private constructor(
+class DataRepository private constructor(
     private val apiServices: ApiServices,
     private val userPreference: UserPreference
 ) {
@@ -38,6 +40,17 @@ class UserRepository private constructor(
         }
     }
 
+    fun getStories() = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiServices.getStories()
+            emit(Result.Success(response))
+        } catch (e: HttpException) {
+            val errorBody = e.response()?.errorBody()?.string()
+            val errorResponse = Gson().fromJson(errorBody, StoryResponse::class.java)
+            emit(Result.Error(errorResponse.message.toString()))
+        }
+    }
     suspend fun saveSession(user: UserModel) {
         userPreference.saveSession(user)
     }
@@ -52,13 +65,13 @@ class UserRepository private constructor(
 
     companion object {
         @Volatile
-        private var instance: UserRepository? = null
+        private var instance: DataRepository? = null
         fun getInstance(
             apiServices: ApiServices,
             userPreference: UserPreference
-        ): UserRepository =
+        ): DataRepository =
             instance ?: synchronized(this) {
-                instance ?: UserRepository(
+                instance ?: DataRepository(
                     apiServices,
                     userPreference)
             }.also { instance = it }

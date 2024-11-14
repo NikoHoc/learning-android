@@ -2,8 +2,11 @@ package com.dicoding.dicodingstory.data.remote.retrofit
 
 import com.dicoding.dicodingstory.data.remote.response.LoginResponse
 import com.dicoding.dicodingstory.data.remote.response.RegisterResponse
+import com.dicoding.dicodingstory.data.remote.response.StoryResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface ApiServices {
@@ -21,4 +24,9 @@ interface ApiServices {
         @Field("email") email: String,
         @Field("password") password: String
     ): LoginResponse
+
+    @GET("stories")
+    suspend fun getStories(
+
+    ): StoryResponse
 }

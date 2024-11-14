@@ -3,6 +3,7 @@ package com.dicoding.dicodingstory.view.main
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
@@ -10,15 +11,20 @@ import android.view.MenuItem
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.dicodingstory.R
+import com.dicoding.dicodingstory.adapter.StoryAdapter
+import com.dicoding.dicodingstory.data.Result
 import com.dicoding.dicodingstory.databinding.ActivityMainBinding
 import com.dicoding.dicodingstory.view.ViewModelFactory
 import com.dicoding.dicodingstory.view.welcome.WelcomeActivity
+
 
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<MainViewModel> {
@@ -39,15 +45,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        viewModel.getSession().observe(this) { user ->
-            if (!user.isLogin) {
-                startActivity(Intent(this, WelcomeActivity::class.java))
-                finish()
-            }
-        }
-
         setupView()
-        //setupAction()
+        setupAction()
         playAnimation()
     }
 
@@ -75,29 +74,69 @@ class MainActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
-        //supportActionBar?.hide()
     }
 
-//    private fun setupAction() {
-//        binding.actionLogout.setOnClickListener {
-//            viewModel.logout()
-//        }
-//    }
+    private fun setupAction() {
+        val storyAdapter = StoryAdapter()
+        viewModel.getSession().observe(this) { user ->
+            if (!user.isLogin) {
+                startActivity(Intent(this, WelcomeActivity::class.java))
+                finish()
+            } else {
+                binding.username.text = getString(R.string.greeting, user.name)
+
+                viewModel.getStories().observe(this) { result ->
+                    when (result) {
+                        is Result.Loading -> {
+                            binding.progressBar.visibility = View.VISIBLE
+                        }
+                        is Result.Success -> {
+                            val story = result.data.listStory
+                            storyAdapter.submitList(story)
+
+                            Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+                            binding.progressBar.visibility = View.GONE
+                            binding.tvStoryNotFound.visibility = View.GONE
+                        }
+                        is Result.Error -> {
+                            Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                            binding.progressBar.visibility = View.GONE
+                            binding.tvStoryNotFound.visibility = View.VISIBLE
+                        }
+                    }
+                }
+
+                val spanCount = if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    1
+                } else {
+                    2
+                }
+                binding.rvStory.apply {
+                    layoutManager = GridLayoutManager(this@MainActivity, spanCount)
+                    setHasFixedSize(true)
+                    adapter = storyAdapter
+                }
+            }
+        }
+
+    }
 
     private fun playAnimation() {
-//        ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
-//            duration = 6000
-//            repeatCount = ObjectAnimator.INFINITE
-//            repeatMode = ObjectAnimator.REVERSE
-//        }.start()
-//
-//        val name = ObjectAnimator.ofFloat(binding.nameTextView, View.ALPHA, 1f).setDuration(100)
-//        val message = ObjectAnimator.ofFloat(binding.messageTextView, View.ALPHA, 1f).setDuration(100)
-//        //val logout = ObjectAnimator.ofFloat(binding.actionLogout, View.ALPHA, 1f).setDuration(100)
-//
-//        AnimatorSet().apply {
-//            playSequentially(name, message)
-//            startDelay = 100
-//        }.start()
+        binding.username.translationX = 500f
+        binding.rvStory.translationX = 500f
+
+        val usernameAnimator = ObjectAnimator.ofFloat(binding.username, View.TRANSLATION_X, 0f).apply {
+            duration = 1000
+        }
+        val rvStoryAnimator = ObjectAnimator.ofFloat(binding.rvStory, View.TRANSLATION_X, 0f).apply {
+            duration = 1000
+            startDelay = 200
+        }
+
+        AnimatorSet().apply {
+            playSequentially(usernameAnimator, rvStoryAnimator)
+            start()
+        }
+
     }
 }
