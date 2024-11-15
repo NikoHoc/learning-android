@@ -119,7 +119,7 @@ class SignUpActivity : AppCompatActivity() {
                     binding.edRegisterPassword.error == null
 
             if (binding.signupButton.isEnabled) {
-                binding.signupButton.backgroundTintList = getColorStateList(R.color.navy)
+                binding.signupButton.backgroundTintList = getColorStateList(R.color.md_theme_primary)
                 binding.signupButton.text = getString(R.string.signup)
             } else {
                 binding.signupButton.backgroundTintList = getColorStateList(R.color.disabled_button)

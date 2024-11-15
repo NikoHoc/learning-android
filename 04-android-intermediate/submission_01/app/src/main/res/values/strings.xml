@@ -48,7 +48,7 @@
     <string name="upload">Unggah</string>
     <string name="camera">Kamera</string>
     <string name="description">Masukan deskripsi cerita anda</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
-    <string name="app_widget_description">This is an app widget description</string>
+
+    <string name="appwidget_text">Cerita sesama dicoding</string>
+    <string name="empty_text">Tidak ada cerita</string>
 </resources>

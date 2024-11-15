@@ -233,7 +233,7 @@ class AddStoryActivity : AppCompatActivity() {
             binding.buttonAdd.isEnabled = isFormFilled
 
             if (binding.buttonAdd.isEnabled) {
-                binding.buttonAdd.backgroundTintList = getColorStateList(R.color.navy)
+                binding.buttonAdd.backgroundTintList = getColorStateList(R.color.md_theme_primary)
                 binding.buttonAdd.text = getString(R.string.upload)
             } else {
                 binding.buttonAdd.backgroundTintList = getColorStateList(R.color.disabled_button)

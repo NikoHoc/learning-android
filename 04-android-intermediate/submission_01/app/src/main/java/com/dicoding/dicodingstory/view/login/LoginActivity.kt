@@ -128,7 +128,7 @@ class LoginActivity : AppCompatActivity() {
             binding.loginButton.isEnabled = isFormFilled && binding.edLoginEmail.error == null && binding.edLoginPassword.error == null
 
             if (binding.loginButton.isEnabled) {
-                binding.loginButton.backgroundTintList = getColorStateList(R.color.navy)
+                binding.loginButton.backgroundTintList = getColorStateList(R.color.md_theme_primary)
                 binding.loginButton.text = getString(R.string.login)
             } else {
                 binding.loginButton.backgroundTintList = getColorStateList(R.color.disabled_button)

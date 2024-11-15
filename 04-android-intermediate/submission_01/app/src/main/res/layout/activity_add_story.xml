@@ -49,7 +49,6 @@
         android:alpha="0"
         tools:alpha="100"
         android:layout_marginTop="8dp"
-        android:backgroundTint="@color/navy"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/previewImageView"
         app:layout_constraintTop_toBottomOf="@+id/previewImageView" />
@@ -63,7 +62,6 @@
         android:alpha="0"
         tools:alpha="100"
         android:layout_marginTop="8dp"
-        android:backgroundTint="@color/navy"
         app:layout_constraintEnd_toEndOf="@+id/previewImageView"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/previewImageView" />
@@ -100,7 +98,6 @@
         android:text="@string/upload"
         android:alpha="0"
         tools:alpha="100"
-        android:backgroundTint="@color/navy"
         app:layout_constraintTop_toBottomOf="@+id/edTextInputLayout"
         app:layout_constraintEnd_toEndOf="@+id/edTextInputLayout"
         app:layout_constraintStart_toStartOf="@+id/edTextInputLayout" />

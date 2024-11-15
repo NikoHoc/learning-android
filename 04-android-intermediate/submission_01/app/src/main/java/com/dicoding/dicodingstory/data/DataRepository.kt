@@ -94,16 +94,6 @@ class DataRepository private constructor(
     companion object {
         @Volatile
         private var instance: DataRepository? = null
-//        fun getInstance(
-//            apiServices: ApiServices,
-//            userPreference: UserPreference
-//        ): DataRepository =
-//            instance ?: synchronized(this) {
-//                instance ?: DataRepository(
-//                    apiServices,
-//                    userPreference)
-//            }.also { instance = it }
-
         fun getInstance(apiService: ApiServices, dataStoreToken: UserPreference) = DataRepository(apiService, dataStoreToken)
     }
 }
