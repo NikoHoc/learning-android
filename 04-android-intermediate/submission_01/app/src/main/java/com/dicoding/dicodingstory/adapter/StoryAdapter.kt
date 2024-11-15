@@ -5,7 +5,10 @@ import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.content.res.TypedArrayUtils.getString
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -36,19 +39,19 @@ class StoryAdapter: ListAdapter<ListStoryItem, StoryAdapter.MyViewHolder>(DIFF_C
                 .error(R.drawable.image_placeholder)
                 .into(binding.ivStory)
 
-            binding.storyOwner.text = story.name
+            binding.storyOwner.text = itemView.context.getString(R.string.story_owner, story.name)
 
             binding.root.setOnClickListener {
                 val context = it.context
                 val intent = Intent(context, DetailStoryActivity::class.java)
                 intent.putExtra(DetailStoryActivity.EXTRA_STORY_DATA, story)
-                //context.startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity).toBundle())
 
-                val optionsCompat: ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    context as Activity,
-                    Pair(binding.ivStory, "profile_image"),
-                    Pair(binding.storyOwner, "profile_name")
-                )
+                val optionsCompat: ActivityOptionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        context as Activity,
+                        Pair(binding.ivStory, "story_image"),
+                        Pair(binding.storyOwner, "story_owner")
+                    )
 
                 context.startActivity(intent, optionsCompat.toBundle())
             }

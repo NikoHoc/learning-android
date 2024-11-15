@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.dicodingstory.R
 import com.dicoding.dicodingstory.adapter.StoryAdapter
 import com.dicoding.dicodingstory.data.Result
@@ -105,20 +106,19 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-
-                val spanCount = if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    1
-                } else {
-                    2
-                }
-                binding.rvStory.apply {
-                    layoutManager = GridLayoutManager(this@MainActivity, spanCount)
-                    setHasFixedSize(true)
-                    adapter = storyAdapter
-                }
+                showRecyclerList(storyAdapter)
             }
         }
 
+    }
+
+    private fun showRecyclerList(storyAdapter: StoryAdapter) {
+        if (applicationContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            binding.rvStory.layoutManager = GridLayoutManager(this, 2)
+        } else {
+            binding.rvStory.layoutManager = LinearLayoutManager(this)
+        }
+        binding.rvStory.adapter = storyAdapter
     }
 
     private fun playAnimation() {

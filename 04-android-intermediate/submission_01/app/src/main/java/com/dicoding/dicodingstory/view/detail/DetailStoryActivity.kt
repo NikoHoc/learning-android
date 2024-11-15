@@ -50,11 +50,7 @@ class DetailStoryActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
-
-        supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-//            title = getString(R.string.result_title)
-        }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun setData(story: ListStoryItem) {
@@ -69,11 +65,15 @@ class DetailStoryActivity : AppCompatActivity() {
         binding.storyDescription.text = getString(R.string.story_description, story.description)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        finishAfterTransition()
+        return true
+    }
 
     override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                finish()
+                finishAfterTransition() // This will apply the transition animation
                 true
             }
             else -> super.onOptionsItemSelected(item)
