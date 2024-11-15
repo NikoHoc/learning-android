@@ -7,10 +7,13 @@ import com.dicoding.dicodingstory.data.pref.UserModel
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val repository: DataRepository) : ViewModel() {
-    fun saveSession(user: UserModel) {
-        viewModelScope.launch {
-            repository.saveSession(user)
-        }
+//    fun saveSession(user: UserModel) {
+//        viewModelScope.launch {
+//            repository.saveSession(user)
+//        }
+//    }
+    fun saveSession(userModel: UserModel) = viewModelScope.launch {
+        repository.saveSession(userModel)
     }
     fun login(email: String, password: String) = repository.login(email, password)
 }

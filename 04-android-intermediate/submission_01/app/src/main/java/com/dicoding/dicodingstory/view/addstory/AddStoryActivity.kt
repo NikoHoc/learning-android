@@ -4,7 +4,6 @@ import android.Manifest
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
-import android.app.ProgressDialog.show
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -29,13 +28,11 @@ import androidx.core.view.WindowInsetsCompat
 import com.dicoding.dicodingstory.R
 import com.dicoding.dicodingstory.data.Result
 import com.dicoding.dicodingstory.databinding.ActivityAddStoryBinding
-import com.dicoding.dicodingstory.databinding.ActivityMainBinding
 import com.dicoding.dicodingstory.utils.getImageUri
 import com.dicoding.dicodingstory.utils.reduceFileImage
 import com.dicoding.dicodingstory.utils.uriToFile
 import com.dicoding.dicodingstory.view.ViewModelFactory
 import com.dicoding.dicodingstory.view.main.MainActivity
-import com.dicoding.dicodingstory.view.main.MainViewModel
 
 class AddStoryActivity : AppCompatActivity() {
 

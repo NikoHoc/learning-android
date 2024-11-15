@@ -9,6 +9,7 @@ import com.dicoding.dicodingstory.view.addstory.AddStoryViewModel
 import com.dicoding.dicodingstory.view.login.LoginViewModel
 import com.dicoding.dicodingstory.view.main.MainViewModel
 import com.dicoding.dicodingstory.view.signup.SignUpViewModel
+import com.dicoding.dicodingstory.view.welcome.WelcomeViewModel
 
 
 class ViewModelFactory(private val repository: DataRepository) : ViewModelProvider.NewInstanceFactory() {
@@ -28,6 +29,9 @@ class ViewModelFactory(private val repository: DataRepository) : ViewModelProvid
             modelClass.isAssignableFrom(AddStoryViewModel::class.java) -> {
                 AddStoryViewModel(repository) as T
             }
+            modelClass.isAssignableFrom(WelcomeViewModel::class.java) -> {
+                WelcomeViewModel(repository) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
@@ -36,13 +40,14 @@ class ViewModelFactory(private val repository: DataRepository) : ViewModelProvid
         @Volatile
         private var INSTANCE: ViewModelFactory? = null
         @JvmStatic
-        fun getInstance(context: Context): ViewModelFactory {
-            if (INSTANCE == null) {
-                synchronized(ViewModelFactory::class.java) {
-                    INSTANCE = ViewModelFactory(Injection.provideRepository(context))
-                }
-            }
-            return INSTANCE as ViewModelFactory
-        }
+//        fun getInstance(context: Context): ViewModelFactory {
+//            if (INSTANCE == null) {
+//                synchronized(ViewModelFactory::class.java) {
+//                    INSTANCE = ViewModelFactory(Injection.provideRepository(context))
+//                }
+//            }
+//            return INSTANCE as ViewModelFactory
+//        }
+        fun getInstance(context: Context) = ViewModelFactory(Injection.provideRepository(context))
     }
 }

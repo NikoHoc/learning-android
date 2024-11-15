@@ -79,11 +79,15 @@ class LoginActivity : AppCompatActivity() {
                         }
                         is Result.Success -> {
                             val loginResponse = result.data
-                            val userId = loginResponse.loginResult?.userId.toString()
-                            val name = loginResponse.loginResult?.name.toString()
-                            val token = loginResponse.loginResult?.token.toString()
+                            val userModel = UserModel(
+                                userId = loginResponse.loginResult?.userId.toString(),
+                                name = loginResponse.loginResult?.name.toString(),
+                                email = email,
+                                token = loginResponse.loginResult?.token.toString(),
+                                isLogin = true
+                            )
+                            viewModel.saveSession(userModel)
 
-                            viewModel.saveSession(UserModel(userId, name, email, token))
                             AlertDialog.Builder(this).apply {
                                 setTitle(R.string.login_success_alert_title)
                                 setMessage(loginResponse.message)

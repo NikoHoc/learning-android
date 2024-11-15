@@ -9,7 +9,6 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -18,7 +17,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.dicoding.dicodingstory.R
 import com.dicoding.dicodingstory.data.Result
-import com.dicoding.dicodingstory.data.remote.response.RegisterResponse
 import com.dicoding.dicodingstory.databinding.ActivitySignUpBinding
 import com.dicoding.dicodingstory.view.ViewModelFactory
 

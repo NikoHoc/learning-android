@@ -12,7 +12,6 @@ import com.bumptech.glide.Glide
 import com.dicoding.dicodingstory.R
 import com.dicoding.dicodingstory.data.remote.response.ListStoryItem
 import com.dicoding.dicodingstory.databinding.ActivityDetailBinding
-import com.dicoding.dicodingstory.databinding.ActivityMainBinding
 import com.dicoding.dicodingstory.utils.formatDate
 
 class DetailStoryActivity : AppCompatActivity() {

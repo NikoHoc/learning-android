@@ -9,16 +9,23 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.dicoding.dicodingstory.R
 import com.dicoding.dicodingstory.databinding.ActivityWelcomeBinding
+import com.dicoding.dicodingstory.view.ViewModelFactory
 import com.dicoding.dicodingstory.view.login.LoginActivity
+import com.dicoding.dicodingstory.view.main.MainActivity
 import com.dicoding.dicodingstory.view.signup.SignUpActivity
 
 class WelcomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWelcomeBinding
+
+    private val welcomeViewModel  by viewModels<WelcomeViewModel> {
+        ViewModelFactory.getInstance(application)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +38,13 @@ class WelcomeActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        welcomeViewModel.getSession().observe(this) { userModel ->
+            if (userModel.isLogin) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
         }
 
         setupView()

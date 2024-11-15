@@ -9,7 +9,6 @@ import com.dicoding.dicodingstory.data.remote.response.UploadStoryResponse
 import com.dicoding.dicodingstory.data.remote.retrofit.ApiServices
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -78,9 +77,11 @@ class DataRepository private constructor(
 
     }
 
-    suspend fun saveSession(user: UserModel) {
-        userPreference.saveSession(user)
-    }
+//    suspend fun saveSession(user: UserModel) {
+//        userPreference.saveSession(user)
+//    }
+
+    suspend fun saveSession(userModel: UserModel) = userPreference.saveSession(userModel)
 
     fun getSession(): Flow<UserModel> {
         return userPreference.getSession()
@@ -93,14 +94,16 @@ class DataRepository private constructor(
     companion object {
         @Volatile
         private var instance: DataRepository? = null
-        fun getInstance(
-            apiServices: ApiServices,
-            userPreference: UserPreference
-        ): DataRepository =
-            instance ?: synchronized(this) {
-                instance ?: DataRepository(
-                    apiServices,
-                    userPreference)
-            }.also { instance = it }
+//        fun getInstance(
+//            apiServices: ApiServices,
+//            userPreference: UserPreference
+//        ): DataRepository =
+//            instance ?: synchronized(this) {
+//                instance ?: DataRepository(
+//                    apiServices,
+//                    userPreference)
+//            }.also { instance = it }
+
+        fun getInstance(apiService: ApiServices, dataStoreToken: UserPreference) = DataRepository(apiService, dataStoreToken)
     }
 }

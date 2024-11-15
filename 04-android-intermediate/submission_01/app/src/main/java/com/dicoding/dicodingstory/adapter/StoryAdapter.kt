@@ -5,10 +5,8 @@ import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.app.ActivityOptionsCompat
-import androidx.core.content.res.TypedArrayUtils.getString
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +15,6 @@ import com.dicoding.dicodingstory.R
 import com.dicoding.dicodingstory.data.remote.response.ListStoryItem
 import com.dicoding.dicodingstory.databinding.ItemStoryLayoutBinding
 import com.dicoding.dicodingstory.view.detail.DetailStoryActivity
-import androidx.core.util.Pair
 
 
 class StoryAdapter: ListAdapter<ListStoryItem, StoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
