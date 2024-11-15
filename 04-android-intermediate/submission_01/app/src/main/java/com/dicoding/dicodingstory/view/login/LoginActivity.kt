@@ -16,7 +16,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.widget.doOnTextChanged
 import com.dicoding.dicodingstory.R
 import com.dicoding.dicodingstory.data.Result
 import com.dicoding.dicodingstory.data.pref.UserModel

@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -24,6 +25,7 @@ import com.dicoding.dicodingstory.adapter.StoryAdapter
 import com.dicoding.dicodingstory.data.Result
 import com.dicoding.dicodingstory.databinding.ActivityMainBinding
 import com.dicoding.dicodingstory.view.ViewModelFactory
+import com.dicoding.dicodingstory.view.addstory.AddStoryActivity
 import com.dicoding.dicodingstory.view.welcome.WelcomeActivity
 
 
@@ -61,6 +63,9 @@ class MainActivity : AppCompatActivity() {
             R.id.action_logout -> {
                 viewModel.logout()
             }
+            R.id.action_setting -> {
+                startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -75,9 +80,7 @@ class MainActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
-    }
 
-    private fun setupAction() {
         val storyAdapter = StoryAdapter()
         viewModel.getSession().observe(this) { user ->
             if (!user.isLogin) {
@@ -109,6 +112,13 @@ class MainActivity : AppCompatActivity() {
                 showRecyclerList(storyAdapter)
             }
         }
+    }
+
+    private fun setupAction() {
+        binding.floatingActionButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, AddStoryActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
@@ -130,13 +140,16 @@ class MainActivity : AppCompatActivity() {
         }
         val rvStoryAnimator = ObjectAnimator.ofFloat(binding.rvStory, View.TRANSLATION_X, 0f).apply {
             duration = 1000
-            startDelay = 200
         }
 
         AnimatorSet().apply {
-            playSequentially(usernameAnimator, rvStoryAnimator)
+            playTogether(usernameAnimator, rvStoryAnimator)
             start()
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getStories()
     }
 }

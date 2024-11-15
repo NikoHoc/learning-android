@@ -39,28 +39,22 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun playAnimation() {
-        // bikin gambar bergerak ke kanan dan ke kiri dengan translation x
         ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
             duration = 6000
             repeatCount = ObjectAnimator.INFINITE
             repeatMode = ObjectAnimator.REVERSE
         }.start()
 
-        // animasi fade in dengan alpha, animasi ini untuk membuat objek yg tidak nampak jadi nampak
-        // tambahkan pada .xml seperti ini
-        // android:alpha="0"
-        // tools:alpha="100"
+
         val login = ObjectAnimator.ofFloat(binding.loginButton, View.ALPHA, 1f).setDuration(100)
         val signup = ObjectAnimator.ofFloat(binding.signupButton, View.ALPHA, 1f).setDuration(100)
         val title = ObjectAnimator.ofFloat(binding.titleTextView, View.ALPHA, 1f).setDuration(100)
         val desc = ObjectAnimator.ofFloat(binding.descTextView, View.ALPHA, 1f).setDuration(100)
 
-        // muncul bersamaan
         val together = AnimatorSet().apply {
             playTogether(login, signup)
         }
 
-        // muncul bergantian
         AnimatorSet().apply {
             playSequentially(title, desc, together)
             start()

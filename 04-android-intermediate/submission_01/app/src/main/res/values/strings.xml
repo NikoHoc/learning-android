@@ -30,11 +30,25 @@
     <string name="success_alert_reply">Lanjut</string>
     <string name="error_alert_reply">Ulangi</string>
 
+    <string name="upload_success_alert_title">Unggah berhasil</string>
+    <string name="upload_error_alert_title">Unggah gagal</string>
+    <string name="image_empty">Gambar masih kosong</string>
+    <string name="description_empty">Isi form dulu</string>
+
     <string name="message_main_page">Selamat Belajar di Dicoding.</string>
     <string name="greeting">Halo, %1$s</string>
     <string name="logout">Keluar</string>
+    <string name="setting">Pengaturan</string>
 
     <string name="no_story">Story tidak tersedia</string>
     <string name="add_story">Button buat story baru</string>
     <string name="image_placeholder">Gambar Story</string>
+
+    <string name="gallery">Galeri</string>
+    <string name="upload">Unggah</string>
+    <string name="camera">Kamera</string>
+    <string name="description">Masukan deskripsi cerita anda</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 </resources>
