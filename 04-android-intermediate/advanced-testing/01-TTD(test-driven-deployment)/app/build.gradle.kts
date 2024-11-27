@@ -77,4 +77,7 @@ dependencies {
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.inline)
     testImplementation(libs.androidx.core.testing)
+
+    // unit testing coroutine
+    testImplementation(libs.kotlinx.coroutines.test)
 }
