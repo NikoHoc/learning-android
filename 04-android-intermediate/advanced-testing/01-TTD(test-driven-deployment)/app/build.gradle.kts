@@ -70,5 +70,11 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx) //liveData
     implementation(libs.androidx.room.ktx)
 
+    // testing ttd
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+
+    // unit testing live data
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.inline)
+    testImplementation(libs.androidx.core.testing)
 }
