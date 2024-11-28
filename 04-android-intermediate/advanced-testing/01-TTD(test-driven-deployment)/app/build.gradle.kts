@@ -3,9 +3,9 @@ plugins {
     id("kotlin-android")
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
-    id ("org.jetbrains.kotlinx.kover") version "0.5.0"
-}
 
+}
+@Suppress("UnstableApiUsage")
 android {
     namespace = "com.dicoding.newsapp"
     compileSdk = 34
@@ -34,6 +34,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
+    }
+    testOptions {
+        animationsDisabled = true
     }
 }
 
@@ -89,4 +92,16 @@ dependencies {
     //special instrumentation testing
     androidTestImplementation(libs.androidx.core.testing) // InstantTaskExecutorRule
     androidTestImplementation(libs.kotlinx.coroutines.test) //TestDispatcher
+
+    //TestCoroutineDispatcher
+    debugImplementation(libs.androidx.fragment.testing) //launchFragmentInContainer
+
+    //mock web server
+    androidTestImplementation(libs.mockwebserver)
+    androidTestImplementation(libs.okhttp3.okhttp.tls)
+
+    androidTestImplementation(libs.espresso.contrib) //RecyclerViewActions
+
+    implementation(libs.androidx.espresso.idling.resource)
+
 }

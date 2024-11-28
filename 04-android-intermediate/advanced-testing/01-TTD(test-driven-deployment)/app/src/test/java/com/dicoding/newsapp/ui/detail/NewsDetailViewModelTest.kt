@@ -7,6 +7,7 @@ import com.dicoding.newsapp.utils.DataDummy
 import com.dicoding.newsapp.utils.MainDispatcherRule
 import com.dicoding.newsapp.utils.getOrAwaitValue
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -40,9 +41,11 @@ class NewsDetailViewModelTest{
         newsDetailViewModel.setNewsData(dummyDetailNews)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `when bookmarkStatus false Should call saveNews`() = runTest {
         val expectedBoolean = MutableLiveData<Boolean>()
@@ -53,6 +56,7 @@ class NewsDetailViewModelTest{
         Mockito.verify(newsRepository).saveNews(dummyDetailNews)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `when bookmarkStatus true Should call deleteNews`() = runTest {
         val expectedBoolean = MutableLiveData<Boolean>()
