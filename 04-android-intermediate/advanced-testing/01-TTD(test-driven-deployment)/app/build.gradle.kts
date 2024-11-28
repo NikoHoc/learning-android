@@ -104,4 +104,6 @@ dependencies {
 
     implementation(libs.androidx.espresso.idling.resource)
 
+
+    androidTestImplementation(libs.espresso.intents) //IntentsTestRule
 }
