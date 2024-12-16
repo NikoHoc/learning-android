@@ -63,4 +63,5 @@ dependencies {
     implementation(libs.logging.interceptor)
 
     implementation(libs.androidx.paging.runtime.ktx)
+    implementation(libs.androidx.room.paging)
 }
