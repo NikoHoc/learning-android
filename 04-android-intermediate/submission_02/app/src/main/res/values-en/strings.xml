@@ -57,4 +57,6 @@
     <string name="title_activity_maps">MapsActivity</string>
 
     <string name="retry">Retry</string>
+    <string name="share_loc">Share story location</string>
+    <string name="location_permission_denied">Location permission denied</string>
 </resources>

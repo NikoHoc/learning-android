@@ -100,24 +100,33 @@ class DataRepository private constructor(
         }
     }
 
-    fun uploadStory(imageFile: File, description: String) = liveData {
+    fun uploadStory(imageFile: File, description: String, lat: Float? = null, lon: Float? = null) = liveData {
         emit(Result.Loading)
-        val requestBody = description.toRequestBody("text/plain".toMediaType())
-        val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
-        val multipartBody = MultipartBody.Part.createFormData(
-            "photo",
-            imageFile.name,
-            requestImageFile
-        )
+
         try {
-            val successResponse = apiServices.uploadStory(multipartBody, requestBody)
+            val descriptionRequestBody = description.toRequestBody("text/plain".toMediaType())
+            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+            val multipartBody = MultipartBody.Part.createFormData(
+                "photo",
+                imageFile.name,
+                requestImageFile
+            )
+            val successResponse = when {
+                lat == null && lon == null -> {
+                    apiServices.uploadStory(multipartBody, descriptionRequestBody)
+                }
+                else -> {
+                    val latDescriptionBody = lat.toString().toRequestBody("text/plain".toMediaType())
+                    val lonDescriptionBody = lon.toString().toRequestBody("text/plain".toMediaType())
+                    apiServices.uploadStory(multipartBody, descriptionRequestBody, latDescriptionBody, lonDescriptionBody)
+                }
+            }
             emit(Result.Success(successResponse))
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
             val errorResponse = Gson().fromJson(errorBody, UploadStoryResponse::class.java)
             emit(Result.Error(errorResponse.message.toString()))
         }
-
     }
 
     suspend fun saveSession(userModel: UserModel) = userPreference.saveSession(userModel)

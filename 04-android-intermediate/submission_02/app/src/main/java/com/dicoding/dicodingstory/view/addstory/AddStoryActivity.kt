@@ -6,15 +6,13 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Location
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.view.WindowInsets
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.PickVisualMediaRequest
@@ -33,6 +31,8 @@ import com.dicoding.dicodingstory.utils.reduceFileImage
 import com.dicoding.dicodingstory.utils.uriToFile
 import com.dicoding.dicodingstory.view.ViewModelFactory
 import com.dicoding.dicodingstory.view.main.MainActivity
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 class AddStoryActivity : AppCompatActivity() {
 
@@ -43,23 +43,55 @@ class AddStoryActivity : AppCompatActivity() {
     }
 
     private var currentImageUri: Uri? = null
+    private var lat: Float? = null
+    private var lon: Float? = null
+    private var uploadWithLocation: Boolean = false
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    private val requestPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted: Boolean ->
-            if (isGranted) {
-                Toast.makeText(this, "Permission request granted", Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(this, "Permission request denied", Toast.LENGTH_LONG).show()
+    private val permissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        permissions.forEach { (permission, isGranted) ->
+            when (permission) {
+                Manifest.permission.CAMERA -> {
+                    if (isGranted) {
+                        Toast.makeText(this, "Camera permission granted", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION -> {
+                    if (isGranted) {
+                        getMyLastLocation()
+                    } else {
+                        Toast.makeText(
+                            this,
+                            R.string.location_permission_denied,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
             }
         }
+    }
 
-    private fun allPermissionsGranted() =
-        ContextCompat.checkSelfPermission(
+    private fun checkAndRequestPermissions(permissions: List<String>) {
+        val permissionsToRequest = permissions.filter {
+            ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
+        }
+
+        if (permissionsToRequest.isNotEmpty()) {
+            permissionLauncher.launch(permissionsToRequest.toTypedArray())
+        }
+    }
+
+    private fun checkPermission(permission: String): Boolean {
+        return ContextCompat.checkSelfPermission(
             this,
-            REQUIRED_PERMISSION
+            permission
         ) == PackageManager.PERMISSION_GRANTED
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,32 +106,19 @@ class AddStoryActivity : AppCompatActivity() {
             insets
         }
 
-        if (!allPermissionsGranted()) {
-            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
-        }
+        checkAndRequestPermissions(
+            listOf(
+                Manifest.permission.CAMERA,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+        )
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         setupView()
         setupAction()
         playAnimation()
-    }
-
-    private fun setupView() {
-        @Suppress("DEPRECATION")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
-        }
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        binding.buttonAdd.isEnabled = false
-        binding.buttonAdd.backgroundTintList = getColorStateList(R.color.disabled_button)
-        binding.buttonAdd.text = getString(R.string.description_empty)
-
-        binding.edAddDescription.addTextChangedListener(formTextWatcher)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -117,10 +136,24 @@ class AddStoryActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupView() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        binding.buttonAdd.isEnabled = false
+        binding.buttonAdd.backgroundTintList = getColorStateList(R.color.disabled_button)
+        binding.buttonAdd.text = getString(R.string.description_empty)
+
+        binding.edAddDescription.addTextChangedListener(formTextWatcher)
+    }
+
     private fun setupAction() {
         binding.galleryButton.setOnClickListener { startGallery() }
         binding.cameraButton.setOnClickListener { startCamera() }
         binding.buttonAdd.setOnClickListener { uploadImage() }
+
+        binding.btnLocationSwitch.setOnCheckedChangeListener { _, isChecked ->
+            uploadWithLocation = isChecked
+        }
     }
 
     private fun startGallery() {
@@ -160,53 +193,122 @@ class AddStoryActivity : AppCompatActivity() {
         }
     }
 
+    private fun getMyLastLocation() {
+        if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) &&
+            checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+        ) {
+            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                if (location != null) {
+                    lat = location.latitude.toFloat()
+                    lon = location.longitude.toFloat()
+                } else {
+                    Toast.makeText(
+                        this@AddStoryActivity,
+                        "Location not found. Try Again",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        } else {
+            checkAndRequestPermissions(
+                listOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
+        }
+    }
+
     @SuppressLint("NewApi")
     private fun uploadImage() {
-
         currentImageUri?.let { uri ->
             val imageFile = uriToFile(uri, this@AddStoryActivity).reduceFileImage()
             Log.d("Image File", "showImage: ${imageFile.path}")
             val description = binding.edAddDescription.text.toString()
             Log.d("Story Description", "description: $description")
 
-            viewModel.uploadStory(imageFile, description).observe(this) { result ->
-                if (result != null) {
-                    when (result) {
-                        is Result.Loading -> {
-                            binding.progressIndicator.visibility = View.VISIBLE
-                        }
-                        is Result.Success -> {
-                            val uploadResponse = result.data
-                            AlertDialog.Builder(this).apply {
-                                setTitle(R.string.upload_success_alert_title)
-                                setMessage(uploadResponse.message)
-                                setPositiveButton(R.string.success_alert_reply) { _, _ ->
-                                    val intent = Intent(this@AddStoryActivity, MainActivity::class.java)
-                                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                                    startActivity(intent)
-                                    finish()
-                                }
-                                create()
-                                show()
+            if (uploadWithLocation) {
+                viewModel.uploadStory(imageFile, description, lat, lon).observe(this) { result ->
+                    if (result != null) {
+                        when (result) {
+                            is Result.Loading -> {
+                                binding.progressIndicator.visibility = View.VISIBLE
                             }
-                            binding.progressIndicator.visibility = View.GONE
-                        }
-                        is Result.Error -> {
-                            AlertDialog.Builder(this).apply {
-                                setTitle(R.string.upload_error_alert_title)
-                                setMessage(result.error)
-                                setPositiveButton(R.string.error_alert_reply) { dialog, _ ->
-                                    dialog.dismiss()
+                            is Result.Success -> {
+                                val uploadResponse = result.data
+                                AlertDialog.Builder(this).apply {
+                                    setTitle(R.string.upload_success_alert_title)
+                                    setMessage(uploadResponse.message)
+                                    setPositiveButton(R.string.success_alert_reply) { _, _ ->
+                                        val intent =
+                                            Intent(this@AddStoryActivity, MainActivity::class.java)
+                                        intent.flags =
+                                            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                        startActivity(intent)
+                                        finish()
+                                    }
+                                    create()
+                                    show()
                                 }
-                                create()
-                                show()
+                                binding.progressIndicator.visibility = View.GONE
                             }
-                            binding.progressIndicator.visibility = View.GONE
+                            is Result.Error -> {
+                                AlertDialog.Builder(this).apply {
+                                    setTitle(R.string.upload_error_alert_title)
+                                    setMessage(result.error)
+                                    setPositiveButton(R.string.error_alert_reply) { dialog, _ ->
+                                        dialog.dismiss()
+                                    }
+                                    create()
+                                    show()
+                                }
+                                binding.progressIndicator.visibility = View.GONE
+                            }
+                        }
+                    }
+                }
+            } else {
+                viewModel.uploadStory(imageFile, description).observe(this) { result ->
+                    if (result != null) {
+                        when (result) {
+                            is Result.Loading -> {
+                                binding.progressIndicator.visibility = View.VISIBLE
+                            }
+                            is Result.Success -> {
+                                val uploadResponse = result.data
+                                AlertDialog.Builder(this).apply {
+                                    setTitle(R.string.upload_success_alert_title)
+                                    setMessage(uploadResponse.message)
+                                    setPositiveButton(R.string.success_alert_reply) { _, _ ->
+                                        val intent =
+                                            Intent(this@AddStoryActivity, MainActivity::class.java)
+                                        intent.flags =
+                                            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                        startActivity(intent)
+                                        finish()
+                                    }
+                                    create()
+                                    show()
+                                }
+                                binding.progressIndicator.visibility = View.GONE
+                            }
+                            is Result.Error -> {
+                                AlertDialog.Builder(this).apply {
+                                    setTitle(R.string.upload_error_alert_title)
+                                    setMessage(result.error)
+                                    setPositiveButton(R.string.error_alert_reply) { dialog, _ ->
+                                        dialog.dismiss()
+                                    }
+                                    create()
+                                    show()
+                                }
+                                binding.progressIndicator.visibility = View.GONE
+                            }
                         }
                     }
                 }
             }
-        } ?: Toast.makeText(this, getString(R.string.image_empty), Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun playAnimation() {
@@ -243,8 +345,5 @@ class AddStoryActivity : AppCompatActivity() {
 
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-    }
-    companion object {
-        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
 }

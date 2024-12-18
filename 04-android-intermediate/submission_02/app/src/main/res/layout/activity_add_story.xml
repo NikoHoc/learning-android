@@ -88,6 +88,38 @@
             tools:alpha="100" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <LinearLayout
+        android:id="@+id/btn_toggle_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edTextInputLayout">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvNotificationTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/share_loc"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/btn_location_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/button_add"
         android:layout_width="0dp"
@@ -98,10 +130,8 @@
         android:text="@string/upload"
         android:alpha="0"
         tools:alpha="100"
-        app:layout_constraintTop_toBottomOf="@+id/edTextInputLayout"
-        app:layout_constraintEnd_toEndOf="@+id/edTextInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/edTextInputLayout" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/btn_toggle_layout"
+        app:layout_constraintEnd_toEndOf="@+id/btn_toggle_layout"
+        app:layout_constraintStart_toStartOf="@+id/btn_toggle_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
