@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DicodingStory</string>
+
+    <string name="title_welcome_page">Welcome to Dicoding Story!</string>
+    <string name="message_welcome_page">Want to share stories with other Dicoding users? Just do it in Dicoding Story!</string>
+
+    <string name="title_login_page">Ready to share your story?</string>
+    <string name="login">Login</string>
+    <string name="message_login_page">Please enter your data first</string>
+
+    <string name="title_signup_page">Fill in your details below</string>
+    <string name="signup">Sign Up</string>
+    <string name="message_register_page">Fill out the form first</string>
+
+    <string name="story_owner">%1$s story</string>
+    <string name="story_date">Created at: %1$s</string>
+    <string name="story_description">Description: %1$s</string>
+
+    <string name="name">Name</string>
+    <string name="username_hint">Enter username</string>
+    <string name="email">Email</string>
+    <string name="email_hint">Enter email</string>
+    <string name="password">Password</string>
+    <string name="password_hint">Enter password</string>
+
+    <string name="signup_success_alert_title">Account created successfully</string>
+    <string name="signup_error_alert_title">Failed to create account</string>
+    <string name="login_success_alert_title">Login successful</string>
+    <string name="login_error_alert_title">Login failed</string>
+    <string name="success_alert_reply">Continue</string>
+    <string name="error_alert_reply">Retry</string>
+
+    <string name="upload_success_alert_title">Upload success</string>
+    <string name="upload_error_alert_title">Upload failed</string>
+    <string name="image_empty">Image is still empty</string>
+    <string name="description_empty">Fill in the form</string>
+
+    <string name="message_main_page">Happy Learning at Dicoding.</string>
+    <string name="greeting">Hello, %1$s</string>
+    <string name="logout">Logout</string>
+    <string name="setting">Settings</string>
+
+    <string name="no_story">No stories available</string>
+    <string name="add_story">Create new story button</string>
+    <string name="image_placeholder">Story Image</string>
+
+    <string name="gallery">Gallery</string>
+    <string name="upload">Upload</string>
+    <string name="camera">Camera</string>
+    <string name="description">Insert your story description</string>
+
+    <string name="appwidget_text">Dicoding user story</string>
+    <string name="empty_text">There is no story</string>
+
+    <string name="map">Open Map</string>
+    <string name="title_activity_maps">MapsActivity</string>
+
+    <string name="retry">Retry</string>
+</resources>
