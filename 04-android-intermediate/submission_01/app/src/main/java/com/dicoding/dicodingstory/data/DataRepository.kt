@@ -3,6 +3,7 @@ package com.dicoding.dicodingstory.data
 import androidx.lifecycle.liveData
 import com.dicoding.dicodingstory.data.pref.UserModel
 import com.dicoding.dicodingstory.data.pref.UserPreference
+import com.dicoding.dicodingstory.data.remote.response.LoginResponse
 import com.dicoding.dicodingstory.data.remote.response.RegisterResponse
 import com.dicoding.dicodingstory.data.remote.response.StoryResponse
 import com.dicoding.dicodingstory.data.remote.response.UploadStoryResponse
@@ -40,7 +41,7 @@ class DataRepository private constructor(
             emit(Result.Success(response))
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
-            val errorResponse = Gson().fromJson(errorBody, RegisterResponse::class.java)
+            val errorResponse = Gson().fromJson(errorBody, LoginResponse::class.java)
             emit(Result.Error(errorResponse.message.toString()))
         }
     }

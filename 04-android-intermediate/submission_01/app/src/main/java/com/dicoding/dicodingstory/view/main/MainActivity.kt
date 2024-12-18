@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 binding.username.text = getString(R.string.greeting, user.name)
 
-                viewModel.getStories().observe(this) { result ->
+                viewModel.  getStories().observe(this) { result ->
                     when (result) {
                         is Result.Loading -> {
                             binding.progressBar.visibility = View.VISIBLE
