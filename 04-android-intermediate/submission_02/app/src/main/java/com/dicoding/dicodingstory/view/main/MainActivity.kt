@@ -19,12 +19,16 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.paging.PagingData
+import androidx.paging.map
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.dicodingstory.R
 import com.dicoding.dicodingstory.adapter.LoadingStateAdapter
 import com.dicoding.dicodingstory.adapter.StoryAdapter
 import com.dicoding.dicodingstory.data.Result
+import com.dicoding.dicodingstory.data.local.StoryEntity
+import com.dicoding.dicodingstory.data.remote.response.ListStoryItem
 import com.dicoding.dicodingstory.databinding.ActivityMainBinding
 import com.dicoding.dicodingstory.view.ViewModelFactory
 import com.dicoding.dicodingstory.view.addstory.AddStoryActivity
@@ -93,8 +97,21 @@ class MainActivity : AppCompatActivity() {
             } else {
                 binding.username.text = getString(R.string.greeting, user.name)
 
-                viewModel.story.observe(this) { pagingData ->
-                    storyAdapter.submitData(lifecycle, pagingData)
+                viewModel.story.observe(this) { result ->
+                    val pagingDataStory: PagingData<StoryEntity> = result
+                    val listStoryItem: PagingData<ListStoryItem> = pagingDataStory.map { story ->
+                        ListStoryItem(
+                            photoUrl = story.photoUrl,
+                            createdAt = story.createdAt,
+                            name = story.name,
+                            description = story.description,
+                            lon = story.lon,
+                            id = story.id,
+                            lat = story.lat
+                        )
+                    }
+                    storyAdapter.submitData(lifecycle, listStoryItem)
+//                    storyAdapter.submitData(lifecycle, result)
                 }
                 showRecyclerList(storyAdapter)
             }

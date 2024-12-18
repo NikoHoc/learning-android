@@ -19,7 +19,7 @@ import com.dicoding.dicodingstory.databinding.ItemStoryLayoutBinding
 import com.dicoding.dicodingstory.view.detail.DetailStoryActivity
 
 
-class StoryAdapter: PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class StoryAdapter: PagingDataAdapter<ListStoryItem, StoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemStoryLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -34,7 +34,7 @@ class StoryAdapter: PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(DI
     }
 
     class MyViewHolder(private val binding: ItemStoryLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(story: StoryEntity) {
+        fun bind(story: ListStoryItem) {
             Glide.with(binding.ivStory.context)
                 .load(story.photoUrl)
                 .error(R.drawable.image_placeholder)
@@ -43,11 +43,10 @@ class StoryAdapter: PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(DI
             binding.storyOwner.text = itemView.context.getString(R.string.story_owner, story.name)
 
             binding.root.setOnClickListener {
-                val storyData = StoryEntity(
+                val storyData = ListStoryItem(
                     photoUrl = story.photoUrl,
                     name = story.name,
                     description = story.description
-
                 )
                 val context = it.context
                 val intent = Intent(context, DetailStoryActivity::class.java)
@@ -66,12 +65,12 @@ class StoryAdapter: PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(DI
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<StoryEntity>() {
-            override fun areItemsTheSame(oldItem: StoryEntity, newItem: StoryEntity): Boolean {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ListStoryItem>() {
+            override fun areItemsTheSame(oldItem: ListStoryItem, newItem: ListStoryItem): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: StoryEntity, newItem: StoryEntity): Boolean {
+            override fun areContentsTheSame(oldItem: ListStoryItem, newItem: ListStoryItem): Boolean {
                 return oldItem.id == newItem.id
             }
         }
