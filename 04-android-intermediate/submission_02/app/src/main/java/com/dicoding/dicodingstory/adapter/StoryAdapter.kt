@@ -1,6 +1,5 @@
 package com.dicoding.dicodingstory.adapter
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
@@ -9,17 +8,15 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dicoding.dicodingstory.R
-import com.dicoding.dicodingstory.data.local.StoryEntity
-import com.dicoding.dicodingstory.data.remote.response.ListStoryItem
+import com.dicoding.dicodingstory.data.local.entity.StoryEntity
 import com.dicoding.dicodingstory.databinding.ItemStoryLayoutBinding
 import com.dicoding.dicodingstory.view.detail.DetailStoryActivity
 
 
-class StoryAdapter: PagingDataAdapter<ListStoryItem, StoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class StoryAdapter: PagingDataAdapter<StoryEntity, StoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemStoryLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -34,7 +31,7 @@ class StoryAdapter: PagingDataAdapter<ListStoryItem, StoryAdapter.MyViewHolder>(
     }
 
     class MyViewHolder(private val binding: ItemStoryLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(story: ListStoryItem) {
+        fun bind(story: StoryEntity) {
             Glide.with(binding.ivStory.context)
                 .load(story.photoUrl)
                 .error(R.drawable.image_placeholder)
@@ -43,7 +40,7 @@ class StoryAdapter: PagingDataAdapter<ListStoryItem, StoryAdapter.MyViewHolder>(
             binding.storyOwner.text = itemView.context.getString(R.string.story_owner, story.name)
 
             binding.root.setOnClickListener {
-                val storyData = ListStoryItem(
+                val storyData = StoryEntity(
                     photoUrl = story.photoUrl,
                     name = story.name,
                     description = story.description
@@ -65,12 +62,12 @@ class StoryAdapter: PagingDataAdapter<ListStoryItem, StoryAdapter.MyViewHolder>(
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ListStoryItem>() {
-            override fun areItemsTheSame(oldItem: ListStoryItem, newItem: ListStoryItem): Boolean {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<StoryEntity>() {
+            override fun areItemsTheSame(oldItem: StoryEntity, newItem: StoryEntity): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: ListStoryItem, newItem: ListStoryItem): Boolean {
+            override fun areContentsTheSame(oldItem: StoryEntity, newItem: StoryEntity): Boolean {
                 return oldItem.id == newItem.id
             }
         }

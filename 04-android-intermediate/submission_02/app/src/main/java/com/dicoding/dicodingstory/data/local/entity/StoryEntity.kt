@@ -1,7 +1,6 @@
-package com.dicoding.dicodingstory.data.local
+package com.dicoding.dicodingstory.data.local.entity
 
 import android.os.Parcelable
-import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName

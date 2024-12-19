@@ -59,4 +59,9 @@
     <string name="retry">Retry</string>
     <string name="share_loc">Share story location</string>
     <string name="location_permission_denied">Location permission denied</string>
+    <string name="location_not_found">Location not found</string>
+
+    <string name="wrong_email_format">Email format is invalid</string>
+    <string name="email_end_gmail_com">Email must end with @gmail.com</string>
+    <string name="password_invalid">Password must be more than 8 characters</string>
 </resources>

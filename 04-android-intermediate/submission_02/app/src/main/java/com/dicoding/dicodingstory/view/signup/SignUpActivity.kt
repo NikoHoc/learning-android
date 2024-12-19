@@ -148,7 +148,6 @@ class SignUpActivity : AppCompatActivity() {
         val passwordEditTextLayout = ObjectAnimator.ofFloat(binding.passwordEditTextLayout, View.ALPHA, 1f).setDuration(100)
         val signup = ObjectAnimator.ofFloat(binding.signupButton, View.ALPHA, 1f).setDuration(100)
 
-        // muncul bergantian
         AnimatorSet().apply {
             playSequentially(
                 title,

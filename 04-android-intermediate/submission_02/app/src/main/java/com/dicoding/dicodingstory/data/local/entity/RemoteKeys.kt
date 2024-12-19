@@ -1,4 +1,4 @@
-package com.dicoding.dicodingstory.data.local
+package com.dicoding.dicodingstory.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

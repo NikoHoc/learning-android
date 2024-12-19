@@ -58,4 +58,9 @@
     <string name="retry">Coba lagi</string>
     <string name="share_loc">Berikan lokasi cerita</string>
     <string name="location_permission_denied">Akses lokasi di tolak</string>
+    <string name="location_not_found">Lokasi tidak ditemukan</string>
+
+    <string name="wrong_email_format">Format email tidak valid</string>
+    <string name="email_end_gmail_com">Email harus diakhiri dengan @gmail.com</string>
+    <string name="password_invalid">Password tidak boleh kurang dari 8 karakter</string>
 </resources>

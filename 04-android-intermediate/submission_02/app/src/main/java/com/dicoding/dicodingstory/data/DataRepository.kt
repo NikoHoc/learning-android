@@ -23,9 +23,8 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.HttpException
 import java.io.File
-import com.dicoding.dicodingstory.data.Result
 import com.dicoding.dicodingstory.data.local.StoryDatabase
-import com.dicoding.dicodingstory.data.local.StoryEntity
+import com.dicoding.dicodingstory.data.local.entity.StoryEntity
 import com.dicoding.dicodingstory.data.paging.StoryRemoteMediator
 
 class DataRepository private constructor(
@@ -70,20 +69,6 @@ class DataRepository private constructor(
             }
         ).liveData
     }
-
-//    fun getStoriesWithLocation() = liveData {
-//        emit(Result.Loading)
-//        try {
-//            val response = apiServices.getStoriesWithLocation()
-//            emit(Result.Success(response))
-//        } catch (e: HttpException) {
-//            val errorBody = e.response()?.errorBody()?.string()
-//            val errorResponse = Gson().fromJson(errorBody, StoryResponse::class.java)
-//            emit(Result.Error(errorResponse.message ?: "Unknown error"))
-//        } catch (e: Exception) {
-//            emit(Result.Error(e.message ?: "Something went wrong"))
-//        }
-//    }
 
     fun getStoriesWithLocation(): LiveData<Result<List<ListStoryItem>>> = liveData {
         emit(Result.Loading)
@@ -140,8 +125,10 @@ class DataRepository private constructor(
     }
 
     companion object {
-        @Volatile
-        private var instance: DataRepository? = null
-        fun getInstance(database: StoryDatabase, apiService: ApiServices, dataStoreToken: UserPreference) = DataRepository(database, apiService, dataStoreToken)
+        fun getInstance(
+            database: StoryDatabase,
+            apiService: ApiServices,
+            dataStoreToken: UserPreference
+        ) = DataRepository(database, apiService, dataStoreToken)
     }
 }

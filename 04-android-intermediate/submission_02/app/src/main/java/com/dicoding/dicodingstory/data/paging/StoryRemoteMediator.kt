@@ -5,9 +5,9 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.dicoding.dicodingstory.data.local.RemoteKeys
+import com.dicoding.dicodingstory.data.local.entity.RemoteKeys
 import com.dicoding.dicodingstory.data.local.StoryDatabase
-import com.dicoding.dicodingstory.data.local.StoryEntity
+import com.dicoding.dicodingstory.data.local.entity.StoryEntity
 import com.dicoding.dicodingstory.data.remote.retrofit.ApiServices
 
 @OptIn(ExperimentalPagingApi::class)

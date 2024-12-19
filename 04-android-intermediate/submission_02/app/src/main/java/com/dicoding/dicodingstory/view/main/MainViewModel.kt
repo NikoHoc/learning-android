@@ -7,9 +7,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.dicoding.dicodingstory.data.DataRepository
-import com.dicoding.dicodingstory.data.local.StoryEntity
+import com.dicoding.dicodingstory.data.local.entity.StoryEntity
 import com.dicoding.dicodingstory.data.pref.UserModel
-import com.dicoding.dicodingstory.data.remote.response.ListStoryItem
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: DataRepository) : ViewModel() {

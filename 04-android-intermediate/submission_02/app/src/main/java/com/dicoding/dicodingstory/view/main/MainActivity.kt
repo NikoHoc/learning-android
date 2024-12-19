@@ -2,33 +2,23 @@ package com.dicoding.dicodingstory.view.main
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.app.ProgressDialog.show
 import android.content.Intent
 import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.WindowInsets
-import android.view.WindowManager
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.paging.PagingData
-import androidx.paging.map
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.dicodingstory.R
 import com.dicoding.dicodingstory.adapter.LoadingStateAdapter
 import com.dicoding.dicodingstory.adapter.StoryAdapter
-import com.dicoding.dicodingstory.data.Result
-import com.dicoding.dicodingstory.data.local.StoryEntity
-import com.dicoding.dicodingstory.data.remote.response.ListStoryItem
 import com.dicoding.dicodingstory.databinding.ActivityMainBinding
 import com.dicoding.dicodingstory.view.ViewModelFactory
 import com.dicoding.dicodingstory.view.addstory.AddStoryActivity
@@ -98,20 +88,7 @@ class MainActivity : AppCompatActivity() {
                 binding.username.text = getString(R.string.greeting, user.name)
 
                 viewModel.story.observe(this) { result ->
-                    val pagingDataStory: PagingData<StoryEntity> = result
-                    val listStoryItem: PagingData<ListStoryItem> = pagingDataStory.map { story ->
-                        ListStoryItem(
-                            photoUrl = story.photoUrl,
-                            createdAt = story.createdAt,
-                            name = story.name,
-                            description = story.description,
-                            lon = story.lon,
-                            id = story.id,
-                            lat = story.lat
-                        )
-                    }
-                    storyAdapter.submitData(lifecycle, listStoryItem)
-//                    storyAdapter.submitData(lifecycle, result)
+                    storyAdapter.submitData(lifecycle, result)
                 }
                 showRecyclerList(storyAdapter)
             }

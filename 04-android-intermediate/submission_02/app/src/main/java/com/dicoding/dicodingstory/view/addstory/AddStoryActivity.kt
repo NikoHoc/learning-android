@@ -204,7 +204,7 @@ class AddStoryActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(
                         this@AddStoryActivity,
-                        "Location not found. Try Again",
+                        resources.getString(R.string.location_not_found),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

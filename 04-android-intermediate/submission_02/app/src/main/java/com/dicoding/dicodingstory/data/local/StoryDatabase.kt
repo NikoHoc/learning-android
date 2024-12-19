@@ -4,6 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.dicoding.dicodingstory.data.local.dao.RemoteKeysDao
+import com.dicoding.dicodingstory.data.local.dao.StoryDao
+import com.dicoding.dicodingstory.data.local.entity.RemoteKeys
+import com.dicoding.dicodingstory.data.local.entity.StoryEntity
 
 @Database(
     entities = [StoryEntity::class, RemoteKeys::class],

@@ -1,7 +1,5 @@
 package com.dicoding.dicodingstory.data.remote.retrofit
 
-import com.dicoding.dicodingstory.data.local.StoryEntity
-import com.dicoding.dicodingstory.data.remote.response.ListStoryItem
 import com.dicoding.dicodingstory.data.remote.response.LoginResponse
 import com.dicoding.dicodingstory.data.remote.response.RegisterResponse
 import com.dicoding.dicodingstory.data.remote.response.StoryResponse
@@ -32,13 +30,15 @@ interface ApiServices {
         @Field("password") password: String
     ): LoginResponse
 
-//    @GET("stories")
-//    suspend fun getStories(): StoryResponse
-
     @GET("stories")
     suspend fun getStories(
         @Query("page") page: Int,
         @Query("size") size: Int
+    ): StoryResponse
+
+    @GET("stories")
+    suspend fun getStoriesWithLocation(
+        @Query("location") location : Int = 1,
     ): StoryResponse
 
     @Multipart
@@ -50,8 +50,5 @@ interface ApiServices {
         @Part("lon") lon: RequestBody? = null
     ) : UploadStoryResponse
 
-    @GET("stories")
-    suspend fun getStoriesWithLocation(
-        @Query("location") location : Int = 1,
-    ): StoryResponse
+
 }

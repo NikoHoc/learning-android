@@ -14,7 +14,6 @@ class MapsViewModel (private val repository: DataRepository) : ViewModel() {
         return repository.getSession().asLiveData()
     }
 
-//    fun getStoriesWithLocation() = repository.getStoriesWithLocation()
     fun getStoriesWithLocation(): LiveData<Result<List<ListStoryItem>>> {
         return repository.getStoriesWithLocation()
     }

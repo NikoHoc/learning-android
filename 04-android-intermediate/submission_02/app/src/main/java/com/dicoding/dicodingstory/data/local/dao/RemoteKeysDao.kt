@@ -1,9 +1,10 @@
-package com.dicoding.dicodingstory.data.local
+package com.dicoding.dicodingstory.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.dicoding.dicodingstory.data.local.entity.RemoteKeys
 
 @Dao
 interface RemoteKeysDao {
